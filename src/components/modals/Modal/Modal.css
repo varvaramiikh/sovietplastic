@@ -1,0 +1,29 @@
+.sp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.sp-modal-bg {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(27, 42, 65, 0.45);
+  cursor: pointer;
+}
+.sp-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
+  box-sizing: border-box;
+  box-shadow: 0 24px 64px rgba(27, 42, 65, 0.25);
+  animation: sp-pop 0.2s ease;
+}

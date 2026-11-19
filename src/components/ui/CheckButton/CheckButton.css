@@ -1,0 +1,18 @@
+.sp-ring {
+  fill: #ffffff;
+  stroke: #252932;
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+.sp-tick {
+  stroke: #252932;
+  transition: stroke 0.2s ease;
+}
+.sp-act.sp-on .sp-ring {
+  fill: #7d9584;
+  stroke: #7d9584;
+}
+.sp-act.sp-on .sp-tick {
+  stroke: #ffffff;
+}

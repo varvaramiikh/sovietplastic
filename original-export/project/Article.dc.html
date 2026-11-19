@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Статья — пример материала</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){article>figure,.sp-text>figure,.sp-text>h2,.sp-pair{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover{background:#F8FAFD!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]){transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+.sp-text{max-width:720px;margin-left:auto;margin-right:auto}
+figure.sp-wrap>*,article>header>nav{max-width:720px;margin-left:auto;margin-right:auto}
+.sp-text p{margin:0 0 20px;font-size:19px;line-height:31px}
+.sp-text a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:#A9B9D2;text-decoration-thickness:2px}
+.sp-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-pair{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</helmet>
+<div style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="materials" hint-size="100%,70px"></dc-import>
+
+<main style="flex: none">
+<article>
+<header class="sp-wrap" style="padding: 48px 48px 56px">
+<nav aria-label="Навигационная цепочка" style="font-size: 13px; color: #4E6488; display: flex; gap: 10px"><a href="Main.dc.html" style="color: #4E6488">Главная</a><span aria-hidden="true">/</span><a href="Materials.dc.html" style="color: #4E6488">Статьи</a><span aria-hidden="true">/</span><span>Название статьи, которое может занимать две строки</span></nav>
+<div class="sp-text" style="margin-top: 48px">
+<h1 style="margin: 0; font-size: clamp(36px, 4.4vw, 60px); font-weight: 500; line-height: 1; letter-spacing: -0.02em; text-transform: uppercase">Название статьи, которое может занимать две строки</h1>
+<p style="margin: 28px 0 0; font-size: 22px; line-height: 33px">Вступление объясняет, о чём материал и зачем его читать. Один короткий абзац, который не повторяет заголовок другими словами.</p>
+<p style="margin: 24px 0 0; font-size: 14px; line-height: 20px; color: #4E6488">00 месяц 0000</p>
+</div>
+</header>
+
+<figure class="sp-wrap" style="margin: 0; padding: 0 48px">
+<div style="height: 480px; background: #DBE2EA; display: flex; align-items: flex-end; justify-content: center; gap: 48px; padding-bottom: 40px; box-sizing: border-box; overflow: hidden">
+<img src="/_blob/6093db140d0917325323fbdbf569d997" alt="" style="height: 300px; width: auto">
+<img src="/_blob/71c672eab5ec5354e8696155720ef67e" alt="" style="height: 440px; width: auto">
+<img src="/_blob/1abde048756c885343125ae104d78e21" alt="" style="height: 260px; width: auto">
+</div>
+<figcaption style="margin-top: 14px; font-size: 14px; color: #4E6488">Подпись к обложке, источник изображения</figcaption>
+</figure>
+
+<div class="sp-wrap" style="padding: 64px 48px 0">
+<div class="sp-text">
+<p>Абзац основного текста. Материал развивает тему последовательно: от вступления к разделам, каждый из которых отвечает на один вопрос.</p>
+<p>Следующий абзац отделён отступом, без красной строки. Ссылки в тексте всегда подчёркнуты, например <a href="Catalog.dc.html">предметы из коллекции</a>, чтобы их можно было отличить не только по цвету.</p>
+
+<h2 style="margin: 64px 0 18px; font-size: 34px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase">Заголовок раздела</h2>
+<p>Перед новым разделом пространства больше, чем после его заголовка, поэтому заголовок визуально относится к следующему тексту.</p>
+
+<figure style="margin: 40px 0">
+<div style="height: 440px; background: #C9D5E5; position: relative; overflow: hidden"><img src="/_blob/71c672eab5ec5354e8696155720ef67e" alt="" style="position: absolute; left: 50%; top: 50px; height: 620px; width: auto; transform: translateX(-50%)"></div>
+<figcaption style="margin-top: 14px; font-size: 14px; color: #4E6488">Что изображено, автор или источник</figcaption>
+</figure>
+
+<h3 style="margin: 48px 0 14px; font-size: 22px; font-weight: 500; line-height: 1.2">Подзаголовок</h3>
+<p>Абзац под подзаголовком. Жирным выделяются только <strong style="font-weight: 600">действительно важные фрагменты</strong>.</p>
+
+<p style="margin: 32px 0; padding-left: 22px; border-left: 2px solid #A9B9D2; font-size: 18px; line-height: 29px; color: #3E4A60">Важное замечание: небольшой отступ и тонкая линия слева, без значка, тени и рамки.</p>
+
+<ul style="margin: 0 0 20px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 19px; line-height: 29px">
+<li style="display: flex; gap: 16px"><span aria-hidden="true" style="flex: none; margin-top: 13px; width: 14px; height: 2px; background: #A9B9D2"></span>Первый пункт списка</li>
+<li style="display: flex; gap: 16px"><span aria-hidden="true" style="flex: none; margin-top: 13px; width: 14px; height: 2px; background: #A9B9D2"></span>Второй пункт, который может быть длиннее и переноситься на следующую строку</li>
+<li style="display: flex; gap: 16px"><span aria-hidden="true" style="flex: none; margin-top: 13px; width: 14px; height: 2px; background: #A9B9D2"></span>Третий пункт</li>
+</ul>
+</div>
+</div>
+
+<figure class="sp-wrap" style="margin: 64px 0 0; padding: 0 48px">
+<div style="height: 440px; background: #DBE2EA; display: flex; align-items: center; justify-content: center; overflow: hidden"><img src="/_blob/1abde048756c885343125ae104d78e21" alt="" style="height: 190%; width: auto; margin-top: 70%"></div>
+<figcaption style="margin-top: 14px; font-size: 14px; color: #4E6488">Что изображено, автор или источник</figcaption>
+</figure>
+
+<div class="sp-wrap" style="padding: 0 48px">
+<div class="sp-text">
+<h2 style="margin: 64px 0 24px; font-size: 34px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase">Сравнение предметов</h2>
+<div class="sp-pair">
+<figure style="margin: 0"><div style="height: 300px; background: #DBE2EA; display: flex; align-items: center; justify-content: center"><img src="/_blob/6093db140d0917325323fbdbf569d997" alt="" style="height: 80%; width: auto"></div><figcaption style="margin-top: 12px; font-size: 15px">Предмет или ракурс 1<span style="display: block; margin-top: 2px; font-size: 14px; color: #4E6488">Подпись</span></figcaption></figure>
+<figure style="margin: 0"><div style="height: 300px; background: #DBE2EA; display: flex; align-items: center; justify-content: center"><img src="/_blob/71c672eab5ec5354e8696155720ef67e" alt="" style="height: 70%; width: auto"></div><figcaption style="margin-top: 12px; font-size: 15px">Предмет или ракурс 2<span style="display: block; margin-top: 2px; font-size: 14px; color: #4E6488">Подпись</span></figcaption></figure>
+</div>
+<div style="margin-top: 32px; overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; font-size: 16px; line-height: 24px">
+<thead>
+<tr style="border-bottom: 1px solid #C9D1DB"><th scope="col" style="padding: 12px 12px 12px 0; text-align: left; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488">Признак</th><th scope="col" style="padding: 12px; text-align: left; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488">Предмет 1</th><th scope="col" style="padding: 12px 0 12px 12px; text-align: left; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488">Предмет 2</th></tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #DCE2EA"><th scope="row" style="padding: 14px 12px 14px 0; text-align: left; font-weight: 400; color: #4E6488">Признак</th><td style="padding: 14px 12px">Значение</td><td style="padding: 14px 0 14px 12px">Значение</td></tr>
+<tr style="border-bottom: 1px solid #DCE2EA"><th scope="row" style="padding: 14px 12px 14px 0; text-align: left; font-weight: 400; color: #4E6488">Признак</th><td style="padding: 14px 12px">Значение</td><td style="padding: 14px 0 14px 12px">Значение</td></tr>
+<tr style="border-bottom: 1px solid #DCE2EA"><th scope="row" style="padding: 14px 12px 14px 0; text-align: left; font-weight: 400; color: #4E6488">Признак</th><td style="padding: 14px 12px">Значение</td><td style="padding: 14px 0 14px 12px">Значение</td></tr>
+</tbody>
+</table>
+</div>
+
+<a href="Materials.dc.html" style="margin-top: 56px; display: inline-flex; align-items: center; gap: 14px; padding-bottom: 8px; border-bottom: 2px solid #A9B9D2; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none"><svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 6H1.5M6.5 1l-5 5 5 5"></path></svg>Все статьи</a>
+</div>
+</div>
+</article>
+</main>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,108px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

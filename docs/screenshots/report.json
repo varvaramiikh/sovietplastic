@@ -1,0 +1,454 @@
+{
+  "pages": [
+    {
+      "route": "/",
+      "width": 1440,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/catalog",
+      "width": 1440,
+      "title": "Коллекция — каталог статуэток",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/catalog",
+      "width": 768,
+      "title": "Коллекция — каталог статуэток",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/catalog",
+      "width": 390,
+      "title": "Коллекция — каталог статуэток",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/figurine",
+      "width": 1440,
+      "title": "Статуэтка — карточка предмета",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/figurine",
+      "width": 768,
+      "title": "Статуэтка — карточка предмета",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/figurine",
+      "width": 390,
+      "title": "Статуэтка — карточка предмета",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/carbolite",
+      "width": 1440,
+      "title": "О карболите",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/carbolite",
+      "width": 768,
+      "title": "О карболите",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/carbolite",
+      "width": 390,
+      "title": "О карболите",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/articles",
+      "width": 1440,
+      "title": "Статьи — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/articles",
+      "width": 768,
+      "title": "Статьи — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/articles",
+      "width": 390,
+      "title": "Статьи — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/article",
+      "width": 1440,
+      "title": "Статья — пример материала",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/article",
+      "width": 768,
+      "title": "Статья — пример материала",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/article",
+      "width": 390,
+      "title": "Статья — пример материала",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/login",
+      "width": 1440,
+      "title": "Вход и регистрация — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/login",
+      "width": 768,
+      "title": "Вход и регистрация — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/login",
+      "width": 390,
+      "title": "Вход и регистрация — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/account",
+      "width": 1440,
+      "title": "Личный кабинет — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/account",
+      "width": 768,
+      "title": "Личный кабинет — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/account",
+      "width": 390,
+      "title": "Личный кабинет — Советский пластик",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/admin",
+      "width": 1440,
+      "title": "КарболитЪ — админ-панель",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/admin",
+      "width": 768,
+      "title": "КарболитЪ — админ-панель",
+      "hscroll": true,
+      "scrollWidth": 909,
+      "errors": []
+    },
+    {
+      "route": "/admin",
+      "width": 390,
+      "title": "КарболитЪ — админ-панель",
+      "hscroll": true,
+      "scrollWidth": 909,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-header",
+      "width": 1440,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-header",
+      "width": 768,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-header",
+      "width": 390,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-footer",
+      "width": 1440,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 1440,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-footer",
+      "width": 768,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 768,
+      "errors": []
+    },
+    {
+      "route": "/_design/site-footer",
+      "width": 390,
+      "title": "Советский пластик — мир карболитовых статуэток",
+      "hscroll": false,
+      "scrollWidth": 390,
+      "errors": []
+    }
+  ],
+  "states": [
+    {
+      "state": "guest-heart-gate",
+      "route": "/catalog",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "signed-heart-plan",
+      "route": "/catalog",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "catalog-empty-search",
+      "route": "/catalog",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "login-register",
+      "route": "/login?mode=register",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "login-error",
+      "route": "/login",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "main-news-2",
+      "route": "/",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "figurine-next-view",
+      "route": "/figurine",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-denied",
+      "route": "/admin?canvasPreview=false",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-figures",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-photos",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-bindings",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-infos",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-kinds",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-authors",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-tags",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-users",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-list-notes",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-figure-form",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-figure-photos",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-new-figure-errors",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-row-menu",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-avatar-menu",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": false,
+      "errors": []
+    },
+    {
+      "state": "admin-mobile",
+      "route": "/admin",
+      "ok": true,
+      "note": "",
+      "hscroll": true,
+      "errors": []
+    }
+  ]
+}

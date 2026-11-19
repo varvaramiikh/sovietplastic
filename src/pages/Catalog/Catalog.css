@@ -1,0 +1,51 @@
+/* Стили страницы из <helmet> файла original-export/project/Catalog.dc.html (без изменений, кроме путей к картинкам).
+   Подключаются только пока страница открыта — как в Claude Design, где у каждой страницы свой документ. */
+
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+button[aria-haspopup="listbox"]:hover{border-color:#1B2A41!important;background:#F8FAFD!important}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]):not([aria-label="Закрыть список"]){transform:scale(.96)}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover,button[style*="border: 1px solid"][style*="background: #FFFFFF"]:hover{background:#F8FAFD!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+@keyframes sp-pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-page{min-width:44px;height:44px;padding:0 10px;border:1px solid #1B2A41;border-radius:12px;background:transparent;color:#1B2A41;font-family:inherit;font-size:15px;cursor:pointer}
+.sp-page:hover{background:#F8FAFD}
+.sp-page-on{background:#1B2A41;color:#FFFFFF}
+.sp-page-on:hover{background:#1B2A41}
+.sp-page:disabled{color:#A9B4C2;cursor:default;border-color:#C9D1DB;background:transparent}
+.sp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.sp-opt{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#252932;font-family:inherit;font-size:15px;text-align:left;white-space:nowrap;cursor:pointer}
+.sp-opt:hover{background:#F8FAFD;color:#1B2A41}
+.sp-opt-on{color:#1B2A41;font-weight:500;background:#F8FAFD}
+.sp-filters{display:flex;flex-direction:column;gap:16px}
+.sp-frow{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:start}
+.sp-frow .sp-flabel{padding-top:11px}
+.sp-fcol{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sp-flabel{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-more{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:0 0 4px;border:0;border-bottom:1px solid #A9B9D2;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-more:hover{border-color:#1B2A41}
+.sp-more svg{transition:transform .2s ease}
+.sp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sp-chip{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.sp-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.sp-chip-n{font-size:12px;color:#4E6488}
+.sp-chip-on,.sp-chip-on:hover{background:#1B2A41;border-color:#1B2A41;color:#FFFFFF}
+.sp-chip-on .sp-chip-n{color:#A9B9D2}
+.sp-reset{padding:0;border:0;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;border-bottom:1px solid #A9B9D2;cursor:pointer}
+.sp-reset:hover{border-color:#1B2A41}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+.sp-frow{grid-template-columns:minmax(0,1fr);gap:8px}.sp-frow .sp-flabel{padding-top:0}
+}
+

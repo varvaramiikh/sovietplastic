@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.env
+.env.*
+!.env.example
+.vite
+node_modules/.tmp
+.DS_Store
+
+wserver/.env
+wserver/data/

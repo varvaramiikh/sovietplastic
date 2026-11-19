@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Статьи — Советский пластик</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+.sp-row h2{transition:color .2s ease}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){.sp-row{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]){transform:scale(.96)}
+.sp-row figure img{transition:transform .5s ease}.sp-row:hover figure img{transform:scale(1.05)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover{background:#F8FAFD!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-tab{height:44px;padding:0 18px;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+.sp-tab:hover{background:#EDF0F4}
+.sp-tab-on{background:#1B2A41;border-color:#1B2A41;color:#FFFFFF}
+.sp-tab-on:hover{background:#1B2A41}
+.sp-row{display:grid;grid-template-columns:360px minmax(0,1fr) 48px;gap:48px;align-items:center;padding:32px 0;border-bottom:1px solid #DCE2EA;color:#252932}
+.sp-row:hover{color:#252932}
+.sp-row:hover .sp-row-title{color:#3E5A88}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-row{grid-template-columns:minmax(0,1fr);gap:20px}
+.sp-row-arrow{display:none}
+}
+</style>
+</helmet>
+<div style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="materials" hint-size="100%,70px"></dc-import>
+
+<main style="flex: none">
+<section class="sp-wrap" style="padding: 48px 48px 40px; background: transparent">
+<nav aria-label="Навигационная цепочка" style="font-size: 13px; color: #4E6488; display: flex; gap: 10px"><a href="Main.dc.html" style="color: #4E6488">Главная</a><span aria-hidden="true">/</span><span>Статьи</span></nav>
+<div style="margin-top: 28px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<h1 style="margin: 0; font-size: clamp(48px, 7vw, 104px); font-weight: 500; line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase">Статьи</h1>
+
+</div>
+
+</section>
+
+<section class="sp-wrap" style="padding: 0 48px">
+<div style="border-top: 1px solid #C9D1DB">
+<sc-for list="{{ items }}" as="m" hint-placeholder-count="6">
+<a href="Article.dc.html" class="sp-row">
+<figure style="margin: 0; height: 230px; background: {{ m.bg }}; display: flex; align-items: flex-end; justify-content: center; gap: 24px; overflow: hidden">
+<img src="{{ m.img }}" alt="" style="height: {{ m.h }}; width: auto; margin-bottom: {{ m.mb }}">
+</figure>
+<div>
+
+<h2 class="sp-row-title" style="margin: 16px 0 0; max-width: 680px; font-size: 28px; font-weight: 500; line-height: 34px; letter-spacing: -0.01em; margin-top: 0px">{{ m.title }}</h2>
+<p style="margin: 12px 0 0; max-width: 620px; font-size: 17px; line-height: 26px; color: #3E4A60">{{ m.text }}</p>
+<p style="margin: 18px 0 0; font-size: 14px; color: #4E6488">{{ m.date }}</p>
+</div>
+
+</a>
+</sc-for>
+</div>
+</section>
+</main>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,108px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2160}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 'all' };
+  }
+  spArticles() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    var m = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    var fd = function (s) { var p = String(s || '').slice(0, 10).split('-'); return p.length === 3 ? parseInt(p[2], 10) + ' ' + m[parseInt(p[1], 10) - 1] + ' ' + p[0] : ''; };
+    if (db && db.v === 2 && db.infos) {
+      var first = function (t) { var ps = String(t || '').split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(function (x) { return x && !/^(#|-|>)/.test(x); }); return (ps[0] || '').replace(/\*\*|__|\*|_/g, '').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').slice(0, 220); };
+      return db.infos.slice().sort(function (a, b) { return (a.infoDate || '') < (b.infoDate || '') ? 1 : -1; }).map(function (a, n) {
+        return { type: '', title: a.name, text: first(a.text), date: fd(a.infoDate), cover: '', bg: n % 2 ? '#C9D5E5' : '#DBE2EA', h: '82%', mb: '-6px' };
+      });
+    }
+    if (!db || !db.articles) return null;
+    return db.articles.filter(function (a) { return a.status === 'published'; }).sort(function (a, b) { return (a.date || '') < (b.date || '') ? 1 : -1; }).map(function (a, n) {
+      return { type: '', title: a.title, text: a.summary || '', date: fd(a.date), cover: a.images && a.images[0] ? a.images[0].src : '', bg: n % 2 ? '#C9D5E5' : '#DBE2EA', h: '82%', mb: '-6px' };
+    });
+  }
+  renderVals() {
+    var self = this;
+    var ALL = [
+      { type: '', title: 'Название статьи', text: 'Краткое описание: о чём статья и зачем её читать.', bg: '#DBE2EA', h: '82%', mb: '-6px' },
+      { type: 'Справка', title: 'Название статьи средней длины', text: 'Краткое описание в одно-два предложения.', bg: '#C9D5E5', h: '190%', mb: '-40%' },
+      { type: 'Статья', title: 'Длинное название статьи, которое занимает две строки в списке статей', text: 'Краткое описание: о чём статья и зачем её читать.', bg: '#DBE2EA', h: '70%', mb: '0px' },
+      { type: 'Справка', title: 'Название статьи', text: 'Краткое описание в одно-два предложения.', bg: '#C9D5E5', h: '160%', mb: '-20%' },
+      { type: 'Статья', title: 'Название статьи средней длины', text: 'Краткое описание: о чём статья и зачем её читать.', bg: '#DBE2EA', h: '88%', mb: '-10px' }
+    ];
+    var dbA = this.spArticles(); if (dbA) ALL = dbA;
+    var filters = [{ key: 'all', label: 'Все' }, { key: 'Статья', label: 'Статьи' }, { key: 'Справка', label: 'Справки' }];
+    var cur = this.state.type;
+    return {
+      tabs: filters.map(function (f) {
+        var n = f.key === 'all' ? ALL.length : ALL.filter(function (m) { return m.type === f.key; }).length;
+        return { label: f.label, count: n, cls: f.key === cur ? 'sp-tab-on' : '', pressed: f.key === cur ? 'true' : 'false', pick: function () { self.setState({ type: f.key }); } };
+      }),
+      items: ALL.filter(function (m) { return cur === 'all' || m.type === cur; }).map(function (m, n) { return Object.assign({}, m, { date: m.date || '00 месяц 0000', img: m.cover || ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'][n % 3] }); })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Коллекция — каталог статуэток</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+button[aria-haspopup="listbox"]:hover{border-color:#1B2A41!important;background:#F8FAFD!important}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]):not([aria-label="Закрыть список"]){transform:scale(.96)}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover,button[style*="border: 1px solid"][style*="background: #FFFFFF"]:hover{background:#F8FAFD!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+.sp-acts{position:absolute;top:6px;right:6px;z-index:2;display:flex;gap:0}
+.sp-act{position:relative;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-act svg{transition:transform .2s ease}.sp-act:hover svg{transform:scale(1.1)}.sp-act:active svg{transform:scale(.9)}
+.sp-act::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);right:0;padding:6px 10px;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:'Onest',system-ui,sans-serif;font-size:12px;line-height:1;white-space:nowrap;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+.sp-act:hover::after,.sp-act:focus-visible::after{opacity:1;transform:none}
+.sp-heart{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}
+.sp-act.sp-on .sp-heart{fill:#B5656B;stroke:#B5656B}
+.sp-ring{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}.sp-tick{stroke:#252932;transition:stroke .2s ease}
+.sp-act.sp-on .sp-ring{fill:#7D9584;stroke:#7D9584}.sp-act.sp-on .sp-tick{stroke:#FFFFFF}
+.sp-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+.sp-modal-bg{position:absolute;inset:0;border:0;padding:0;background:rgba(27,42,65,.45);cursor:pointer}
+.sp-modal-box{position:relative;width:100%;max-width:460px;background:#FFFFFF;border-radius:8px;padding:32px;box-sizing:border-box;box-shadow:0 24px 64px rgba(27,42,65,.25);animation:sp-pop .2s ease}
+@keyframes sp-pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sp-mx{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:6px;background:transparent;color:#1B2A41;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-mx:hover{background:#F8FAFD}
+.sp-mf{display:flex;flex-direction:column;gap:8px}
+.sp-mf label{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-mf input{width:100%;height:48px;padding:0 16px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:16px;box-sizing:border-box}
+.sp-mf input:hover{border-color:#A9B9D2}.sp-mf input:focus{outline:none;border-color:#1B2A41}
+.sp-mf-cur{position:relative}.sp-mf-cur input{padding-right:40px}.sp-mf-cur span{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:16px;color:#4E6488;pointer-events:none}
+.sp-mbtn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border:0;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-mbtn:hover{background:#2C3F5E}
+.sp-mlink{padding:0 0 2px;border:0;border-bottom:1px solid #A9B9D2;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.sp-mlink:hover{border-color:#1B2A41}
+.sp-plan{position:absolute;left:8px;right:8px;bottom:8px;z-index:2;display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-radius:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:.45;transition:opacity .25s ease}
+article:hover .sp-plan,.sp-plan:hover,.sp-plan:focus-within{opacity:1}
+.sp-plan-f{display:flex;flex-direction:column;gap:4px;min-width:0;cursor:text}
+.sp-plan-price{flex-direction:row!important;align-items:center;justify-content:space-between;gap:12px!important}
+.sp-plan-price .sp-plan-in{width:110px;flex:none}
+.sp-plan-l{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-plan-in{display:flex;align-items:baseline;gap:4px}
+.sp-plan-in i{font-style:normal;font-size:15px;color:#4E6488}
+.sp-plan input{width:100%;min-width:0;height:30px;padding:0;border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;color:#252932;font-family:inherit;font-size:15px;box-sizing:border-box}
+.sp-plan input::placeholder{color:#A9B4C2}
+.sp-plan input:hover{border-bottom-color:#C9D1DB}
+.sp-plan input:focus{outline:none;border-bottom-color:#1B2A41}
+.sp-plan-price input{text-align:right}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-page{min-width:44px;height:44px;padding:0 10px;border:1px solid #1B2A41;border-radius:12px;background:transparent;color:#1B2A41;font-family:inherit;font-size:15px;cursor:pointer}
+.sp-page:hover{background:#F8FAFD}
+.sp-page-on{background:#1B2A41;color:#FFFFFF}
+.sp-page-on:hover{background:#1B2A41}
+.sp-page:disabled{color:#A9B4C2;cursor:default;border-color:#C9D1DB;background:transparent}
+.sp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.sp-opt{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#252932;font-family:inherit;font-size:15px;text-align:left;white-space:nowrap;cursor:pointer}
+.sp-opt:hover{background:#F8FAFD;color:#1B2A41}
+.sp-opt-on{color:#1B2A41;font-weight:500;background:#F8FAFD}
+.sp-filters{display:flex;flex-direction:column;gap:16px}
+.sp-frow{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:start}
+.sp-frow .sp-flabel{padding-top:11px}
+.sp-fcol{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sp-flabel{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-more{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:0 0 4px;border:0;border-bottom:1px solid #A9B9D2;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-more:hover{border-color:#1B2A41}
+.sp-more svg{transition:transform .2s ease}
+.sp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sp-chip{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.sp-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.sp-chip-n{font-size:12px;color:#4E6488}
+.sp-chip-on,.sp-chip-on:hover{background:#1B2A41;border-color:#1B2A41;color:#FFFFFF}
+.sp-chip-on .sp-chip-n{color:#A9B9D2}
+.sp-reset{padding:0;border:0;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;border-bottom:1px solid #A9B9D2;cursor:pointer}
+.sp-reset:hover{border-color:#1B2A41}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+.sp-frow{grid-template-columns:minmax(0,1fr);gap:8px}.sp-frow .sp-flabel{padding-top:0}
+}
+</style>
+</helmet>
+<div style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="catalog" hint-size="100%,70px"></dc-import>
+
+<main style="flex: none">
+<section class="sp-wrap" style="padding: 48px 48px 0; background: transparent">
+<nav aria-label="Навигационная цепочка" style="font-size: 13px; color: #4E6488; display: flex; gap: 10px"><a href="Main.dc.html" style="color: #4E6488">Главная</a><span aria-hidden="true">/</span><span>Коллекция</span></nav>
+<div style="margin-top: 28px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<h1 style="margin: 0; font-size: clamp(48px, 7vw, 104px); font-weight: 500; line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase">Коллекция</h1>
+</div>
+<div style="margin-top: 32px; border-top: 1px solid #DCE2EA"></div>
+</section>
+
+<section class="sp-wrap" style="padding: 28px 48px 0; padding-top: 24px">
+<div aria-label="Фильтры" role="group" class="sp-filters">
+<div class="sp-frow">
+<span class="sp-flabel" id="f-kind">Категория</span>
+<div class="sp-chips" role="group" aria-labelledby="f-kind">
+<sc-for list="{{ kinds }}" as="o" hint-placeholder-count="6">
+<button type="button" class="sp-chip {{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.toggle }}">{{ o.label }}<span class="sp-chip-n">{{ o.count }}</span></button>
+</sc-for>
+</div>
+</div>
+<div class="sp-frow" style="margin-top: 16px">
+<span class="sp-flabel" id="f-tag">Теги</span>
+<div class="sp-chips" role="group" aria-labelledby="f-tag">
+<sc-for list="{{ tagOpts }}" as="o" hint-placeholder-count="10">
+<button type="button" class="sp-chip {{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.toggle }}">{{ o.label }}<span class="sp-chip-n">{{ o.count }}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; padding-bottom: 18px; border-bottom: 1px solid #DCE2EA">
+<div style="order: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 24px">
+<p aria-live="polite" style="margin: 0; font-size: 16px">Найдено <strong style="font-weight: 500">{{ foundText }}</strong></p>
+<sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ false }}">
+<button type="button" class="sp-reset" onClick="{{ reset }}">Сбросить фильтры</button>
+</sc-if>
+</div>
+<div style="display: flex; align-items: center; gap: 10px">
+<span id="cat-sort-label" style="font-size: 15px; font-weight: 400; color: #4E6488">Сортировка</span>
+<div style="position: relative">
+<sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Закрыть список" tabindex="-1" onClick="{{ closeSort }}" style="position: fixed; inset: 0; z-index: 40; border: 0; padding: 0; background: transparent; cursor: default"></button>
+</sc-if>
+<button type="button" aria-haspopup="listbox" aria-expanded="{{ sortExpanded }}" aria-labelledby="cat-sort-label" onClick="{{ toggleSort }}" style="position: relative; z-index: 41; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-width: 230px; height: 44px; padding: 0 18px 0 16px; border: 1px solid #C9D1DB; border-radius: 6px; background: #FFFFFF; color: #1B2A41; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; box-sizing: border-box">{{ sortLabel }}<svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="#1B2A41" stroke-width="1.5" aria-hidden="true" style="flex: none; transform: {{ sortArrow }}"><path d="M1 1.5l5 5 5-5"></path></svg></button>
+<sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+<ul role="listbox" aria-labelledby="cat-sort-label" style="position: absolute; top: calc(100% + 6px); right: 0; z-index: 42; min-width: 100%; margin: 0; padding: 6px; list-style: none; background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 8px; box-shadow: 0 12px 32px rgba(27, 42, 65, 0.12); box-sizing: border-box">
+<sc-for list="{{ sortOptions }}" as="so" hint-placeholder-count="3">
+<li role="option" aria-selected="{{ so.selected }}"><button type="button" onClick="{{ so.pick }}" class="sp-opt {{ so.cls }}">{{ so.label }}<sc-if value="{{ so.on }}" hint-placeholder-val="{{ false }}"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="#1B2A41" stroke-width="1.6" aria-hidden="true"><path d="M1 5l4 4 8-8"></path></svg></sc-if></button></li>
+</sc-for>
+</ul>
+</sc-if>
+</div>
+</div>
+<div style="order: -1; position: relative; width: min(400px, 100%)">
+<label for="cat-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск по коллекции</label>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#4E6488" stroke-width="1.5" aria-hidden="true" style="position: absolute; left: 16px; top: 14px"><circle cx="7" cy="7" r="5.5"></circle><path d="M11 11l4 4"></path></svg>
+<input id="cat-search" type="search" value="{{ q }}" onChange="{{ setQ }}" placeholder="Поиск по названию, категории или тегу" style="width: 100%; height: 44px; padding: 0 16px 0 44px; border: 1px solid #C9D1DB; border-radius: 6px; font-family: inherit; font-size: 15px; color: #252932; background: #FFFFFF; box-sizing: border-box">
+</div>
+</div>
+
+<sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 40px; padding: 56px 32px; background: #F8FAFD; border-radius: 8px; text-align: center">
+<p style="margin: 0; font-size: 22px; font-weight: 500">Ничего не найдено</p>
+<p style="margin: 10px 0 0; font-size: 16px; color: #4E6488">Попробуйте убрать часть фильтров или изменить запрос.</p>
+</div>
+</sc-if>
+
+<div class="sp-grid" style="margin-top: 40px">
+<sc-for list="{{ pageItems }}" as="it" hint-placeholder-count="12">
+<article style="position: relative; display: flex; flex-direction: column; min-width: 0">
+<div class="sp-acts">
+<button type="button" class="sp-act {{ it.wantCls }}" data-tip="Хочу купить" aria-label="Хочу купить" aria-pressed="{{ it.wantPressed }}" onClick="{{ it.toggleWant }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path class="sp-heart" d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" stroke-width="1.5" stroke-linejoin="round"></path></svg></button>
+<button type="button" class="sp-act {{ it.haveCls }}" data-tip="Есть в коллекции" aria-label="Есть в коллекции" aria-pressed="{{ it.havePressed }}" onClick="{{ it.toggleHave }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle class="sp-ring" cx="12" cy="12" r="9.25" stroke-width="1.5"></circle><path class="sp-tick" d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<div style="position: relative">
+<a href="Figurine.dc.html" onClick="{{ it.go }}" aria-label="{{ it.title }}" style="display: block">
+<figure style="margin: 0; aspect-ratio: 4 / 5; background: #DBE2EA; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<img src="{{ it.img }}" alt="" style="height: {{ it.scale }}%; width: auto">
+</figure>
+</a>
+<sc-if value="{{ it.planOn }}" hint-placeholder-val="{{ false }}">
+<div class="sp-plan">
+<label class="sp-plan-f"><span class="sp-plan-l">Где планирую купить</span><input type="text" value="{{ it.note }}" onChange="{{ it.setNote }}" placeholder="Магазин, сайт, барахолка"></label>
+<label class="sp-plan-f sp-plan-price"><span class="sp-plan-l">Примерная цена</span><span class="sp-plan-in"><input type="text" inputmode="numeric" value="{{ it.price }}" onChange="{{ it.setPrice }}" placeholder="0"><i>{{ it.cur }}</i></span></label>
+</div>
+</sc-if>
+</div>
+<div style="margin-top: 8px">
+<h3 style="margin: 0; font-size: 18px; font-weight: 400; line-height: 24px"><a href="Figurine.dc.html" onClick="{{ it.go }}">{{ it.title }}</a></h3>
+<p style="margin: 6px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; font-size: 14px; line-height: 20px; color: #4E6488"><span>{{ it.kind }}</span><span>{{ it.mainTag }}</span></p>
+</div>
+</article>
+</sc-for>
+</div>
+
+<sc-if value="{{ hasPages }}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Страницы каталога" style="margin-top: 64px; padding-top: 24px; border-top: 1px solid #DCE2EA; display: flex; align-items: center; justify-content: center; gap: 6px">
+<button type="button" class="sp-page" aria-label="Предыдущая страница" disabled="{{ noPrev }}" onClick="{{ prev }}" style="border-radius: 6px !important; border-color: transparent !important"><svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 6H1.5M6.5 1l-5 5 5 5"></path></svg></button>
+<sc-for list="{{ pages }}" as="p" hint-placeholder-count="2">
+<button type="button" class="sp-page {{ p.cls }}" aria-current="{{ p.current }}" onClick="{{ p.pick }}" style="border-radius: 6px !important; border-color: transparent !important">{{ p.n }}</button>
+</sc-for>
+<button type="button" class="sp-page" aria-label="Следующая страница" disabled="{{ noNext }}" onClick="{{ next }}" style="border-radius: 6px !important; border-color: transparent !important"><svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></button>
+</nav>
+</sc-if>
+</section>
+</main>
+
+<sc-if value="{{ gate.open }}" hint-placeholder-val="{{ false }}">
+<div class="sp-modal">
+<button type="button" class="sp-modal-bg" aria-label="Закрыть окно" onClick="{{ gate.close }}"></button>
+<div class="sp-modal-box" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+<button type="button" class="sp-mx" aria-label="Закрыть" onClick="{{ gate.close }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<h2 id="gate-title" style="margin: 0; padding-right: 40px; font-size: 24px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em">Войдите в аккаунт</h2>
+<p style="margin: 14px 0 0; font-size: 16px; line-height: 24px; color: #3E4A60">{{ gate.text }}</p>
+<div style="margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<a href="Login.dc.html" class="sp-mbtn" style="color: #FFFFFF; text-decoration: none">Войти</a>
+<a href="Login.dc.html" class="sp-mlink" style="text-decoration: none">Зарегистрироваться</a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ plan.open }}" hint-placeholder-val="{{ false }}">
+<div class="sp-modal">
+<button type="button" class="sp-modal-bg" aria-label="Закрыть окно" onClick="{{ plan.skip }}"></button>
+<div class="sp-modal-box" role="dialog" aria-modal="true" aria-labelledby="plan-title">
+<button type="button" class="sp-mx" aria-label="Закрыть" onClick="{{ plan.skip }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#B5656B" stroke="#B5656B" stroke-width="1.5" stroke-linejoin="round"></path></svg>Добавлено в «Хочу купить»</p>
+<h2 id="plan-title" style="margin: 12px 0 0; padding-right: 40px; font-size: 24px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em">{{ plan.title }}</h2>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 18px">
+<div class="sp-mf"><label for="plan-note">Где планирую купить</label><input id="plan-note" type="text" value="{{ plan.note }}" onChange="{{ plan.setNote }}" placeholder="Магазин, сайт, барахолка"></div>
+<div class="sp-mf"><label for="plan-price">Примерная цена</label><div class="sp-mf-cur"><input id="plan-price" type="text" inputmode="numeric" value="{{ plan.price }}" onChange="{{ plan.setPrice }}" placeholder="0"><span>{{ plan.cur }}</span></div></div>
+</div>
+<div style="margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<button type="button" class="sp-mbtn" onClick="{{ plan.save }}">Сохранить</button>
+<button type="button" class="sp-mlink" onClick="{{ plan.skip }}">Заполню позже</button>
+</div>
+<p style="margin: 20px 0 0; font-size: 14px; line-height: 20px; color: #4E6488">Эти заметки видны только вам и хранятся в личном кабинете.</p>
+</div>
+</div>
+</sc-if>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,108px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2640}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { q: '', sel: { kind: {}, tag: {} }, sort: 'default', page: 1 };
+  }
+  componentDidMount() {
+    this.spInit();
+    try {
+      var v = window.localStorage.getItem('sp-tag');
+      if (v) { var t = {}; t[v] = true; this.setState({ sel: { kind: {}, tag: t }, page: 1 }); window.localStorage.removeItem('sp-tag'); }
+    } catch (e) {}
+  }
+  spFromDb() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    if (db && db.v === 2 && db.figures) {
+      var fx = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (String(arr[i].id) === String(id)) return arr[i]; return null; };
+      var dm = function (n) { return n == null || n === '' ? '' : String(n).replace('.', ',') + ' см'; };
+      return db.figures.filter(function (f) { var k = fx(db.kinds, f.kindId); return f.visible && (!k || k.visible !== false); }).map(function (f) {
+        var k = fx(db.kinds, f.kindId), a = fx(db.authors, f.authorId);
+        var tags = (db.figureTags || []).filter(function (b) { return String(b.figureId) === String(f.id); }).map(function (b, i) { var x = fx(db.tags, b.tagId); return x ? { label: x.tagText, weight: 100 - i } : null; }).filter(Boolean);
+        var ph = (db.photos || []).filter(function (p) { return String(p.figureId) === String(f.id); }).sort(function (x, y) { return (y.isMain ? 1 : 0) - (x.isMain ? 1 : 0) || (x.sort || 0) - (y.sort || 0); });
+        var main = fx(ph, f.pictureMainId) || ph[0];
+        return { id: f.id, title: f.name, category: k ? k.name : '', kind: k ? k.name : '', author: a ? a.name : '', factory: f.factoryName || '', height: dm(f.height), length: dm(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createDate || '').slice(0, 10), scale: 76, img: main ? (main.picture || main.pictureCompressed) : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+      });
+    }
+    if (!db || !db.figurines) return null;
+    var by = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (arr[i].id === id) return arr[i]; return null; };
+    var dim = function (d) { return d && d.value !== '' && d.value != null ? String(d.value).replace('.', ',') + ' ' + (d.unit || 'см') : ''; };
+    return db.figurines.filter(function (f) { var c = by(db.categories, f.categoryId); return f.status === 'published' && (!c || c.visible !== false); }).map(function (f) {
+      var c = by(db.categories, f.categoryId), a = by(db.authors, f.authorId);
+      var tags = (f.tagIds || []).map(function (t, i) { var x = by(db.tags, t); return x ? { label: x.name, weight: 100 - i } : null; }).filter(Boolean);
+      var ph = (f.photos || []).filter(function (p) { return p.id === f.mainPhotoId; })[0] || (f.photos || [])[0];
+      return { id: f.id, title: f.title, category: c ? c.name : '', kind: c ? c.name : '', author: a ? a.name : '', factory: f.factory || '', height: dim(f.height), length: dim(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createdAt || '').slice(0, 10), scale: 76, img: ph ? ph.src : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+    });
+  }
+  spItems() {
+    var fromDb = this.spFromDb(); if (fromDb) return fromDb;
+    var TAGS = ['Фигурное катание', 'Спорт', 'Балет', 'Детство', 'Животные', 'Цирк', 'Танец', 'Музыка', 'Женский образ', 'Пионеры'];
+    var KINDS = ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'];
+    var titles = ['Название статуэтки', 'Название статуэтки средней длины', 'Длинное название статуэтки, которое переносится на несколько строк без многоточия'];
+    var out = [];
+    for (var i = 0; i < 24; i++) {
+      var idx = [i % 10, (i * 3 + 1) % 10, (i * 7 + 4) % 10, (i * 9 + 2) % 10, (i + 5) % 10, (i * 3 + 6) % 10, (i + 3) % 10, (i * 7 + 8) % 10, (i + 1) % 10, (i + 7) % 10];
+      var want = i % 5 + 4;
+      var seen = {}; var tags = [];
+      for (var k = 0; k < idx.length && tags.length < want; k++) {
+        var t = idx[k]; if (seen[t]) continue; seen[t] = 1;
+        tags.push({ label: TAGS[t], weight: (i * 37 + k * 53 + t * 11) % 85 + 15 });
+      }
+      tags.sort(function (a, b) { return b.weight - a.weight; });
+      var kind = KINDS[[0, 0, 1, 2, 0, 3, 0, 4, 2, 0, 5, 1][i % 12]];
+      var added = '2026-' + ('0' + (12 - (i * 5 % 11 + 1))).slice(-2) + '-' + ('0' + (i * 7 % 27 + 1)).slice(-2);
+      out.push({ id: i + 1, title: titles[i % 3], kind: kind, added: added, tags: tags, scale: [80, 70, 76, 66][i % 4], img: ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'][i % 3] });
+    }
+    return out;
+  }
+  spInit() {
+    var self = this;
+    this.spLoad();
+    this._spSync = function () { self.spLoad(); };
+    try { window.addEventListener('storage', this._spSync); window.addEventListener('focus', this._spSync); } catch (e) {}
+  }
+  spLoad() {
+    var g = function (k) { try { return JSON.parse(window.localStorage.getItem(k) || '{}') || {}; } catch (e) { return {}; } };
+    var pr = g('sp-profile');
+    var auth = false; try { auth = window.localStorage.getItem('sp-auth') === '1'; } catch (e) {}
+    this.setState({ want: g('sp-want'), have: g('sp-have'), spCur: pr.currency || 'RUB', spAuth: auth });
+  }
+  spToggle(kind, id, title) {
+    if (!this.state.spAuth) { this.setState({ gate: kind, plan: null }); return; }
+    var cur = Object.assign({}, this.state[kind] || {});
+    var had = Object.prototype.hasOwnProperty.call(cur, id);
+    if (had) delete cur[id]; else cur[id] = kind === 'want' ? { note: '', price: '' } : true;
+    try { window.localStorage.setItem(kind === 'want' ? 'sp-want' : 'sp-have', JSON.stringify(cur)); } catch (e) {}
+    var s = {}; s[kind] = cur;
+    if (kind === 'want' && !had) s.plan = { id: id, title: title || '', note: '', price: '' };
+    this.setState(s);
+  }
+  spEntry(v) { return (v && typeof v === 'object') ? { note: v.note || '', price: v.price || '' } : { note: typeof v === 'string' ? v : '', price: '' }; }
+  spEditPlan(id, title) { var e = this.spEntry((this.state.want || {})[id]); this.setState({ plan: { id: id, title: title || '', note: e.note, price: e.price } }); }
+  spSetWant(id, patch) {
+    var w = Object.assign({}, this.state.want || {});
+    w[id] = Object.assign(this.spEntry(w[id]), patch);
+    try { window.localStorage.setItem('sp-want', JSON.stringify(w)); } catch (e) {}
+    this.setState({ want: w });
+  }
+  spCurSign() { return ({ RUB: '₽', USD: '$', EUR: '€' })[this.state.spCur] || '₽'; }
+  spGate() {
+    var self = this, g = this.state.gate;
+    return { open: !!g, text: g === 'have' ? 'Чтобы отмечать статуэтки в «Есть в коллекции», войдите в аккаунт или зарегистрируйтесь.' : 'Чтобы добавлять статуэтки в «Хочу купить», войдите в аккаунт или зарегистрируйтесь.', close: function () { self.setState({ gate: null }); } };
+  }
+  spPlan() {
+    var self = this, p = this.state.plan;
+    var upd = function (k, v) { var q = Object.assign({}, self.state.plan); q[k] = v; self.setState({ plan: q }); };
+    return {
+      open: !!p, title: p ? p.title : '', note: p ? p.note : '', price: p ? p.price : '', cur: this.spCurSign(),
+      setNote: function (e) { upd('note', e.target.value); },
+      setPrice: function (e) { upd('price', String(e.target.value || '').replace(/[^0-9]/g, '').slice(0, 9)); },
+      save: function () { var q = self.state.plan; if (!q) return; var w = Object.assign({}, self.state.want || {}); w[q.id] = { note: q.note, price: q.price }; try { window.localStorage.setItem('sp-want', JSON.stringify(w)); } catch (e) {} self.setState({ want: w, plan: null }); },
+      skip: function () { self.setState({ plan: null }); }
+    };
+  }
+  spMark(it) {
+    var self = this, au = !!this.state.spAuth, w = au ? (this.state.want || {}) : {}, h = au ? (this.state.have || {}) : {};
+    var wo = Object.prototype.hasOwnProperty.call(w, it.id), ho = !!h[it.id];
+    return { wantCls: wo ? 'sp-on' : '', wantPressed: wo ? 'true' : 'false', haveCls: ho ? 'sp-on' : '', havePressed: ho ? 'true' : 'false', toggleWant: function () { self.spToggle('want', it.id, it.title); }, toggleHave: function () { self.spToggle('have', it.id); }, planOn: wo, note: self.spEntry(w[it.id]).note, price: self.spEntry(w[it.id]).price, cur: self.spCurSign(), setNote: function (e) { self.spSetWant(it.id, { note: e.target.value }); }, setPrice: function (e) { self.spSetWant(it.id, { price: String(e.target.value || '').replace(/[^0-9]/g, '').slice(0, 9) }); } };
+  }
+  spStore(key, val) { try { window.localStorage.setItem(key, String(val)); } catch (e) {} }
+  plural(n, forms) { var a = n % 100, b = n % 10; if (a > 10 && a < 20) return forms[2]; if (b === 1) return forms[0]; if (b >= 2 && b <= 4) return forms[1]; return forms[2]; }
+  renderVals() {
+    var self = this, st = this.state;
+    var all = this.spItems();
+    var valuesOf = function (it, key) { return key === 'tag' ? it.tags.map(function (t) { return t.label; }) : [it.kind]; };
+    var q = st.q.trim().toLowerCase();
+    var filtered = all.filter(function (it) {
+      var keysF = ['kind', 'tag'];
+      for (var f = 0; f < keysF.length; f++) {
+        var s = st.sel[keysF[f]]; var keys = Object.keys(s).filter(function (x) { return s[x]; });
+        if (keys.length) { var vals = valuesOf(it, keysF[f]); if (!vals.some(function (x) { return keys.indexOf(x) >= 0; })) return false; }
+      }
+      if (q) {
+        var hay = (it.title + ' ' + it.kind + ' ' + it.tags.map(function (t) { return t.label; }).join(' ')).toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    if (st.sort === 'title') filtered.sort(function (a, b) { return a.title < b.title ? -1 : (a.title > b.title ? 1 : a.id - b.id); });
+    if (st.sort === 'added') filtered.sort(function (a, b) { return a.added < b.added ? 1 : (a.added > b.added ? -1 : a.id - b.id); });
+    var size = 12;
+    var pageCount = Math.max(1, Math.ceil(filtered.length / size));
+    var page = Math.min(st.page, pageCount);
+    var setSel = function (field, value, on) {
+      var next = { kind: Object.assign({}, st.sel.kind), tag: Object.assign({}, st.sel.tag) };
+      next[field][value] = on; self.setState({ sel: next, page: 1 });
+    };
+    var optsFor = function (key, order, limit, open) {
+      var counts = {};
+      all.forEach(function (it) { valuesOf(it, key).forEach(function (v) { counts[v] = (counts[v] || 0) + 1; }); });
+      var list = Object.keys(counts);
+      list.sort(function (a, b) { return a.localeCompare(b, 'ru'); });
+      var total = list.length;
+      var res = list.map(function (v) {
+        var on = !!st.sel[key][v];
+        return { label: v, count: counts[v], cls: on ? 'sp-chip-on' : '', pressed: on ? 'true' : 'false', toggle: function () { setSel(key, v, !on); } };
+      });
+      res.total = total;
+      return res;
+    };
+    var kinds = optsFor('kind', ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'], 4, !!st.kindsOpen);
+    var tagOpts = optsFor('tag', ['Фигурное катание', 'Балет', 'Спорт', 'Танец', 'Цирк', 'Музыка', 'Детство', 'Пионеры', 'Женский образ', 'Животные'], 6, !!st.tagsOpen);
+    var anySel = ['kind', 'tag'].some(function (k) { return Object.keys(st.sel[k]).some(function (v) { return st.sel[k][v]; }); });
+    var pageItems = filtered.slice((page - 1) * size, page * size).map(function (it) {
+      return Object.assign({}, it, {
+        go: function () { self.spStore('sp-item', it.id); },
+        mainTag: it.tags[0] ? it.tags[0].label : ''
+      }, self.spMark(it));
+    });
+    var pages = [];
+    for (var p = 1; p <= pageCount; p++) {
+      (function (n) { pages.push({ n: n, cls: n === page ? 'sp-page-on' : '', current: n === page ? 'page' : 'false', pick: function () { self.setState({ page: n }); } }); })(p);
+    }
+    var SORTS = [['default', 'По порядку'], ['added', 'По дате добавления'], ['title', 'По названию']];
+    return {
+      q: st.q,
+      setQ: function (e) { self.setState({ q: e.target.value, page: 1 }); },
+      sortOpen: !!st.sortOpen,
+      sortExpanded: st.sortOpen ? 'true' : 'false',
+      sortArrow: st.sortOpen ? 'rotate(180deg)' : 'none',
+      toggleSort: function () { self.setState({ sortOpen: !st.sortOpen }); },
+      closeSort: function () { self.setState({ sortOpen: false }); },
+      sortLabel: SORTS.filter(function (o) { return o[0] === st.sort; })[0][1],
+      sortOptions: SORTS.map(function (o) { var on = st.sort === o[0]; return { label: o[1], on: on, selected: on ? 'true' : 'false', cls: on ? 'sp-opt-on' : '', pick: function () { self.setState({ sort: o[0], page: 1, sortOpen: false }); } }; }),
+      kinds: kinds,
+      tagOpts: tagOpts,
+      hasFilters: anySel || !!q,
+      reset: function () { self.setState({ q: '', sel: { kind: {}, tag: {} }, page: 1 }); },
+      foundText: filtered.length + ' ' + this.plural(filtered.length, ['предмет', 'предмета', 'предметов']),
+      isEmpty: filtered.length === 0,
+      plan: this.spPlan(),
+      gate: this.spGate(),
+      pageItems: pageItems,
+      pages: pages,
+      hasPages: pageCount > 1,
+      noPrev: page <= 1,
+      noNext: page >= pageCount,
+      prev: function () { self.setState({ page: Math.max(1, page - 1) }); },
+      next: function () { self.setState({ page: Math.min(pageCount, page + 1) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

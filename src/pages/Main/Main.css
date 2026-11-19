@@ -1,0 +1,63 @@
+/* Стили страницы из <helmet> файла original-export/project/Main.dc.html (без изменений, кроме путей к картинкам).
+   Подключаются только пока страница открыта — как в Claude Design, где у каждой страницы свой документ. */
+
+body{margin:0;background:#F7F9FC}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){main section,article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active,a[style*="height: 52px"]:active{transform:scale(.96)}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover{background:#F8FAFD!important;border-color:#1B2A41!important}
+.k-banner{display:flex;gap:16px;align-items:stretch;padding:20px;border-radius:8px;background:#F8FAFD;color:#252932;transition:background-color .2s ease}
+.k-banner:hover{background:#EEF2F8;color:#252932}
+.k-banner:hover .k-banner-thumb img{transform:scale(1.06)}
+.k-banner-thumb img{transition:transform .4s ease}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.k-first{animation:none!important}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+@keyframes sp-pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{color:#1B2A41}
+.k-wrap{padding:0 48px;box-sizing:border-box}
+.k-head{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;align-items:end}
+.k-first{display:flex;flex-direction:column;background:#DBE2EA;height:min(829px,calc(100vh - 71px));min-height:600px}
+.k-carousel{position:relative;flex:none;height:calc(min(829px,calc(100vh - 71px)) * 0.38);min-height:240px;display:flex;flex-direction:column;padding-top:16px;box-sizing:border-box}
+.k-viewport{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:8px;background:#F8FAFD}
+.k-track{position:relative;z-index:2;pointer-events:none;display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.k-slide{position:relative;flex:0 0 100%;box-sizing:border-box;height:100%;min-height:0;overflow:hidden;display:flex;justify-content:flex-end;align-items:center;padding:24px 56px 40px;background:#F8FAFD;color:#252932}
+.k-slide-bg{position:absolute;inset:0;pointer-events:none}
+.k-slide-bg img{position:absolute;left:10%;top:6%;height:150%;width:auto;transition:transform .6s ease}
+.k-viewport:hover .k-slide-bg img{transform:scale(1.03)}
+.k-slide-text{position:relative;z-index:2;width:min(560px,46%);display:flex;flex-direction:column;gap:16px;pointer-events:none}
+.k-slide-text a{pointer-events:auto}
+.k-slide-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;margin-top:6px;padding-bottom:8px;border-bottom:2px solid #A9B9D2;color:#1B2A41!important;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.k-slide-btn:hover{border-color:#1B2A41}
+.k-hero-btn{position:relative;align-self:flex-start;display:inline-flex;align-items:center;gap:24px;height:48px;padding:0 20px;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41!important;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.k-hero-btn:hover{background:#F8FAFD}
+.k-hero-btn:active{transform:scale(.96)}
+
+.k-zone{position:absolute;top:0;bottom:0;width:25%;z-index:1;padding:0;border:0;background:transparent}
+.k-zone:active{transform:none}
+.k-zone-l{left:0;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M34 20H6M15 11l-9 9 9 9' fill='none' stroke='%231B2A41' stroke-width='2.2'/%3E%3C/svg%3E") 20 20, w-resize}
+.k-zone-r{right:0;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M6 20h28M25 11l9 9-9 9' fill='none' stroke='%231B2A41' stroke-width='2.2'/%3E%3C/svg%3E") 20 20, e-resize}
+.k-slide-title{position:relative;z-index:2}
+.k-dots{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;display:flex;gap:8px}
+.k-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#C9D1DB;cursor:pointer;transition:width .3s ease,background-color .2s ease,border-radius .3s ease}
+.k-dot:hover{background:#A9B9D2}
+.k-dot-on{width:24px;border-radius:4px;background:#A9B9D2}
+.k-hero{position:relative;flex:1;min-height:0;margin-top:0;overflow:hidden;background:#DBE2EA;display:flex;flex-direction:column;justify-content:space-between;padding:56px 48px;box-sizing:border-box}
+.k-hero-art{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:0 14% 0 0;pointer-events:none}
+.k-grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.k-what{display:grid;grid-template-columns:minmax(0,546fr) minmax(0,138fr) minmax(0,660fr);align-items:stretch}
+.k-news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+@media (max-width:900px){
+.k-wrap{padding:0 20px}
+.k-first{height:auto;min-height:0}.k-hero{min-height:560px}.k-carousel{flex:none;height:300px}.k-slide{padding:20px}.k-slide-text{width:62%}.k-slide-bg img{left:2%}
+.k-grid4{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+.k-head,.k-what,.k-news{grid-template-columns:minmax(0,1fr);row-gap:32px}
+.k-sp{display:none}
+}
+/*ask:page*/body{background:#1B2A41}/*ask:page-end*/
+html,body{scrollbar-width:none;-ms-overflow-style:none;overflow-x:hidden}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}

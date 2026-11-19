@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вход и регистрация — Советский пластик</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button,input{transition:color .2s ease,background-color .2s ease,border-color .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:stretch}
+.sp-tabs{display:flex;gap:32px;border-bottom:1px solid #DCE2EA}
+.sp-tab{position:relative;padding:0 0 14px;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-tab:hover{color:#1B2A41}
+.sp-tab-on{color:#1B2A41}
+.sp-tab-on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#1B2A41}
+.sp-field{display:flex;flex-direction:column;gap:8px}
+.sp-field label{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-field input{width:100%;height:48px;padding:0 16px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:16px;box-sizing:border-box}
+.sp-field input:hover{border-color:#A9B9D2}
+.sp-field input:focus{outline:none;border-color:#1B2A41}
+.sp-submit{display:inline-flex;align-items:center;justify-content:center;gap:24px;width:100%;height:52px;border-radius:6px;background:#1B2A41;color:#FFFFFF!important;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box}
+.sp-submit:hover{background:#2C3F5E}
+.sp-submit:active{transform:scale(.98)}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-auth{grid-template-columns:minmax(0,1fr);gap:32px}
+.sp-auth-art{display:none!important}
+}
+</style>
+</helmet>
+<div style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="" hint-size="100%,71px"></dc-import>
+
+<main style="flex: none">
+<section class="sp-wrap" style="padding: 48px 48px 0">
+<div class="sp-auth">
+<div style="max-width: 480px">
+<h1 style="margin: 0; font-size: clamp(40px, 5vw, 72px); font-weight: 500; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase">{{ heading }}</h1>
+<p style="margin: 20px 0 0; font-size: 17px; line-height: 26px; color: #3E4A60">{{ lead }}</p>
+
+<div class="sp-tabs" role="tablist" style="margin-top: 40px">
+<button type="button" role="tab" class="sp-tab {{ loginTabCls }}" aria-selected="{{ loginSel }}" onClick="{{ toLogin }}">Вход</button>
+<button type="button" role="tab" class="sp-tab {{ regTabCls }}" aria-selected="{{ regSel }}" onClick="{{ toReg }}">Регистрация</button>
+</div>
+
+<div style="margin-top: 32px; display: flex; flex-direction: column; gap: 20px">
+<sc-if value="{{ isReg }}" hint-placeholder-val="{{ false }}">
+<div class="sp-field"><label for="f-login">Логин</label><input id="f-login" type="text" autocomplete="username" value="{{ login }}" onChange="{{ setLogin }}" placeholder="Латиница и цифры"></div>
+<div class="sp-field"><label for="f-name">Имя</label><input id="f-name" type="text" autocomplete="name" value="{{ name }}" onChange="{{ setName }}" placeholder="Как к вам обращаться"></div>
+</sc-if>
+<div class="sp-field"><label for="f-email">Электронная почта</label><input id="f-email" type="email" autocomplete="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="name@example.ru"></div>
+<div class="sp-field"><label for="f-pass">Пароль</label><input id="f-pass" type="password" autocomplete="{{ passAuto }}" value="{{ pass }}" onChange="{{ setPass }}" placeholder="{{ passHint }}"></div>
+<sc-if value="{{ isReg }}" hint-placeholder-val="{{ false }}">
+<div class="sp-field"><label for="f-pass2">Повторите пароль</label><input id="f-pass2" type="password" autocomplete="new-password" value="{{ pass2 }}" onChange="{{ setPass2 }}"></div>
+</sc-if>
+<sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+<p role="alert" style="margin: 0; font-size: 15px; color: #9A4A50">{{ error }}</p>
+</sc-if>
+<a href="Account.dc.html" class="sp-submit" onClick="{{ submit }}" style="margin-top: 8px">{{ submitLabel }}<svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="#FFFFFF" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></a>
+<p style="margin: 0; font-size: 15px; color: #4E6488">{{ switchText }} <button type="button" onClick="{{ switchMode }}" style="padding: 0 0 2px; border: 0; border-bottom: 1px solid #A9B9D2; background: transparent; color: #1B2A41; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer">{{ switchLink }}</button></p>
+</div>
+</div>
+
+<div class="sp-auth-art" aria-hidden="true" style="order: -1; position: relative; min-height: 620px; border-radius: 8px; background: #DBE2EA; overflow: hidden; display: flex; align-items: flex-end; justify-content: center">
+<img src="/_blob/450b2160012cd8f6c7fdb8f130e8930a" alt="" style="height: 88%; width: auto">
+</div>
+</div>
+</section>
+</main>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,177px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["login","register"],"default":"login"},"$preview":{"width":1440,"height":1140}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mode: null, login: '', name: '', email: '', pass: '', pass2: '', error: '' };
+  }
+  spHash(s) { var h = 5381; s = String(s || ''); for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return 'h' + (h >>> 0).toString(36); }
+  spSeed() {
+    var now = Date.now(), day = 86400000;
+    var iso = function (t) { return new Date(t).toISOString(); };
+    var TAGS = ['Фигурное катание', 'Спорт', 'Балет', 'Детство', 'Зима', 'Цирк', 'Танец', 'Музыка', 'Женский образ', 'Пионеры'];
+    var KINDS = ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'];
+    var IMG = ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'];
+    var titles = ['Название статуэтки', 'Название статуэтки средней длины', 'Длинное название статуэтки, которое переносится на несколько строк без многоточия'];
+    var db = { v: 1, seq: 1000, users: [], categories: [], tags: [], authors: [], figurines: [], articles: [] };
+    KINDS.forEach(function (k, i) { db.categories.push({ id: 'c' + (i + 1), name: k, order: i + 1, visible: true }); });
+    TAGS.forEach(function (t, i) { db.tags.push({ id: 't' + (i + 1), name: t }); });
+    [1, 2, 3].forEach(function (n) { db.authors.push({ id: 'a' + n, name: 'Автор ' + n, bio: '', sourceName: '', sourceUrl: '' }); });
+    for (var i = 0; i < 24; i++) {
+      var idx = [i % 10, (i * 3 + 1) % 10, (i * 7 + 4) % 10, (i * 9 + 2) % 10, (i + 5) % 10, (i * 3 + 6) % 10, (i + 3) % 10, (i * 7 + 8) % 10, (i + 1) % 10, (i + 7) % 10];
+      var want = i % 5 + 4, seen = {}, tags = [];
+      for (var k = 0; k < idx.length && tags.length < want; k++) {
+        var t = idx[k]; if (seen[t]) continue; seen[t] = 1;
+        tags.push({ t: t, w: (i * 37 + k * 53 + t * 11) % 85 + 15 });
+      }
+      tags.sort(function (a, b) { return b.w - a.w; });
+      var made = now - (40 - i) * day;
+      db.figurines.push({
+        id: i + 1, title: titles[i % 3],
+        categoryId: 'c' + ([0, 0, 1, 2, 0, 3, 0, 4, 2, 0, 5, 1][i % 12] + 1),
+        authorId: i % 4 === 1 ? 'a' + (i % 3 + 1) : '',
+        factory: i % 3 === 0 ? 'Фабрика ' + (i % 2 + 1) : '',
+        height: { value: i % 2 === 0 ? String(12 + i % 9) : '', unit: 'см' },
+        length: { value: i % 4 === 0 ? String(6 + i % 5) : '', unit: 'см' },
+        description: '', comment: '', sourceName: '', sourceUrl: '',
+        tagIds: tags.map(function (x) { return 't' + (x.t + 1); }),
+        photos: [{ id: 'p' + (i + 1), src: IMG[i % 3], caption: '', source: '', name: 'Заглушка' }],
+        mainPhotoId: 'p' + (i + 1), variantIds: [],
+        status: 'published', createdAt: iso(made), updatedAt: iso(made + day), updatedBy: 'Мамаа'
+      });
+    }
+    var arts = [['Название статьи', 'Краткое описание: о чём статья и зачем её читать.'], ['Название статьи средней длины', 'Краткое описание в одно-два предложения.'], ['Длинное название статьи, которое занимает две строки в списке статей', 'Краткое описание: о чём статья и зачем её читать.'], ['Название статьи', 'Краткое описание в одно-два предложения.'], ['Название статьи средней длины', 'Краткое описание: о чём статья и зачем её читать.']];
+    arts.forEach(function (a, n) { var d = now - (n * 9 + 2) * day; db.articles.push({ id: 'r' + (n + 1), title: a[0], summary: a[1], body: '## Заголовок раздела\nАбзац основного текста. **Важная мысль** выделяется жирным.\n\n- Первый пункт\n- Второй пункт', images: [], date: iso(d).slice(0, 10), sourceName: '', sourceUrl: '', status: 'published', createdAt: iso(d), updatedAt: iso(d), updatedBy: 'Мамаа' }); });
+    db.users.push({ id: 'u1', name: 'Мамаа', email: 'admin@karbolit.ru', role: 'admin', isAdmin: true, status: 'active', pass: this.spHash('karbolit'), createdAt: iso(now - 60 * day) });
+    db.users.push({ id: 'u2', name: 'Анна', email: 'anna@example.ru', role: 'user', isAdmin: false, status: 'active', pass: this.spHash('anna123'), createdAt: iso(now - 12 * day) });
+    db.users.push({ id: 'u3', name: 'Павел', email: 'pavel@example.ru', role: 'user', isAdmin: false, status: 'blocked', pass: this.spHash('pavel123'), createdAt: iso(now - 5 * day) });
+    return db;
+  }
+  spReadDb() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    if (!db || (!db.figurines && !db.figures)) { db = this.spSeed(); try { window.localStorage.setItem('sp-db', JSON.stringify(db)); } catch (e) {} }
+    return db;
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    var mode = st.mode || this.props.mode || 'login';
+    var reg = mode === 'register';
+    var set = function (k) { return function (e) { var s = { error: '' }; s[k] = e.target.value; self.setState(s); }; };
+    return {
+      isReg: reg,
+      crumb: reg ? 'Регистрация' : 'Вход',
+      heading: reg ? 'Регистрация' : 'Вход',
+      lead: reg ? 'Создайте аккаунт, чтобы отмечать статуэтки, которые хотите купить, и те, что уже есть в вашей коллекции.' : 'Войдите, чтобы открыть личный кабинет и свои подборки статуэток.',
+      loginTabCls: reg ? '' : 'sp-tab-on',
+      regTabCls: reg ? 'sp-tab-on' : '',
+      loginSel: reg ? 'false' : 'true',
+      regSel: reg ? 'true' : 'false',
+      toLogin: function () { self.setState({ mode: 'login', error: '' }); },
+      toReg: function () { self.setState({ mode: 'register', error: '' }); },
+      switchMode: function () { self.setState({ mode: reg ? 'login' : 'register', error: '' }); },
+      switchText: reg ? 'Уже есть аккаунт?' : 'Ещё нет аккаунта?',
+      switchLink: reg ? 'Войти' : 'Зарегистрироваться',
+      login: st.login, name: st.name, email: st.email, pass: st.pass, pass2: st.pass2,
+      setLogin: set('login'), setName: set('name'), setEmail: set('email'), setPass: set('pass'), setPass2: set('pass2'),
+      passAuto: reg ? 'new-password' : 'current-password',
+      passHint: reg ? 'Не меньше 6 символов' : '',
+      submitLabel: reg ? 'Создать аккаунт' : 'Войти',
+      hasError: !!st.error,
+      error: st.error,
+      submit: function (e) {
+        var err = '';
+        if (reg && !/^[A-Za-z0-9_.-]{3,}$/.test(st.login.trim())) err = 'Логин: не меньше 3 символов, латиница и цифры.';
+        else if (reg && !st.name.trim()) err = 'Укажите имя.';
+        else if (!/^\S+@\S+\.\S+$/.test(st.email.trim())) err = 'Проверьте адрес электронной почты.';
+        else if (st.pass.length < (reg ? 6 : 1)) err = reg ? 'Пароль должен быть не короче 6 символов.' : 'Введите пароль.';
+        else if (reg && st.pass !== st.pass2) err = 'Пароли не совпадают.';
+        var hash = function (s) { var h = 5381; s = String(s || ''); for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return 'h' + (h >>> 0).toString(36); };
+        var sdb = null, known = null;
+        try { sdb = self.spReadDb(); } catch (x) {}
+        if (!err && sdb && sdb.users) {
+          var em = st.email.trim().toLowerCase();
+          known = sdb.users.filter(function (u) { return String(u.email).toLowerCase() === em; })[0] || null;
+          if (reg && known) err = 'Аккаунт с такой почтой уже есть. Войдите вместо регистрации.';
+          else if (!reg && known && known.pass && known.pass !== hash(st.pass)) err = 'Неверная электронная почта или пароль.';
+          else if (!reg && known && known.status === 'blocked') err = 'Этот аккаунт заблокирован.';
+        }
+        if (err) { if (e && e.preventDefault) e.preventDefault(); self.setState({ error: err }); return; }
+        try {
+          window.localStorage.setItem('sp-auth', '1');
+          window.localStorage.removeItem('sp-admin');
+          var prof = JSON.parse(window.localStorage.getItem('sp-profile') || '{}') || {};
+          prof.email = st.email.trim();
+          if (reg) { prof.name = st.name.trim(); prof.login = st.login.trim(); if (!prof.currency) prof.currency = 'RUB'; }
+          else if (known) { if (known.name) prof.name = known.name; }
+          window.localStorage.setItem('sp-profile', JSON.stringify(prof));
+          if (reg) {
+            var db = self.spReadDb();
+            if (db && db.users && !db.users.some(function (u) { return String(u.email).toLowerCase() === prof.email.toLowerCase(); })) {
+              var nowIso = new Date().toISOString(), nid = 1; db.users.forEach(function (u) { var n = parseInt(u.id, 10); if (n >= nid) nid = n + 1; });
+              db.users.push(db.v === 2 ? { id: nid, login: prof.login, name: prof.name || '', email: prof.email, defaultCurrency: 'RUB', isAdmin: false, pass: hash(st.pass), createDate: nowIso, createdBy: prof.login, modifyDate: nowIso, modifiedBy: prof.login } : { id: 'u' + Date.now().toString(36), name: prof.name || '', email: prof.email, role: 'user', isAdmin: false, status: 'active', pass: hash(st.pass), createdAt: nowIso });
+              window.localStorage.setItem('sp-db', JSON.stringify(db));
+            }
+          }
+        } catch (x) {}
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

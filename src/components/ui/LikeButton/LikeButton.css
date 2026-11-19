@@ -1,0 +1,11 @@
+.sp-heart {
+  fill: #ffffff;
+  stroke: #252932;
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+.sp-act.sp-on .sp-heart {
+  fill: #b5656b;
+  stroke: #b5656b;
+}

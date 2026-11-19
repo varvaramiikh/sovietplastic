@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Статуэтка — карточка предмета</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+.sp-thumb img{transition:transform .3s ease}.sp-thumb:hover img{transform:scale(1.08)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){main section+section,article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]){transform:scale(.96)}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover,button[style*="border: 1px solid"][style*="background: #FFFFFF"]:hover{background:#F8FAFD!important}
+.sp-arrow:hover{background:rgba(27,42,65,.08)!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+.sp-acts{position:absolute;top:6px;right:6px;z-index:2;display:flex;gap:0}
+.sp-act{position:relative;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-act svg{transition:transform .2s ease}.sp-act:hover svg{transform:scale(1.1)}.sp-act:active svg{transform:scale(.9)}
+.sp-act::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);right:0;padding:6px 10px;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:'Onest',system-ui,sans-serif;font-size:12px;line-height:1;white-space:nowrap;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+.sp-act:hover::after,.sp-act:focus-visible::after{opacity:1;transform:none}
+.sp-heart{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}
+.sp-act.sp-on .sp-heart{fill:#B5656B;stroke:#B5656B}
+.sp-ring{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}.sp-tick{stroke:#252932;transition:stroke .2s ease}
+.sp-act.sp-on .sp-ring{fill:#7D9584;stroke:#7D9584}.sp-act.sp-on .sp-tick{stroke:#FFFFFF}
+.sp-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+.sp-modal-bg{position:absolute;inset:0;border:0;padding:0;background:rgba(27,42,65,.45);cursor:pointer}
+.sp-modal-box{position:relative;width:100%;max-width:460px;background:#FFFFFF;border-radius:8px;padding:32px;box-sizing:border-box;box-shadow:0 24px 64px rgba(27,42,65,.25);animation:sp-pop .2s ease}
+@keyframes sp-pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sp-mx{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:6px;background:transparent;color:#1B2A41;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-mx:hover{background:#F8FAFD}
+.sp-mf{display:flex;flex-direction:column;gap:8px}
+.sp-mf label{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-mf input{width:100%;height:48px;padding:0 16px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:16px;box-sizing:border-box}
+.sp-mf input:hover{border-color:#A9B9D2}.sp-mf input:focus{outline:none;border-color:#1B2A41}
+.sp-mf-cur{position:relative}.sp-mf-cur input{padding-right:40px}.sp-mf-cur span{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:16px;color:#4E6488;pointer-events:none}
+.sp-mbtn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border:0;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-mbtn:hover{background:#2C3F5E}
+.sp-mlink{padding:0 0 2px;border:0;border-bottom:1px solid #A9B9D2;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.sp-mlink:hover{border-color:#1B2A41}
+.sp-plan{position:absolute;left:8px;right:8px;bottom:8px;z-index:2;display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-radius:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:.45;transition:opacity .25s ease}
+article:hover .sp-plan,.sp-plan:hover,.sp-plan:focus-within{opacity:1}
+.sp-plan-f{display:flex;flex-direction:column;gap:4px;min-width:0;cursor:text}
+.sp-plan-price{flex-direction:row!important;align-items:center;justify-content:space-between;gap:12px!important}
+.sp-plan-price .sp-plan-in{width:110px;flex:none}
+.sp-plan-l{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-plan-in{display:flex;align-items:baseline;gap:4px}
+.sp-plan-in i{font-style:normal;font-size:15px;color:#4E6488}
+.sp-plan input{width:100%;min-width:0;height:30px;padding:0;border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;color:#252932;font-family:inherit;font-size:15px;box-sizing:border-box}
+.sp-plan input::placeholder{color:#A9B4C2}
+.sp-plan input:hover{border-bottom-color:#C9D1DB}
+.sp-plan input:focus{outline:none;border-bottom-color:#1B2A41}
+.sp-plan-price input{text-align:right}
+.sp-tag{display:inline-flex;align-items:center;height:30px;padding:0 11px;border-radius:6px;font-size:13px;line-height:1;white-space:nowrap;text-decoration:none;box-sizing:border-box}
+.sp-tag{background:#FFFFFF;color:#1B2A41;border:1px solid #C9D1DB}
+.sp-tag:hover{border-color:#1B2A41;color:#1B2A41}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-tagc{display:inline-flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#1B2A41;text-decoration:none;line-height:1}
+.sp-tagc:hover{color:#3E5A88}
+.sp-tagc i{width:7px;height:7px;border-radius:50%;background:#A9B9D2;flex:none}
+.sp-chip{display:inline-flex;align-items:center;height:36px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;line-height:1;white-space:nowrap;text-decoration:none;box-sizing:border-box;transition:border-color .2s ease,color .2s ease}
+.sp-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.sp-arrow{width:48px;height:48px;border:0;border-radius:6px;background:#1B2A41;color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-arrow:hover{background:#2C3F5E}
+.sp-thumb{width:84px;height:84px;padding:0;border:1px solid transparent;border-radius:6px;background:#DBE2EA;cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sp-thumb-on{border-color:#1B2A41;box-shadow:inset 0 0 0 1px #1B2A41}
+.sp-gal{display:flex;gap:16px;align-items:flex-start}
+.sp-thumbs-wrap{order:-1;flex:none}
+.sp-thumbs{display:flex;flex-direction:column;gap:10px;max-height:640px;overflow-y:auto;scrollbar-width:none}
+.sp-thumbs::-webkit-scrollbar{display:none}
+.sp-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:64px;align-items:start}
+.sp-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:64px}
+.sp-more{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.sp-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;row-gap:22px}
+.sp-col{margin:0;display:flex;flex-direction:column;gap:22px}
+.sp-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:baseline;font-size:18px;line-height:27px}
+.sp-row dt{display:flex;align-items:baseline;gap:10px;color:#4E6488}
+.sp-row dt i{flex:1;min-width:24px;border-bottom:1px solid #C9D1DB;transform:translateY(-6px)}
+.sp-row dd{margin:0;color:#252932}
+.sp-iconbtn{width:40px;height:40px;flex:none;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-wide{margin-top:48px;width:100%;height:64px;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px}
+.sp-wide:hover,.sp-iconbtn:hover{background:#FFFFFF}
+@media (max-width:900px){
+.sp-specs{grid-template-columns:minmax(0,1fr)}
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-top,.sp-two{grid-template-columns:minmax(0,1fr);gap:32px}
+.sp-gal{flex-direction:column;align-items:stretch}
+.sp-gal>div:first-child{height:440px!important}
+.sp-thumbs-wrap{order:1}
+.sp-thumbs{flex-direction:row;flex-wrap:wrap;max-height:none}
+.sp-more{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+}
+</style>
+</helmet>
+<div id="top" style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="catalog" hint-size="100%,70px"></dc-import>
+
+<main style="flex: none">
+<section class="sp-wrap" style="padding: 40px 48px 0">
+<nav aria-label="Навигационная цепочка" style="font-size: 13px; color: #4E6488; display: flex; flex-wrap: wrap; gap: 10px"><a href="Main.dc.html" style="color: #4E6488">Главная</a><span aria-hidden="true">/</span><a href="Catalog.dc.html" style="color: #4E6488">Коллекция</a><span aria-hidden="true">/</span><span>{{ item.title }}</span></nav>
+
+<div class="sp-top" style="margin-top: 32px">
+<div class="sp-gal">
+<div style="position: relative; flex: 1; min-width: 0; height: 640px; background: #DBE2EA; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<img src="{{ item.img }}" alt="{{ viewAlt }}" style="height: {{ view.h }}; width: auto; margin-top: {{ view.mt }}">
+<div class="sp-acts" style="top: 10px; right: 10px">
+<button type="button" class="sp-act {{ itemMark.wantCls }}" data-tip="Хочу купить" aria-label="Хочу купить" aria-pressed="{{ itemMark.wantPressed }}" onClick="{{ itemMark.toggleWant }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path class="sp-heart" d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" stroke-width="1.5" stroke-linejoin="round"></path></svg></button>
+<button type="button" class="sp-act {{ itemMark.haveCls }}" data-tip="Есть в коллекции" aria-label="Есть в коллекции" aria-pressed="{{ itemMark.havePressed }}" onClick="{{ itemMark.toggleHave }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle class="sp-ring" cx="12" cy="12" r="9.25" stroke-width="1.5"></circle><path class="sp-tick" d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<p style="position: absolute; top: 20px; left: 24px; margin: 0; font-size: 15px; color: #4E6488"><span style="color: #252932; font-weight: 500">{{ viewNo }}</span> / {{ viewCount }}</p>
+<div style="position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none">
+<button type="button" class="sp-arrow" aria-label="Предыдущий ракурс" onClick="{{ prevView }}" style="pointer-events: auto; background: transparent !important; color: #1B2A41 !important"><svg width="16" height="14" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 6H1.5M6.5 1l-5 5 5 5"></path></svg></button>
+<button type="button" class="sp-arrow" aria-label="Следующий ракурс" onClick="{{ nextView }}" style="pointer-events: auto; background: transparent !important; color: #1B2A41 !important"><svg width="16" height="14" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></button>
+</div>
+</div>
+<div class="sp-thumbs-wrap">
+<div role="group" aria-label="Ракурсы" class="sp-thumbs">
+<sc-for list="{{ views }}" as="v" hint-placeholder-count="5">
+<button type="button" class="sp-thumb {{ v.cls }}" aria-label="{{ v.label }}" onClick="{{ v.pick }}"><img src="{{ v.img }}" alt="" style="height: {{ v.h }}; width: auto; margin-top: {{ v.mt }}"></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div>
+
+<h1 style="margin: 18px 0 0; font-size: clamp(32px, 3vw, 44px); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; text-transform: uppercase; margin-top: 0px">{{ item.title }}</h1>
+
+<div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #C9D1DB">
+<h2 style="margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-transform: none">Характеристики</h2>
+<dl class="sp-col" style="margin-top: 24px">
+<sc-for list="{{ specs }}" as="s" hint-placeholder-count="3">
+<div class="sp-row"><dt><span>{{ s.k }}</span><i aria-hidden="true"></i></dt><dd>{{ s.v }}</dd></div>
+</sc-for>
+<div class="sp-row" style="display: flex; flex-direction: column; align-items: stretch; gap: 14px; grid-template-columns: none"><dt style="display: block; margin: 0"><span style="font-size: 18px; font-weight: 500; color: #252932">Теги</span><i aria-hidden="true" style="display: none"></i></dt><dd style="margin: 0; width: 100%; text-align: left"><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; gap: 8px; flex-wrap: wrap; justify-content: flex-start">
+<sc-for list="{{ tags }}" as="tag" hint-placeholder-count="5">
+<li><a href="Catalog.dc.html" onClick="{{ tag.go }}" class="sp-chip">{{ tag.label }}</a></li>
+</sc-for>
+</ul></dd></div>
+</dl>
+<sc-if value="{{ itemPlan.on }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 28px; padding: 20px 24px; border-radius: 8px; background: #F8FAFD">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#B5656B" stroke="#B5656B" stroke-width="1.5" stroke-linejoin="round"></path></svg>В списке «Хочу купить»</p>
+<button type="button" class="sp-mlink" onClick="{{ itemPlan.edit }}">Изменить</button>
+</div>
+<dl class="sp-col" style="margin-top: 16px; gap: 12px">
+<div class="sp-row" style="font-size: 16px; line-height: 24px"><dt><span>Где планирую купить</span><i aria-hidden="true"></i></dt><dd>{{ itemPlan.note }}</dd></div>
+<div class="sp-row" style="font-size: 16px; line-height: 24px"><dt><span>Примерная цена</span><i aria-hidden="true"></i></dt><dd>{{ itemPlan.price }}</dd></div>
+</dl>
+</div>
+</sc-if>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="sp-wrap" style="padding: 88px 48px 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(40px, 4.7vw, 68px); font-weight: 500; line-height: 0.9; letter-spacing: -0.02em; text-transform: uppercase">Другие предметы<br>коллекции</h2>
+<a href="Catalog.dc.html" style="display: inline-flex; align-items: center; gap: 14px; padding-bottom: 8px; border-bottom: 2px solid #A9B9D2; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">Вся коллекция<svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></a>
+</div>
+<div class="sp-more" style="margin-top: 56px">
+<sc-for list="{{ others }}" as="it" hint-placeholder-count="4">
+<article style="position: relative; display: flex; flex-direction: column; min-width: 0">
+<div class="sp-acts">
+<button type="button" class="sp-act {{ it.wantCls }}" data-tip="Хочу купить" aria-label="Хочу купить" aria-pressed="{{ it.wantPressed }}" onClick="{{ it.toggleWant }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path class="sp-heart" d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" stroke-width="1.5" stroke-linejoin="round"></path></svg></button>
+<button type="button" class="sp-act {{ it.haveCls }}" data-tip="Есть в коллекции" aria-label="Есть в коллекции" aria-pressed="{{ it.havePressed }}" onClick="{{ it.toggleHave }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle class="sp-ring" cx="12" cy="12" r="9.25" stroke-width="1.5"></circle><path class="sp-tick" d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<div style="position: relative">
+<a href="#top" onClick="{{ it.go }}" aria-label="{{ it.title }}" style="display: block">
+<figure style="margin: 0; aspect-ratio: 4 / 5; background: #DBE2EA; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<img src="{{ it.img }}" alt="" style="height: {{ it.scale }}%; width: auto">
+</figure>
+</a>
+<sc-if value="{{ it.planOn }}" hint-placeholder-val="{{ false }}">
+<div class="sp-plan">
+<label class="sp-plan-f"><span class="sp-plan-l">Где планирую купить</span><input type="text" value="{{ it.note }}" onChange="{{ it.setNote }}" placeholder="Магазин, сайт, барахолка"></label>
+<label class="sp-plan-f sp-plan-price"><span class="sp-plan-l">Примерная цена</span><span class="sp-plan-in"><input type="text" inputmode="numeric" value="{{ it.price }}" onChange="{{ it.setPrice }}" placeholder="0"><i>{{ it.cur }}</i></span></label>
+</div>
+</sc-if>
+</div>
+<div style="margin-top: 8px">
+<h3 style="margin: 0; font-size: 18px; font-weight: 400; line-height: 24px"><a href="#top" onClick="{{ it.go }}">{{ it.title }}</a></h3>
+<p style="margin: 6px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; font-size: 14px; line-height: 20px; color: #4E6488"><span>{{ it.category }}</span><span>{{ it.mainTag }}</span></p>
+
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+</main>
+
+<sc-if value="{{ tagsOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box">
+<button type="button" aria-label="Закрыть окно" onClick="{{ closeTags }}" style="position: absolute; inset: 0; border: 0; padding: 0; background: rgba(27, 42, 65, 0.6); cursor: pointer"></button>
+<div role="dialog" aria-modal="true" aria-labelledby="tags-title" style="position: relative; width: 100%; max-width: 560px; max-height: 80vh; overflow-y: auto; background: #FFFFFF; border-radius: 8px; padding: 36px 36px 32px; box-sizing: border-box; box-shadow: 0 24px 64px rgba(27, 42, 65, 0.25)">
+<button type="button" aria-label="Закрыть" onClick="{{ closeTags }}" style="position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #1B2A41; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<h2 id="tags-title" style="margin: 0; padding-right: 48px; font-size: 26px; font-weight: 600; line-height: 1.15">{{ item.title }}</h2>
+<h3 style="margin: 28px 0 0; font-size: 18px; font-weight: 600">Теги</h3>
+<ul style="list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px">
+<sc-for list="{{ tags }}" as="tag" hint-placeholder-count="8">
+<li><a href="Catalog.dc.html" onClick="{{ tag.go }}" class="sp-tagc"><i aria-hidden="true"></i>{{ tag.label }}</a></li>
+</sc-for>
+</ul>
+<h3 style="margin: 32px 0 0; font-size: 18px; font-weight: 600">Характеристики</h3>
+<dl class="sp-col" style="margin-top: 16px; gap: 16px">
+<sc-for list="{{ specs }}" as="s" hint-placeholder-count="8">
+<div class="sp-row" style="font-size: 16px; line-height: 24px"><dt><span>{{ s.k }}</span><i aria-hidden="true"></i></dt><dd>{{ s.v }}</dd></div>
+</sc-for>
+</dl>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ gate.open }}" hint-placeholder-val="{{ false }}">
+<div class="sp-modal">
+<button type="button" class="sp-modal-bg" aria-label="Закрыть окно" onClick="{{ gate.close }}"></button>
+<div class="sp-modal-box" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+<button type="button" class="sp-mx" aria-label="Закрыть" onClick="{{ gate.close }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<h2 id="gate-title" style="margin: 0; padding-right: 40px; font-size: 24px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em">Войдите в аккаунт</h2>
+<p style="margin: 14px 0 0; font-size: 16px; line-height: 24px; color: #3E4A60">{{ gate.text }}</p>
+<div style="margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<a href="Login.dc.html" class="sp-mbtn" style="color: #FFFFFF; text-decoration: none">Войти</a>
+<a href="Login.dc.html" class="sp-mlink" style="text-decoration: none">Зарегистрироваться</a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ plan.open }}" hint-placeholder-val="{{ false }}">
+<div class="sp-modal">
+<button type="button" class="sp-modal-bg" aria-label="Закрыть окно" onClick="{{ plan.skip }}"></button>
+<div class="sp-modal-box" role="dialog" aria-modal="true" aria-labelledby="plan-title">
+<button type="button" class="sp-mx" aria-label="Закрыть" onClick="{{ plan.skip }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#B5656B" stroke="#B5656B" stroke-width="1.5" stroke-linejoin="round"></path></svg>Добавлено в «Хочу купить»</p>
+<h2 id="plan-title" style="margin: 12px 0 0; padding-right: 40px; font-size: 24px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em">{{ plan.title }}</h2>
+<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 18px">
+<div class="sp-mf"><label for="plan-note">Где планирую купить</label><input id="plan-note" type="text" value="{{ plan.note }}" onChange="{{ plan.setNote }}" placeholder="Магазин, сайт, барахолка"></div>
+<div class="sp-mf"><label for="plan-price">Примерная цена</label><div class="sp-mf-cur"><input id="plan-price" type="text" inputmode="numeric" value="{{ plan.price }}" onChange="{{ plan.setPrice }}" placeholder="0"><span>{{ plan.cur }}</span></div></div>
+</div>
+<div style="margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<button type="button" class="sp-mbtn" onClick="{{ plan.save }}">Сохранить</button>
+<button type="button" class="sp-mlink" onClick="{{ plan.skip }}">Заполню позже</button>
+</div>
+<p style="margin: 20px 0 0; font-size: 14px; line-height: 20px; color: #4E6488">Эти заметки видны только вам и хранятся в личном кабинете.</p>
+</div>
+</div>
+</sc-if>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,108px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3160}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { id: 2, view: 0, tagsOpen: false, seed: Math.floor(Math.random() * 200) + 1 };
+  }
+  componentDidMount() {
+    this.spInit();
+    try { var v = parseInt(window.localStorage.getItem('sp-item'), 10); if (v >= 1) this.setState({ id: v }); } catch (e) {}
+  }
+  spFromDb() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    if (db && db.v === 2 && db.figures) {
+      var fx = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (String(arr[i].id) === String(id)) return arr[i]; return null; };
+      var dm = function (n) { return n == null || n === '' ? '' : String(n).replace('.', ',') + ' см'; };
+      return db.figures.filter(function (f) { var k = fx(db.kinds, f.kindId); return f.visible && (!k || k.visible !== false); }).map(function (f) {
+        var k = fx(db.kinds, f.kindId), a = fx(db.authors, f.authorId);
+        var tags = (db.figureTags || []).filter(function (b) { return String(b.figureId) === String(f.id); }).map(function (b, i) { var x = fx(db.tags, b.tagId); return x ? { label: x.tagText, weight: 100 - i } : null; }).filter(Boolean);
+        var ph = (db.photos || []).filter(function (p) { return String(p.figureId) === String(f.id); }).sort(function (x, y) { return (y.isMain ? 1 : 0) - (x.isMain ? 1 : 0) || (x.sort || 0) - (y.sort || 0); });
+        var main = fx(ph, f.pictureMainId) || ph[0];
+        return { id: f.id, title: f.name, category: k ? k.name : '', kind: k ? k.name : '', author: a ? a.name : '', factory: f.factoryName || '', height: dm(f.height), length: dm(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createDate || '').slice(0, 10), scale: 76, img: main ? (main.picture || main.pictureCompressed) : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+      });
+    }
+    if (!db || !db.figurines) return null;
+    var by = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (arr[i].id === id) return arr[i]; return null; };
+    var dim = function (d) { return d && d.value !== '' && d.value != null ? String(d.value).replace('.', ',') + ' ' + (d.unit || 'см') : ''; };
+    return db.figurines.filter(function (f) { var c = by(db.categories, f.categoryId); return f.status === 'published' && (!c || c.visible !== false); }).map(function (f) {
+      var c = by(db.categories, f.categoryId), a = by(db.authors, f.authorId);
+      var tags = (f.tagIds || []).map(function (t, i) { var x = by(db.tags, t); return x ? { label: x.name, weight: 100 - i } : null; }).filter(Boolean);
+      var ph = (f.photos || []).filter(function (p) { return p.id === f.mainPhotoId; })[0] || (f.photos || [])[0];
+      return { id: f.id, title: f.title, category: c ? c.name : '', kind: c ? c.name : '', author: a ? a.name : '', factory: f.factory || '', height: dim(f.height), length: dim(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createdAt || '').slice(0, 10), scale: 76, img: ph ? ph.src : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+    });
+  }
+  spItems() {
+    var fromDb = this.spFromDb(); if (fromDb) return fromDb;
+    var TAGS = ['Фигурное катание', 'Спорт', 'Балет', 'Детство', 'Животные', 'Цирк', 'Танец', 'Музыка', 'Женский образ', 'Пионеры'];
+    var titles = ['Название статуэтки', 'Название статуэтки средней длины', 'Длинное название статуэтки, которое переносится на несколько строк без многоточия'];
+    var out = [];
+    for (var i = 0; i < 24; i++) {
+      var author = (i % 4 === 1) ? 'Автор ' + (i % 3 + 1) : '';
+      var factory = (i % 3 === 0) ? 'Фабрика ' + (i % 2 + 1) : '';
+      var height = (i % 2 === 0) ? (12 + i % 9) + ' см' : '';
+      var length = (i % 4 === 0) ? (6 + i % 5) + ' см' : '';
+      var idx = [i % 10, (i * 3 + 1) % 10, (i * 7 + 4) % 10, (i * 9 + 2) % 10, (i + 5) % 10, (i * 3 + 6) % 10, (i + 3) % 10, (i * 7 + 8) % 10, (i + 1) % 10, (i + 7) % 10];
+      var want = i % 5 + 4;
+      var seen = {}; var tags = [];
+      for (var k = 0; k < idx.length && tags.length < want; k++) {
+        var t = idx[k]; if (seen[t]) continue; seen[t] = 1;
+        tags.push({ label: TAGS[t], weight: (i * 37 + k * 53 + t * 11) % 85 + 15 });
+      }
+      tags.sort(function (a, b) { return b.weight - a.weight; });
+      out.push({ id: i + 1, title: titles[i % 3], category: ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'][[0, 0, 1, 2, 0, 3, 0, 4, 2, 0, 5, 1][i % 12]], author: author, factory: factory, height: height, length: length, meta: [author, factory, '[высота]'].filter(Boolean).join(', '), tags: tags, scale: [80, 70, 76, 66][i % 4], img: ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'][i % 3] });
+    }
+    return out;
+  }
+  spInit() {
+    var self = this;
+    this.spLoad();
+    this._spSync = function () { self.spLoad(); };
+    try { window.addEventListener('storage', this._spSync); window.addEventListener('focus', this._spSync); } catch (e) {}
+  }
+  spLoad() {
+    var g = function (k) { try { return JSON.parse(window.localStorage.getItem(k) || '{}') || {}; } catch (e) { return {}; } };
+    var pr = g('sp-profile');
+    var auth = false; try { auth = window.localStorage.getItem('sp-auth') === '1'; } catch (e) {}
+    this.setState({ want: g('sp-want'), have: g('sp-have'), spCur: pr.currency || 'RUB', spAuth: auth });
+  }
+  spToggle(kind, id, title) {
+    if (!this.state.spAuth) { this.setState({ gate: kind, plan: null }); return; }
+    var cur = Object.assign({}, this.state[kind] || {});
+    var had = Object.prototype.hasOwnProperty.call(cur, id);
+    if (had) delete cur[id]; else cur[id] = kind === 'want' ? { note: '', price: '' } : true;
+    try { window.localStorage.setItem(kind === 'want' ? 'sp-want' : 'sp-have', JSON.stringify(cur)); } catch (e) {}
+    var s = {}; s[kind] = cur;
+    if (kind === 'want' && !had) s.plan = { id: id, title: title || '', note: '', price: '' };
+    this.setState(s);
+  }
+  spEntry(v) { return (v && typeof v === 'object') ? { note: v.note || '', price: v.price || '' } : { note: typeof v === 'string' ? v : '', price: '' }; }
+  spEditPlan(id, title) { var e = this.spEntry((this.state.want || {})[id]); this.setState({ plan: { id: id, title: title || '', note: e.note, price: e.price } }); }
+  spSetWant(id, patch) {
+    var w = Object.assign({}, this.state.want || {});
+    w[id] = Object.assign(this.spEntry(w[id]), patch);
+    try { window.localStorage.setItem('sp-want', JSON.stringify(w)); } catch (e) {}
+    this.setState({ want: w });
+  }
+  spCurSign() { return ({ RUB: '₽', USD: '$', EUR: '€' })[this.state.spCur] || '₽'; }
+  spGate() {
+    var self = this, g = this.state.gate;
+    return { open: !!g, text: g === 'have' ? 'Чтобы отмечать статуэтки в «Есть в коллекции», войдите в аккаунт или зарегистрируйтесь.' : 'Чтобы добавлять статуэтки в «Хочу купить», войдите в аккаунт или зарегистрируйтесь.', close: function () { self.setState({ gate: null }); } };
+  }
+  spPlan() {
+    var self = this, p = this.state.plan;
+    var upd = function (k, v) { var q = Object.assign({}, self.state.plan); q[k] = v; self.setState({ plan: q }); };
+    return {
+      open: !!p, title: p ? p.title : '', note: p ? p.note : '', price: p ? p.price : '', cur: this.spCurSign(),
+      setNote: function (e) { upd('note', e.target.value); },
+      setPrice: function (e) { upd('price', String(e.target.value || '').replace(/[^0-9]/g, '').slice(0, 9)); },
+      save: function () { var q = self.state.plan; if (!q) return; var w = Object.assign({}, self.state.want || {}); w[q.id] = { note: q.note, price: q.price }; try { window.localStorage.setItem('sp-want', JSON.stringify(w)); } catch (e) {} self.setState({ want: w, plan: null }); },
+      skip: function () { self.setState({ plan: null }); }
+    };
+  }
+  spMark(it) {
+    var self = this, au = !!this.state.spAuth, w = au ? (this.state.want || {}) : {}, h = au ? (this.state.have || {}) : {};
+    var wo = Object.prototype.hasOwnProperty.call(w, it.id), ho = !!h[it.id];
+    return { wantCls: wo ? 'sp-on' : '', wantPressed: wo ? 'true' : 'false', haveCls: ho ? 'sp-on' : '', havePressed: ho ? 'true' : 'false', toggleWant: function () { self.spToggle('want', it.id, it.title); }, toggleHave: function () { self.spToggle('have', it.id); }, planOn: wo, note: self.spEntry(w[it.id]).note, price: self.spEntry(w[it.id]).price, cur: self.spCurSign(), setNote: function (e) { self.spSetWant(it.id, { note: e.target.value }); }, setPrice: function (e) { self.spSetWant(it.id, { price: String(e.target.value || '').replace(/[^0-9]/g, '').slice(0, 9) }); } };
+  }
+  spStore(key, val) { try { window.localStorage.setItem(key, String(val)); } catch (e) {} }
+  tagCls(w) { return w >= 70 ? 'sp-tag-hi' : (w >= 40 ? 'sp-tag-mid' : 'sp-tag-lo'); }
+  renderVals() {
+    var self = this, st = this.state;
+    var all = this.spItems();
+    var item = all.filter(function (x) { return x.id === st.id; })[0] || all[0];
+    var VIEWS = [
+      { label: 'Главный ракурс — предмет целиком', h: '84%', mt: '0px' },
+      { label: 'Вид сбоку', h: '74%', mt: '0px' },
+      { label: 'Верхняя часть крупно', h: '170%', mt: '60%' },
+      { label: 'Основание и клеймо', h: '190%', mt: '-95%' },
+      { label: 'Общий вид в витрине', h: '58%', mt: '0px' }
+    ];
+    var vi = st.view % VIEWS.length;
+    var mkTags = function (tags) { return tags.map(function (t) { return Object.assign({}, t, { cls: self.tagCls(t.weight), go: function () { self.spStore('sp-tag', t.label); } }); }); };
+    var seed = (st.seed || 1) * 1000 + item.id;
+    var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    var mine = item.tags.map(function (t) { return t.label; });
+    var pool = all.filter(function (o) { return o.id !== item.id; });
+    for (var s1 = pool.length - 1; s1 > 0; s1--) { var r1 = Math.floor(rnd() * (s1 + 1)); var tmp = pool[s1]; pool[s1] = pool[r1]; pool[r1] = tmp; }
+    var shared = function (o) { return o.tags.some(function (t) { return mine.indexOf(t.label) >= 0; }); };
+    var picked = pool.filter(shared).concat(pool.filter(function (o) { return !shared(o); })).slice(0, 4);
+    var others = [];
+    for (var j = 0; j < picked.length; j++) {
+      var o = picked[j];
+      (function (o) { others.push(Object.assign({}, o, { mainTag: o.tags[0] ? o.tags[0].label : '', year: '[год]', tags: mkTags(o.tags), go: function () { self.spStore('sp-item', o.id); self.setState({ id: o.id, view: 0, tagsOpen: false }); } }, self.spMark(o))); })(o);
+    }
+    var specList = [
+        { k: 'Категория', v: item.category },
+        { k: 'Высота', v: item.height },
+        { k: 'Длина', v: item.length },
+        { k: 'Фабрика', v: item.factory },
+        { k: 'Автор', v: item.author }
+    ].filter(function (s) { return !!s.v; });
+    return {
+      item: item,
+      plan: this.spPlan(),
+      gate: this.spGate(),
+      itemPlan: (function () { var w = self.state.spAuth ? (self.state.want || {}) : {}; var on = Object.prototype.hasOwnProperty.call(w, item.id); var e = self.spEntry(w[item.id]); return { on: on, note: e.note || 'Не указано', price: e.price ? Number(e.price).toLocaleString('ru-RU') + ' ' + self.spCurSign() : 'Не указана', edit: function () { self.spEditPlan(item.id, item.title); } }; })(),
+      itemMark: self.spMark(item),
+      specs: specList,
+      tags: mkTags(item.tags),
+      shownTags: mkTags(item.tags.slice(0, 6)),
+      hasMoreTags: item.tags.length > 6,
+      tagCount: item.tags.length,
+      tagsOpen: st.tagsOpen,
+      openTags: function () { self.setState({ tagsOpen: true }); },
+      closeTags: function () { self.setState({ tagsOpen: false }); },
+      view: VIEWS[vi],
+      viewAlt: item.title + ': ' + VIEWS[vi].label.toLowerCase(),
+      viewLabel: VIEWS[vi].label,
+      viewNo: vi + 1,
+      viewCount: VIEWS.length,
+      views: VIEWS.map(function (v, n) { return Object.assign({}, v, { img: item.img, cls: n === vi ? 'sp-thumb-on' : '', pick: function () { self.setState({ view: n }); } }); }),
+      prevView: function () { self.setState({ view: (vi + VIEWS.length - 1) % VIEWS.length }); },
+      nextView: function () { self.setState({ view: (vi + 1) % VIEWS.length }); },
+      others: others
+    };
+  }
+}
+</script>
+</body>
+</html>

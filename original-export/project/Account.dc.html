@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Личный кабинет — Советский пластик</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+a,button,input,textarea{transition:color .2s ease,background-color .2s ease,border-color .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-acts{position:absolute;top:6px;right:6px;z-index:2;display:flex;gap:0}
+.sp-act{position:relative;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-act svg{transition:transform .2s ease}.sp-act:hover svg{transform:scale(1.1)}.sp-act:active svg{transform:scale(.9)}
+.sp-act::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);right:0;padding:6px 10px;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:'Onest',system-ui,sans-serif;font-size:12px;line-height:1;white-space:nowrap;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+.sp-act:hover::after,.sp-act:focus-visible::after{opacity:1;transform:none}
+.sp-heart{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}
+.sp-act.sp-on .sp-heart{fill:#B5656B;stroke:#B5656B}
+.sp-ring{fill:#FFFFFF;stroke:#252932;transition:fill .2s ease,stroke .2s ease}.sp-tick{stroke:#252932;transition:stroke .2s ease}
+.sp-act.sp-on .sp-ring{fill:#7D9584;stroke:#7D9584}.sp-act.sp-on .sp-tick{stroke:#FFFFFF}
+.sp-prof{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;padding:40px;border-radius:8px;background:#F8FAFD}
+.sp-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
+.sp-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.sp-field label,.sp-flabel{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-field input{width:100%;height:48px;padding:0 16px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:16px;box-sizing:border-box}
+.sp-field input:hover,.sp-note:hover{border-color:#A9B9D2}
+.sp-field input:focus,.sp-note:focus{outline:none;border-color:#1B2A41}
+.sp-chip{display:inline-flex;align-items:center;height:40px;padding:0 16px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:15px;cursor:pointer}
+.sp-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.sp-chip-on,.sp-chip-on:hover{background:#1B2A41;border-color:#1B2A41;color:#FFFFFF}
+.sp-btn{display:inline-flex;align-items:center;gap:24px;height:48px;padding:0 22px;border:0;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-btn:hover{background:#2C3F5E}.sp-btn:active{transform:scale(.97)}
+.sp-ghost{display:inline-flex;align-items:center;height:40px;padding:0 16px;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-sizing:border-box}
+.sp-ghost:hover{background:#FFFFFF}
+.sp-link{padding:0 0 2px;border:0;border-bottom:1px solid #A9B9D2;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.sp-link:hover{border-color:#1B2A41}
+.sp-tabs{display:flex;gap:36px;border-bottom:1px solid #DCE2EA}
+.sp-tab{position:relative;display:inline-flex;align-items:center;gap:10px;padding:0 0 16px;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.sp-tab:hover{color:#1B2A41}
+.sp-tab-on{color:#1B2A41}.sp-tab-on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#1B2A41}
+.sp-tab-n{font-size:12px;letter-spacing:0;color:#4E6488}
+.sp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.sp-note{width:100%;min-height:64px;margin-top:12px;padding:10px 12px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;line-height:20px;resize:vertical;box-sizing:border-box}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-prof{grid-template-columns:minmax(0,1fr);gap:28px;padding:24px}
+.sp-fields{grid-template-columns:minmax(0,1fr)}
+.sp-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+}
+
+.sp-who{display:flex;align-items:center;gap:16px}
+.sp-ava{flex:none;border-radius:50%;background:#DBE2EA;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sp-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sp-stat{display:flex;align-items:center;gap:20px;padding:24px 28px;border:1px solid transparent;border-radius:8px;background:#F8FAFD;color:#252932;font-family:inherit;text-align:left;cursor:pointer}
+.sp-stat:hover{border-color:#C9D1DB}
+.sp-stat-on,.sp-stat-on:hover{border-color:#1B2A41;background:#FFFFFF}
+.sp-stat-n{font-size:44px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.sp-stat-l{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-stat-s{margin-top:6px;font-size:14px;color:#4E6488}
+.sp-drawer-bg{position:fixed;inset:0;z-index:1000;border:0;padding:0;background:rgba(27,42,65,.45);cursor:pointer}
+.sp-drawer{position:fixed;top:0;right:0;bottom:0;z-index:1001;width:min(520px,100%);overflow-y:auto;background:#FFFFFF;box-shadow:-24px 0 64px rgba(27,42,65,.18);padding:36px 40px 40px;box-sizing:border-box;animation:sp-slide .3s cubic-bezier(.4,0,.2,1)}
+@keyframes sp-slide{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.sp-x{position:absolute;top:20px;right:20px;width:44px;height:44px;border:0;border-radius:6px;background:transparent;color:#1B2A41;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-x:hover{background:#F8FAFD}
+.sp-sep{margin:32px 0 0;padding-top:28px;border-top:1px solid #DCE2EA}
+.sp-plan{position:absolute;left:8px;right:8px;bottom:8px;z-index:2;display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-radius:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:.45;transition:opacity .25s ease}
+article:hover .sp-plan,.sp-plan:hover,.sp-plan:focus-within{opacity:1}
+.sp-plan-price{flex-direction:row!important;align-items:center;justify-content:space-between;gap:12px!important}
+.sp-plan-price .sp-plan-in{width:110px;flex:none}
+.sp-plan-f{display:flex;flex-direction:column;gap:4px;min-width:0;cursor:text}
+.sp-plan-l{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.sp-plan-in{display:flex;align-items:baseline;gap:4px}
+.sp-plan-in i{font-style:normal;font-size:15px;color:#4E6488}
+.sp-plan input{width:100%;min-width:0;height:30px;padding:0;border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;color:#252932;font-family:inherit;font-size:15px;box-sizing:border-box}
+.sp-plan input::placeholder{color:#A9B4C2}
+.sp-plan input:hover{border-bottom-color:#C9D1DB}
+.sp-plan input:focus{outline:none;border-bottom-color:#1B2A41}
+.sp-plan-price input{text-align:right}
+
+.sp-price{position:relative;margin-top:8px}
+.sp-price input{width:100%;height:40px;padding:0 36px 0 12px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;box-sizing:border-box}
+.sp-price input:hover{border-color:#A9B9D2}.sp-price input:focus{outline:none;border-color:#1B2A41}
+.sp-price span{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:14px;color:#4E6488;pointer-events:none}
+.sp-toast{position:fixed;left:50%;bottom:32px;z-index:1100;transform:translateX(-50%);padding:14px 20px;border-radius:8px;background:#1B2A41;color:#FFFFFF;font-size:15px;box-shadow:0 12px 32px rgba(27,42,65,.25)}
+@media (max-width:900px){.sp-stats{grid-template-columns:minmax(0,1fr)}.sp-drawer{padding:28px 20px}}
+</style>
+</helmet>
+<div style="font-family: 'Onest', system-ui, sans-serif; color: #252932; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+<dc-import name="SiteHeader" current="" hint-size="100%,71px"></dc-import>
+
+<main style="flex: none">
+<sc-if value="{{ guest }}" hint-placeholder-val="{{ false }}">
+<section class="sp-wrap" style="padding: 48px 48px 0">
+<div style="padding: 56px 40px; border-radius: 8px; background: #F8FAFD; text-align: center">
+<p style="margin: 0; font-size: 22px; font-weight: 500">Вы не вошли в аккаунт</p>
+<p style="margin: 10px 0 0; font-size: 16px; color: #4E6488">Войдите или зарегистрируйтесь, чтобы открыть свою коллекцию.</p>
+<a href="Login.dc.html" class="sp-btn" style="margin-top: 28px; text-decoration: none">Войти<svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="#FFFFFF" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></a>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ signed }}" hint-placeholder-val="{{ true }}">
+<section class="sp-wrap" style="padding: 48px 48px 0">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div>
+<p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488">{{ greeting }}</p>
+<h1 style="margin: 16px 0 0; font-size: clamp(48px, 7vw, 104px); font-weight: 500; line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase">Моя коллекция</h1>
+</div>
+<div class="sp-who">
+<div class="sp-ava" style="width: 56px; height: 56px">
+<sc-if value="{{ hasAvatar }}" hint-placeholder-val="{{ false }}"><img src="{{ avatar }}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if>
+<sc-if value="{{ noAvatar }}" hint-placeholder-val="{{ true }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4E6488" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4 21c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5" stroke-linecap="round"></path></svg></sc-if>
+</div>
+<div style="min-width: 0">
+<p style="margin: 0; font-size: 17px; font-weight: 500; line-height: 22px">{{ displayName }}</p>
+<p style="margin: 2px 0 0; font-size: 14px; line-height: 20px; color: #4E6488">{{ displayLogin }}</p>
+</div>
+<button type="button" class="sp-ghost" onClick="{{ openEdit }}" style="margin-left: 8px; gap: 10px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z" stroke-linejoin="round"></path></svg>Редактировать профиль</button>
+<sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}"><a href="Admin.dc.html" class="sp-btn" onClick="{{ goAdmin }}" style="height: 40px; padding: 0 16px; gap: 10px; text-decoration: none"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="1.5" width="5" height="5" rx="1"></rect><rect x="9.5" y="1.5" width="5" height="5" rx="1"></rect><rect x="1.5" y="9.5" width="5" height="5" rx="1"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="1"></rect></svg>Админ-панель</a></sc-if>
+</div>
+</div>
+
+<div class="sp-stats" role="tablist" aria-label="Папки коллекции" style="margin-top: 40px">
+<button type="button" role="tab" class="sp-stat {{ wantTabCls }}" aria-selected="{{ wantSel }}" onClick="{{ toWant }}">
+<svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#B5656B" stroke="#B5656B" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+<span style="flex: 1; min-width: 0"><span class="sp-stat-l" style="display: block">Хочу купить</span><span class="sp-stat-s" style="display: block">{{ budgetText }}</span></span>
+<span class="sp-stat-n">{{ wantCount }}</span>
+</button>
+<button type="button" role="tab" class="sp-stat {{ haveTabCls }}" aria-selected="{{ haveSel }}" onClick="{{ toHave }}">
+<svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9.25" fill="#7D9584" stroke="#7D9584" stroke-width="1.5"></circle><path d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="flex: 1; min-width: 0"><span class="sp-stat-l" style="display: block">Есть в коллекции</span><span class="sp-stat-s" style="display: block">{{ haveText }}</span></span>
+<span class="sp-stat-n">{{ haveCount }}</span>
+</button>
+</div>
+
+<sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 40px; padding: 56px 32px; background: #F8FAFD; border-radius: 8px; text-align: center">
+<p style="margin: 0; font-size: 22px; font-weight: 500">{{ emptyTitle }}</p>
+<p style="margin: 10px 0 0; font-size: 16px; color: #4E6488">{{ emptyText }}</p>
+<a href="Catalog.dc.html" style="margin-top: 24px; display: inline-flex; align-items: center; gap: 14px; padding-bottom: 8px; border-bottom: 2px solid #A9B9D2; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">Перейти в коллекцию<svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M0 6h12.5M7.5 1l5 5-5 5"></path></svg></a>
+</div>
+</sc-if>
+
+<div class="sp-grid" style="margin-top: 48px">
+<sc-for list="{{ shown }}" as="it" hint-placeholder-count="4">
+<article style="position: relative; display: flex; flex-direction: column; min-width: 0">
+<div class="sp-acts">
+<button type="button" class="sp-act {{ it.wantCls }}" data-tip="Хочу купить" aria-label="Хочу купить" aria-pressed="{{ it.wantPressed }}" onClick="{{ it.toggleWant }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path class="sp-heart" d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" stroke-width="1.5" stroke-linejoin="round"></path></svg></button>
+<button type="button" class="sp-act {{ it.haveCls }}" data-tip="Есть в коллекции" aria-label="Есть в коллекции" aria-pressed="{{ it.havePressed }}" onClick="{{ it.toggleHave }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle class="sp-ring" cx="12" cy="12" r="9.25" stroke-width="1.5"></circle><path class="sp-tick" d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<div style="position: relative">
+<a href="Figurine.dc.html" onClick="{{ it.go }}" aria-label="{{ it.title }}" style="display: block">
+<figure style="margin: 0; aspect-ratio: 4 / 5; background: #DBE2EA; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<img src="{{ it.img }}" alt="" style="height: {{ it.scale }}%; width: auto">
+</figure>
+</a>
+<sc-if value="{{ it.showNote }}" hint-placeholder-val="{{ false }}">
+<div class="sp-plan">
+<label class="sp-plan-f"><span class="sp-plan-l">Где планирую купить</span><input type="text" value="{{ it.note }}" onChange="{{ it.setNote }}" placeholder="Магазин, сайт, барахолка"></label>
+<label class="sp-plan-f sp-plan-price"><span class="sp-plan-l">Примерная цена</span><span class="sp-plan-in"><input type="text" inputmode="numeric" value="{{ it.price }}" onChange="{{ it.setPrice }}" placeholder="0"><i>{{ cur }}</i></span></label>
+</div>
+</sc-if>
+</div>
+<div style="margin-top: 8px">
+<h3 style="margin: 0; font-size: 18px; font-weight: 400; line-height: 24px"><a href="Figurine.dc.html" onClick="{{ it.go }}">{{ it.title }}</a></h3>
+<p style="margin: 6px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; font-size: 14px; line-height: 20px; color: #4E6488"><span>{{ it.kind }}</span><span>{{ it.mainTag }}</span></p>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+</sc-if>
+</main>
+
+<sc-if value="{{ editOpen }}" hint-placeholder-val="{{ false }}">
+<button type="button" class="sp-drawer-bg" aria-label="Закрыть окно" onClick="{{ closeEdit }}"></button>
+<div class="sp-drawer" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+<button type="button" class="sp-x" aria-label="Закрыть" onClick="{{ closeEdit }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"></path></svg></button>
+<h2 id="edit-title" style="margin: 0; padding-right: 48px; font-size: 28px; font-weight: 500; line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase">Профиль</h2>
+
+<div style="margin-top: 28px; display: flex; align-items: center; gap: 20px">
+<div class="sp-ava" style="width: 96px; height: 96px">
+<sc-if value="{{ dHasAvatar }}" hint-placeholder-val="{{ false }}"><img src="{{ dAvatar }}" alt="Аватар" style="width: 100%; height: 100%; object-fit: cover"></sc-if>
+<sc-if value="{{ dNoAvatar }}" hint-placeholder-val="{{ true }}"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#4E6488" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4 21c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5" stroke-linecap="round"></path></svg></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px">
+<label class="sp-ghost" style="position: relative; overflow: hidden">{{ avatarLabel }}<input type="file" accept="image/*" onChange="{{ pickAvatar }}" aria-label="Загрузить аватар" style="position: absolute; inset: 0; opacity: 0; cursor: pointer"></label>
+<sc-if value="{{ dHasAvatar }}" hint-placeholder-val="{{ false }}"><button type="button" class="sp-link" onClick="{{ dropAvatar }}">Удалить фото</button></sc-if>
+</div>
+</div>
+
+<div style="margin-top: 28px; display: flex; flex-direction: column; gap: 20px">
+<div class="sp-field"><label for="p-login">Логин</label><input id="p-login" type="text" autocomplete="username" value="{{ draft.login }}" onChange="{{ setLogin }}" placeholder="Латиница и цифры"></div>
+<div class="sp-field"><label for="p-name">Имя</label><input id="p-name" type="text" autocomplete="name" value="{{ draft.name }}" onChange="{{ setName }}"></div>
+<div class="sp-field"><label for="p-email">Электронная почта</label><input id="p-email" type="email" autocomplete="email" value="{{ draft.email }}" onChange="{{ setEmail }}"></div>
+<div>
+<span class="sp-flabel" id="p-cur">Валюта по умолчанию</span>
+<div role="radiogroup" aria-labelledby="p-cur" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{ currencies }}" as="c" hint-placeholder-count="3">
+<button type="button" role="radio" class="sp-chip {{ c.cls }}" aria-checked="{{ c.checked }}" onClick="{{ c.pick }}">{{ c.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div class="sp-sep">
+<p class="sp-flabel" style="margin: 0">Пароль</p>
+<div style="margin-top: 14px; display: flex; flex-direction: column; gap: 14px">
+<div class="sp-field"><label for="p-pass">Новый пароль</label><input id="p-pass" type="password" autocomplete="new-password" value="{{ pass }}" onChange="{{ setPass }}" placeholder="Оставьте пустым, чтобы не менять"></div>
+<div class="sp-field"><label for="p-pass2">Повторите пароль</label><input id="p-pass2" type="password" autocomplete="new-password" value="{{ pass2 }}" onChange="{{ setPass2 }}"></div>
+</div>
+</div>
+
+<sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 20px 0 0; font-size: 15px; color: #9A4A50">{{ error }}</p></sc-if>
+
+<div style="margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<button type="button" class="sp-btn" onClick="{{ save }}">Сохранить</button>
+<a href="Main.dc.html" onClick="{{ signOut }}" class="sp-link" style="font-size: 14px; text-decoration: none">Выйти из аккаунта</a>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}"><p class="sp-toast" role="status">{{ toastText }}</p></sc-if>
+
+<div style="margin-top: auto; padding-top: 100px">
+<dc-import name="SiteFooter" hint-size="100%,177px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"signedIn":{"editor":"boolean","default":true},"editOpen":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1640}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { auth: null, prof: {}, want: {}, have: {}, tab: 'want', edit: null, draft: {}, pass: '', pass2: '', error: '', toast: '' };
+  }
+  componentDidMount() {
+    var self = this;
+    this.spLoad();
+    this._sync = function () { self.spLoad(); };
+    try { window.addEventListener('storage', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); } catch (e) {} if (this._t) clearTimeout(this._t); }
+  spGet(k) { try { return JSON.parse(window.localStorage.getItem(k) || '{}') || {}; } catch (e) { return {}; } }
+  spLoad() {
+    var auth = null;
+    try { auth = window.localStorage.getItem('sp-auth') === '1' ? true : null; } catch (e) {}
+    var want = this.spGet('sp-want'), have = this.spGet('sp-have');
+    var demo = true;
+    try { demo = window.localStorage.getItem('sp-want') === null && window.localStorage.getItem('sp-have') === null; } catch (e) {}
+    if (demo) { want = { 3: { note: 'Барахолка на Удельной', price: '3500' }, 8: { note: '', price: '' }, 14: { note: 'Авито, продавец из Твери', price: '5200' } }; have = { 1: true, 5: true, 11: true, 20: true }; }
+    var prof = this.spGet('sp-profile'), adminId = '';
+    try {
+      var sdb = JSON.parse(window.localStorage.getItem('sp-db') || 'null');
+      var em = String(prof.email || '').toLowerCase();
+      var au = sdb && sdb.users ? sdb.users.filter(function (u) { return em && String(u.email).toLowerCase() === em && u.isAdmin && u.status !== 'blocked'; })[0] : null;
+      if (au && auth) adminId = au.id;
+    } catch (e) {}
+    this.setState({ auth: auth, prof: prof, want: want, have: have, adminId: adminId });
+  }
+  spSave(k, v) { try { window.localStorage.setItem(k, JSON.stringify(v)); window.dispatchEvent(new Event('storage')); } catch (e) {} }
+  spFromDb() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    if (db && db.v === 2 && db.figures) {
+      var fx = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (String(arr[i].id) === String(id)) return arr[i]; return null; };
+      var dm = function (n) { return n == null || n === '' ? '' : String(n).replace('.', ',') + ' см'; };
+      return db.figures.filter(function (f) { var k = fx(db.kinds, f.kindId); return f.visible && (!k || k.visible !== false); }).map(function (f) {
+        var k = fx(db.kinds, f.kindId), a = fx(db.authors, f.authorId);
+        var tags = (db.figureTags || []).filter(function (b) { return String(b.figureId) === String(f.id); }).map(function (b, i) { var x = fx(db.tags, b.tagId); return x ? { label: x.tagText, weight: 100 - i } : null; }).filter(Boolean);
+        var ph = (db.photos || []).filter(function (p) { return String(p.figureId) === String(f.id); }).sort(function (x, y) { return (y.isMain ? 1 : 0) - (x.isMain ? 1 : 0) || (x.sort || 0) - (y.sort || 0); });
+        var main = fx(ph, f.pictureMainId) || ph[0];
+        return { id: f.id, title: f.name, category: k ? k.name : '', kind: k ? k.name : '', author: a ? a.name : '', factory: f.factoryName || '', height: dm(f.height), length: dm(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createDate || '').slice(0, 10), scale: 76, img: main ? (main.picture || main.pictureCompressed) : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+      });
+    }
+    if (!db || !db.figurines) return null;
+    var by = function (arr, id) { for (var i = 0; i < (arr || []).length; i++) if (arr[i].id === id) return arr[i]; return null; };
+    var dim = function (d) { return d && d.value !== '' && d.value != null ? String(d.value).replace('.', ',') + ' ' + (d.unit || 'см') : ''; };
+    return db.figurines.filter(function (f) { var c = by(db.categories, f.categoryId); return f.status === 'published' && (!c || c.visible !== false); }).map(function (f) {
+      var c = by(db.categories, f.categoryId), a = by(db.authors, f.authorId);
+      var tags = (f.tagIds || []).map(function (t, i) { var x = by(db.tags, t); return x ? { label: x.name, weight: 100 - i } : null; }).filter(Boolean);
+      var ph = (f.photos || []).filter(function (p) { return p.id === f.mainPhotoId; })[0] || (f.photos || [])[0];
+      return { id: f.id, title: f.title, category: c ? c.name : '', kind: c ? c.name : '', author: a ? a.name : '', factory: f.factory || '', height: dim(f.height), length: dim(f.length), tags: tags, mainTag: tags[0] ? tags[0].label : '', added: (f.createdAt || '').slice(0, 10), scale: 76, img: ph ? ph.src : '/_blob/71c672eab5ec5354e8696155720ef67e', meta: '' };
+    });
+  }
+  spItems() {
+    var fromDb = this.spFromDb(); if (fromDb) return fromDb;
+    var TAGS = ['Фигурное катание', 'Спорт', 'Балет', 'Детство', 'Зима', 'Цирк', 'Танец', 'Музыка', 'Женский образ', 'Пионеры'];
+    var KINDS = ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'];
+    var titles = ['Название статуэтки', 'Название статуэтки средней длины', 'Длинное название статуэтки, которое переносится на несколько строк без многоточия'];
+    var out = [];
+    for (var i = 0; i < 24; i++) {
+      var idx = [i % 10, (i * 3 + 1) % 10, (i * 7 + 4) % 10, (i * 9 + 2) % 10, (i + 5) % 10, (i * 3 + 6) % 10, (i + 3) % 10, (i * 7 + 8) % 10, (i + 1) % 10, (i + 7) % 10];
+      var want = i % 5 + 4, seen = {}, tags = [];
+      for (var k = 0; k < idx.length && tags.length < want; k++) {
+        var t = idx[k]; if (seen[t]) continue; seen[t] = 1;
+        tags.push({ label: TAGS[t], weight: (i * 37 + k * 53 + t * 11) % 85 + 15 });
+      }
+      tags.sort(function (a, b) { return b.weight - a.weight; });
+      out.push({ id: i + 1, title: titles[i % 3], kind: KINDS[[0, 0, 1, 2, 0, 3, 0, 4, 2, 0, 5, 1][i % 12]], mainTag: tags[0].label, scale: [80, 70, 76, 66][i % 4], img: ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'][i % 3] });
+    }
+    return out;
+  }
+  wantEntry(v) { return (v && typeof v === 'object') ? { note: v.note || '', price: v.price || '' } : { note: typeof v === 'string' ? v : '', price: '' }; }
+  setWant(id, patch) {
+    var w = Object.assign({}, this.state.want);
+    w[id] = Object.assign(this.wantEntry(w[id]), patch);
+    this.spSave('sp-want', w);
+    this.setState({ want: w });
+  }
+  spToggle(kind, id) {
+    var cur = Object.assign({}, this.state[kind]);
+    if (Object.prototype.hasOwnProperty.call(cur, id)) delete cur[id]; else cur[id] = kind === 'want' ? { note: '', price: '' } : true;
+    var s = {}; s[kind] = cur;
+    this.spSave('sp-want', kind === 'want' ? cur : this.state.want);
+    this.spSave('sp-have', kind === 'have' ? cur : this.state.have);
+    this.setState(s);
+  }
+  flash(text) {
+    var self = this;
+    if (this._t) clearTimeout(this._t);
+    this.setState({ toast: text });
+    this._t = setTimeout(function () { self.setState({ toast: '' }); }, 2600);
+  }
+  pickAvatar(e) {
+    var self = this;
+    var f = e && e.target && e.target.files && e.target.files[0];
+    if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var size = 240, c = document.createElement('canvas'); c.width = size; c.height = size;
+        var s = Math.min(img.width, img.height);
+        c.getContext('2d').drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, size, size);
+        self.setState({ draft: Object.assign({}, self.state.draft, { avatar: c.toDataURL('image/jpeg', 0.85) }) });
+      };
+      img.src = rd.result;
+    };
+    rd.readAsDataURL(f);
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    var signed = st.auth === null ? !!this.props.signedIn : st.auth;
+    var p = st.prof || {};
+    var name = p.name || p.firstName || '';
+    var login = p.login || (p.email ? p.email.split('@')[0] : '');
+    var CUR = { RUB: '₽', USD: '$', EUR: '€' };
+    var curCode = p.currency || 'RUB';
+    var cur = CUR[curCode] || '₽';
+    var editOpen = st.edit === null ? !!this.props.editOpen : st.edit;
+    var d = Object.assign({ login: login, name: name, email: p.email || '', currency: curCode, avatar: p.avatar || '' }, st.draft);
+    var setD = function (k) { return function (e) { var x = Object.assign({}, self.state.draft); x[k] = e.target.value; self.setState({ draft: x, error: '' }); }; };
+    var all = this.spItems();
+    var has = function (o, id) { return Object.prototype.hasOwnProperty.call(o, id); };
+    var wantList = all.filter(function (it) { return has(st.want, it.id); });
+    var haveList = all.filter(function (it) { return !!st.have[it.id]; });
+    var budget = wantList.reduce(function (s, it) { var v = parseFloat(self.wantEntry(st.want[it.id]).price); return s + (isFinite(v) ? v : 0); }, 0);
+    var isWant = st.tab === 'want';
+    var shown = (isWant ? wantList : haveList).map(function (it) {
+      var w = has(st.want, it.id), h = !!st.have[it.id], we = self.wantEntry(st.want[it.id]);
+      return Object.assign({}, it, {
+        wantCls: w ? 'sp-on' : '', wantPressed: w ? 'true' : 'false',
+        haveCls: h ? 'sp-on' : '', havePressed: h ? 'true' : 'false',
+        toggleWant: function () { self.spToggle('want', it.id); },
+        toggleHave: function () { self.spToggle('have', it.id); },
+        go: function () { try { window.localStorage.setItem('sp-item', String(it.id)); } catch (e) {} },
+        showNote: isWant,
+        note: we.note,
+        price: we.price,
+        setNote: function (e) { self.setWant(it.id, { note: e.target.value }); },
+        setPrice: function (e) { self.setWant(it.id, { price: String(e.target.value || '').replace(/[^0-9]/g, '').slice(0, 9) }); }
+      });
+    });
+    var plural = function (n, f) { var a = n % 100, b = n % 10; if (a > 10 && a < 20) return f[2]; if (b === 1) return f[0]; if (b >= 2 && b <= 4) return f[1]; return f[2]; };
+    return {
+      signed: signed,
+      guest: !signed,
+      isAdmin: !!st.adminId,
+      goAdmin: function () { try { window.localStorage.setItem('sp-admin', st.adminId); } catch (e) {} },
+      greeting: name ? 'Здравствуйте, ' + name : 'Личный кабинет',
+      displayName: name || 'Без имени',
+      displayLogin: login ? '@' + login : (p.email || 'Логин не указан'),
+      avatar: p.avatar || '', hasAvatar: !!p.avatar, noAvatar: !p.avatar,
+      openEdit: function () { self.setState({ edit: true, draft: {}, pass: '', pass2: '', error: '' }); },
+      closeEdit: function () { self.setState({ edit: false, draft: {}, pass: '', pass2: '', error: '' }); },
+      editOpen: editOpen,
+      draft: d,
+      setLogin: setD('login'), setName: setD('name'), setEmail: setD('email'),
+      currencies: [['RUB', '₽ Рубль'], ['USD', '$ Доллар'], ['EUR', '€ Евро']].map(function (c) {
+        var on = d.currency === c[0];
+        return { label: c[1], cls: on ? 'sp-chip-on' : '', checked: on ? 'true' : 'false', pick: function () { self.setState({ draft: Object.assign({}, self.state.draft, { currency: c[0] }) }); } };
+      }),
+      dAvatar: d.avatar, dHasAvatar: !!d.avatar, dNoAvatar: !d.avatar,
+      avatarLabel: d.avatar ? 'Заменить фото' : 'Загрузить фото',
+      pickAvatar: function (e) { self.pickAvatar(e); },
+      dropAvatar: function () { self.setState({ draft: Object.assign({}, self.state.draft, { avatar: '' }) }); },
+      pass: st.pass, pass2: st.pass2,
+      setPass: function (e) { self.setState({ pass: e.target.value, error: '' }); },
+      setPass2: function (e) { self.setState({ pass2: e.target.value, error: '' }); },
+      hasError: !!st.error, error: st.error,
+      save: function () {
+        var err = '';
+        if (d.login && !/^[A-Za-z0-9_.-]{3,}$/.test(d.login)) err = 'Логин: не меньше 3 символов, латиница, цифры, точка, дефис или подчёркивание.';
+        else if (d.email && !/^\S+@\S+\.\S+$/.test(d.email)) err = 'Проверьте адрес электронной почты.';
+        else if (st.pass && st.pass.length < 6) err = 'Пароль должен быть не короче 6 символов.';
+        else if (st.pass !== st.pass2) err = 'Пароли не совпадают.';
+        if (err) { self.setState({ error: err }); return; }
+        var np = Object.assign({}, self.state.prof, { login: d.login, name: d.name, email: d.email, currency: d.currency, avatar: d.avatar });
+        if (!np.avatar) delete np.avatar;
+        delete np.firstName;
+        self.spSave('sp-profile', np);
+        self.setState({ prof: np, edit: false, draft: {}, pass: '', pass2: '' });
+        self.flash(st.pass ? 'Профиль и пароль обновлены' : 'Профиль обновлён');
+      },
+      signOut: function () { try { window.localStorage.removeItem('sp-auth'); window.localStorage.removeItem('sp-admin'); window.dispatchEvent(new Event('storage')); } catch (e) {} },
+      toast: !!st.toast, toastText: st.toast,
+      cur: cur,
+      wantTabCls: isWant ? 'sp-stat-on' : '', haveTabCls: isWant ? '' : 'sp-stat-on',
+      wantSel: isWant ? 'true' : 'false', haveSel: isWant ? 'false' : 'true',
+      toWant: function () { self.setState({ tab: 'want' }); },
+      toHave: function () { self.setState({ tab: 'have' }); },
+      wantCount: wantList.length,
+      haveCount: haveList.length,
+      budgetText: budget > 0 ? 'Бюджет: ' + budget.toLocaleString('ru-RU') + ' ' + cur : 'Укажите цены, чтобы посчитать бюджет',
+      haveText: haveList.length ? haveList.length + ' ' + plural(haveList.length, ['предмет', 'предмета', 'предметов']) + ' на ваших полках' : 'Отмечайте галочкой то, что уже есть',
+      shown: shown,
+      isEmpty: shown.length === 0,
+      emptyTitle: isWant ? 'Здесь пока пусто' : 'Коллекция пока пуста',
+      emptyText: isWant ? 'Нажмите на сердечко на карточке статуэтки, чтобы добавить её в «Хочу купить».' : 'Нажмите на галочку на карточке статуэтки, чтобы отметить, что она уже есть у вас.'
+    };
+  }
+}
+</script>
+</body>
+</html>

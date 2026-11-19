@@ -1,0 +1,42 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": { "expand": "fill", "h": 4180, "title": "Главная", "w": 1440, "x": 0, "y": 0, "is_interactive": true },
+    "Catalog.dc.html": { "expand": "fill", "h": 2640, "title": "Каталог", "w": 1440, "x": 1520, "y": 0, "is_interactive": true },
+    "Figurine.dc.html": { "expand": "fill", "h": 2450, "title": "Страница статуэтки", "w": 1440, "x": 3040, "y": 0, "is_interactive": true },
+    "Carbolite.dc.html": { "expand": "fill", "h": 3500, "title": "О карболите", "w": 1440, "x": 4560, "y": 0, "is_interactive": true },
+    "Materials.dc.html": { "expand": "fill", "h": 2070, "title": "Статьи", "w": 1440, "x": 6080, "y": 0, "is_interactive": true },
+    "Article.dc.html": { "expand": "fill", "h": 4190, "title": "Статья (пример)", "w": 1440, "x": 7600, "y": 0, "is_interactive": true },
+    "Login.dc.html": { "expand": "fill", "h": 1140, "title": "Вход и регистрация", "w": 1440, "x": 9120, "y": 0, "is_interactive": true },
+    "Account.dc.html": { "expand": "fill", "h": 1640, "title": "Личный кабинет", "w": 1440, "x": 10640, "y": 0, "is_interactive": true },
+    "Admin.dc.html": { "expand": "fill", "h": 1400, "title": "Админка", "w": 1440, "x": 0, "y": 4800, "is_interactive": true },
+    "SiteHeader.dc.html": { "h": 71, "title": "Компонент: шапка", "w": 1440, "x": 0, "y": -420, "is_interactive": true },
+    "SiteFooter.dc.html": { "h": 177, "title": "Компонент: подвал", "w": 1440, "x": 1520, "y": -420 }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-11T10:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "file": "Main.dc.html",
+    "view": "focused"
+  },
+  "notes": {},
+  "order": [
+    "Main.dc.html",
+    "Catalog.dc.html",
+    "Figurine.dc.html",
+    "Carbolite.dc.html",
+    "Materials.dc.html",
+    "Article.dc.html",
+    "Login.dc.html",
+    "Account.dc.html",
+    "Admin.dc.html",
+    "SiteHeader.dc.html",
+    "SiteFooter.dc.html"
+  ],
+  "pages": [],
+  "title": "КарболитЪ — сайт"
+}

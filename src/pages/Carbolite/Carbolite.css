@@ -1,0 +1,29 @@
+/* Стили страницы из <helmet> файла original-export/project/Carbolite.dc.html (без изменений, кроме путей к картинкам).
+   Подключаются только пока страница открыта — как в Claude Design, где у каждой страницы свой документ. */
+
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+.sp-pair figure img{transition:transform .5s ease}.sp-pair figure:hover img{transform:scale(1.04)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){main section{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover{background:#F8FAFD!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]){transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+.sp-split{display:grid;grid-template-columns:minmax(0,546fr) minmax(0,138fr) minmax(0,660fr);align-items:center}
+.sp-split-r{display:grid;grid-template-columns:minmax(0,660fr) minmax(0,138fr) minmax(0,546fr);align-items:center}
+.sp-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.sp-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:64px}
+@media (max-width:900px){
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-split,.sp-split-r,.sp-two{grid-template-columns:minmax(0,1fr);gap:32px}
+.sp-pair{grid-template-columns:minmax(0,1fr)}
+.sp-gap{display:none}
+}
+

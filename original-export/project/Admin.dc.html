@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>КарболитЪ — админ-панель</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF}
+*{box-sizing:border-box}
+a,button,input,select,textarea{transition:color .2s ease,background-color .2s ease,border-color .2s ease,opacity .2s ease}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+html,body{scrollbar-width:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.a-topbar{position:sticky;top:0;z-index:58;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;background:#1B2A41;color:#FFFFFF;font-family:'Onest',system-ui,sans-serif}
+.a-brand{display:flex;align-items:center;gap:10px;padding:0;border:0;background:transparent;color:#FFFFFF;font-family:inherit;font-size:17px;line-height:18px;text-align:left;cursor:pointer}
+.a-brand small{display:block;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#A9B9D2}
+.a-toplink{padding:0;border:0;background:transparent;color:#DCE2EA;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.a-toplink:hover{color:#FFFFFF}
+.a-topme{font-size:14px;line-height:17px;color:#FFFFFF;text-align:right}.a-topme small{display:block;font-size:12px;color:#A9B9D2}
+.a-app{display:grid;grid-template-columns:256px minmax(0,1fr);min-height:calc(100vh - 64px);font-family:'Onest',system-ui,sans-serif;color:#252932}
+.a-side{position:sticky;top:64px;height:calc(100vh - 64px);display:flex;flex-direction:column;padding:16px 14px 20px;background:#F8FAFD;border-right:1px solid #DCE2EA;overflow-y:auto}
+.a-nav{display:flex;flex-direction:column;gap:2px}
+.a-navh{margin:18px 0 6px;padding:0 12px;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.a-navi{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:38px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#252932;font-family:inherit;font-size:15px;text-align:left;cursor:pointer}
+.a-navi:hover{background:#EEF2F8;color:#1B2A41}
+.a-navi-on,.a-navi-on:hover{background:#1B2A41;color:#FFFFFF}
+.a-navi b{font-weight:400;font-size:13px;opacity:.7}
+.a-side-copy{margin:auto 0 0;padding:16px 12px 0;font-size:12px;color:#7F93B3}
+.a-main{min-width:0;padding:36px 48px 120px;background:#FFFFFF}
+.a-h1{margin:0;font-size:40px;font-weight:500;line-height:1;letter-spacing:-.02em;text-transform:uppercase}
+.a-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+.a-sub{margin:10px 0 0;font-size:15px;color:#4E6488}
+.a-btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border:1px solid #1B2A41;border-radius:6px;background:#1B2A41;color:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.a-btn:hover{background:#2C3F5E;border-color:#2C3F5E;color:#FFFFFF}
+.a-btn:disabled{opacity:.5;cursor:default}
+.a-ghost{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.a-ghost:hover{border-color:#1B2A41;background:#F8FAFD;color:#1B2A41}
+.a-danger{border-color:#E4C9CB;color:#9A4A50}.a-danger:hover{border-color:#9A4A50;background:#F6ECEC;color:#7E3B40}
+.a-link{padding:0;border:0;background:transparent;color:#1B2A41;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer;border-bottom:1px solid #A9B9D2}
+.a-link:hover{border-color:#1B2A41;color:#1B2A41}
+.a-link-red{color:#9A4A50;border-color:#E4C9CB}.a-link-red:hover{color:#7E3B40;border-color:#9A4A50}
+.a-back{display:inline-flex;align-items:center;gap:10px;padding:0;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.a-back:hover{color:#1B2A41}
+.a-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.a-tile{padding:24px;border-radius:8px;background:#F8FAFD}
+.a-tile p{margin:0}
+.a-tile .n{font-size:44px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.a-tile .l{margin-top:12px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#4E6488}
+.a-card{padding:28px;border:1px solid #DCE2EA;border-radius:8px;background:#FFFFFF}
+.a-card h2{margin:0;font-size:20px;font-weight:600;line-height:1.2}
+.a-card .a-hint{margin:6px 0 0}
+.a-hint{font-size:13px;line-height:19px;color:#4E6488}
+.a-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.a-input,.a-select,.a-textarea{width:100%;height:44px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:15px}
+.a-select{padding-right:32px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231B2A41' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.a-textarea{height:auto;min-height:120px;padding:12px 14px;line-height:23px;resize:vertical}
+.a-input:hover,.a-select:hover,.a-textarea:hover{border-color:#A9B9D2}
+.a-input:focus,.a-select:focus,.a-textarea:focus{outline:none;border-color:#1B2A41}
+.a-input[aria-invalid="true"],.a-select[aria-invalid="true"]{border-color:#9A4A50;background:#FFFBFB}
+.a-search{position:relative;flex:1 1 280px;max-width:420px}
+.a-search input{padding-left:40px}
+.a-search svg{position:absolute;left:14px;top:14px;pointer-events:none}
+.a-filters .a-select{width:auto;min-width:160px}
+.a-table{width:100%;border-collapse:collapse;font-size:15px}
+.a-table th{padding:12px 12px 12px 0;text-align:left;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4E6488;border-bottom:1px solid #C9D1DB;white-space:nowrap}
+.a-table td{padding:12px 12px 12px 0;border-bottom:1px solid #DCE2EA;vertical-align:middle}
+.a-table tr:hover td{background:#FBFCFE}
+.a-thumb{width:56px;height:56px;border-radius:6px;background:#DBE2EA;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.a-thumb img{max-width:100%;max-height:100%;object-fit:contain}
+.a-acts{justify-self:end;display:flex;align-items:center;gap:8px}
+.a-edit{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#1B2A41;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;cursor:pointer}
+.a-edit:hover{border-color:#1B2A41;background:#F8FAFD}
+.a-me{position:relative}
+.a-ava{width:40px;height:40px;padding:0;border:1px solid #C9D1DB;border-radius:50%;background:#F8FAFD;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;box-sizing:border-box}
+.a-ava:hover{border-color:#A9B9D2}
+.a-me-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:62;min-width:230px;padding:6px;background:#FFFFFF;border:1px solid #DCE2EA;border-radius:8px;box-shadow:0 12px 32px rgba(27,42,65,.14);box-sizing:border-box}
+.a-me-who{margin:0;padding:10px 12px 12px;border-bottom:1px solid #DCE2EA;margin-bottom:6px;font-size:15px;line-height:20px;color:#252932}.a-me-who small{display:block;font-size:13px;color:#4E6488}
+.a-me-item{display:flex;align-items:center;width:100%;height:40px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:#252932!important;font-family:inherit;font-size:15px;text-align:left;text-decoration:none;cursor:pointer;box-sizing:border-box}
+.a-me-item:hover{background:#F8FAFD}
+.a-navi-site{margin-bottom:4px;text-decoration:none}.a-navi-site svg{opacity:.7}
+.a-tbtn{padding:0;border:0;background:transparent;color:#252932;font-family:inherit;font-size:15px;font-weight:500;text-align:left;cursor:pointer}
+.a-tbtn:hover{color:#3E5A88}
+.a-acts{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:flex-end}
+.a-badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:13px;font-size:13px;white-space:nowrap}
+.a-badge i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.a-pub{background:#EAF1EC;color:#4E6E58}
+.a-hid{background:#EEF1F5;color:#5C6B80}
+.a-blk{background:#F6ECEC;color:#9A4A50}
+.a-pages{display:flex;gap:6px;justify-content:center;margin-top:28px}
+.a-page{min-width:40px;height:40px;padding:0 10px;border:1px solid transparent;border-radius:6px;background:transparent;color:#1B2A41;font-family:inherit;font-size:15px;cursor:pointer}
+.a-page:hover{background:#F8FAFD}
+.a-page-on,.a-page-on:hover{background:#1B2A41;color:#FFFFFF}
+.a-page:disabled{color:#A9B4C2;cursor:default;background:transparent}
+.a-empty{margin-top:24px;padding:48px 32px;border-radius:8px;background:#F8FAFD;text-align:center}
+.a-empty p{margin:0}.a-empty .t{font-size:20px;font-weight:500}.a-empty .s{margin-top:8px;font-size:15px;color:#4E6488}
+.a-form{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+.a-col{display:flex;flex-direction:column;gap:24px;min-width:0}
+.a-f{display:flex;flex-direction:column;gap:8px;min-width:0}
+.a-f>label,.a-lab{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4E6488}
+.a-req{color:#9A4A50;margin-left:4px}
+.a-err{font-size:13px;color:#9A4A50}
+.a-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.a-row{display:flex;gap:8px;align-items:center}
+.a-dim{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:8px}
+.a-chips{display:flex;flex-wrap:wrap;gap:8px}
+.a-chip{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.a-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.a-chip-on,.a-chip-on:hover{background:#1B2A41;border-color:#1B2A41;color:#FFFFFF}
+.a-quick{display:flex;gap:8px;align-items:center;padding:12px;border-radius:6px;background:#F8FAFD}
+.a-drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:28px;border:1px dashed #A9B9D2;border-radius:8px;background:#F8FAFD;text-align:center;cursor:pointer}
+.a-drop:hover{border-color:#1B2A41;background:#F2F5FA}
+.a-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.a-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.a-ph{position:relative;display:flex;flex-direction:column;border:1px solid #DCE2EA;border-radius:8px;background:#FFFFFF}
+.a-ph-main{border-color:#A9B9D2}
+.a-ph-img{position:relative;border-radius:7px 7px 0 0;aspect-ratio:1/1;background:#DBE2EA;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.a-ph-img img{max-width:100%;max-height:100%;object-fit:contain}
+.a-ph-tag{position:absolute;top:8px;left:8px;padding:4px 8px;border-radius:4px;background:#1B2A41;color:#FFFFFF;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.a-ph-body{display:flex;flex-direction:column;gap:8px;padding:12px}
+.a-ph-body input{height:36px;font-size:14px}
+.a-ph-ctl{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.a-icon{width:32px;height:32px;padding:0;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#1B2A41;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.a-icon:hover{border-color:#1B2A41}.a-icon:disabled{opacity:.4;cursor:default}
+.a-bar{position:sticky;bottom:0;z-index:20;margin:32px -48px -120px;padding:16px 48px;border-top:1px solid #DCE2EA;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.a-dirty{font-size:14px;color:#9A6B2F}
+.a-meta{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#4E6488}
+.a-meta b{font-weight:500;color:#252932}
+.a-alert{padding:14px 16px;border-radius:6px;background:#F6ECEC;color:#7E3B40;font-size:15px;line-height:21px}
+.a-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px}
+.a-modal-bg{position:absolute;inset:0;border:0;padding:0;background:rgba(27,42,65,.5);cursor:pointer}
+.a-modal-box{position:relative;width:100%;max-width:520px;max-height:86vh;overflow-y:auto;padding:32px;border-radius:8px;background:#FFFFFF;box-shadow:0 24px 64px rgba(27,42,65,.25)}
+.a-modal-box h2{margin:0;font-size:24px;font-weight:500;line-height:1.15}
+.a-toast{position:fixed;right:32px;bottom:32px;z-index:1100;display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:8px;background:#1B2A41;color:#FFFFFF;font-size:15px;box-shadow:0 12px 32px rgba(27,42,65,.25);animation:a-in .25s ease}
+.a-toast-err{background:#7E3B40}
+@keyframes a-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.a-tool{display:flex;flex-wrap:wrap;gap:6px}
+.a-tool button{height:32px;padding:0 10px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#1B2A41;font-family:inherit;font-size:13px;cursor:pointer}
+.a-tool button:hover{border-color:#1B2A41}
+.a-prev{padding:28px 32px;border:1px solid #DCE2EA;border-radius:8px;background:#FFFFFF;max-width:760px}
+.a-prev h3{margin:28px 0 10px;font-size:24px;font-weight:500;text-transform:uppercase;letter-spacing:-.01em}
+.a-prev p{margin:0 0 16px;font-size:17px;line-height:28px}
+.a-prev blockquote{margin:0 0 16px;padding-left:18px;border-left:2px solid #A9B9D2;color:#3E4A60}
+.a-prev ul{margin:0 0 16px;padding-left:22px;font-size:17px;line-height:28px}
+.a-prev a{text-decoration:underline;text-decoration-color:#A9B9D2;text-underline-offset:3px}
+.a-gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#F8FAFD;font-family:'Onest',system-ui,sans-serif;color:#252932;text-align:center}
+.a-note{padding:10px 14px;border-radius:6px;background:#FFF7E8;color:#7A5A22;font-size:13px;line-height:19px}
+.a-split{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
+.a-tbl{width:100%}
+.a-tr{display:grid;gap:14px;align-items:center;padding:12px 8px;border-bottom:1px solid #DCE2EA;font-size:15px}
+.a-tr:hover{background:#FBFCFE}
+.a-th,.a-th:hover{padding:10px 8px;border-bottom:1px solid #C9D1DB;background:transparent;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4E6488}
+.a-tr>div{min-width:0}
+.a-dd{position:relative;width:100%;min-width:0}
+.a-filters .a-dd{width:auto;min-width:170px}
+.a-dd-up{z-index:61}
+.a-dd-btn{display:flex;align-items:center;text-align:left;cursor:pointer}
+.a-dd-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.a-dd-btn:disabled{opacity:.55;cursor:default}
+.a-dd-list{position:absolute;top:calc(100% + 4px);left:0;z-index:62;min-width:100%;max-height:300px;overflow-y:auto;margin:0;padding:6px;list-style:none;background:#FFFFFF;border:1px solid #DCE2EA;border-radius:8px;box-shadow:0 12px 32px rgba(27,42,65,.14)}
+.a-dd-opt{display:block;width:100%;min-height:36px;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:#252932;font-family:inherit;font-size:14px;text-align:left;white-space:nowrap;cursor:pointer}
+.a-dd-opt:hover{background:#F8FAFD;color:#1B2A41}
+.a-dd-on{font-weight:500;color:#1B2A41;background:#F2F5FA}
+.a-dd-shade{position:fixed;inset:0;z-index:55;border:0;padding:0;background:transparent;cursor:default}
+.a-btn-red,.a-btn-red:hover{background:#9A4A50;border-color:#9A4A50}
+.a-btn-red:hover{background:#7E3B40;border-color:#7E3B40}
+.a-formhead{position:sticky;top:64px;z-index:30;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin:-36px -48px 24px;padding:20px 48px 18px;background:rgba(255,255,255,.97);border-bottom:1px solid #DCE2EA}
+.a-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#4E6488}
+.a-crumb{padding:0;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.a-crumb:hover{color:#1B2A41}.a-crumb-cur{color:#252932}
+.a-tabs{display:flex;flex-wrap:wrap;gap:4px 28px;margin-bottom:24px;border-bottom:1px solid #DCE2EA}
+.a-tab{position:relative;display:inline-flex;align-items:center;gap:8px;padding:0 0 14px;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.a-tab:hover{color:#1B2A41}.a-tab:disabled{color:#A9B4C2;cursor:not-allowed}
+.a-tab b{font-weight:400;letter-spacing:0;font-size:12px}
+.a-tab-on{color:#1B2A41}.a-tab-on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#1B2A41}
+.a-switch{display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:15px;line-height:21px}
+.a-switch input{position:absolute;opacity:0;width:1px;height:1px}
+.a-switch-ui{flex:none;position:relative;width:40px;height:22px;margin-top:1px;border-radius:11px;background:#C9D1DB;transition:background-color .2s ease}
+.a-switch-ui::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#FFFFFF;transition:transform .2s ease}
+.a-switch input:checked+.a-switch-ui{background:#1B2A41}.a-switch input:checked+.a-switch-ui::after{transform:translateX(18px)}
+.a-switch input:focus-visible+.a-switch-ui{outline:2px solid #3E5A88;outline-offset:2px}
+.a-switch input:disabled+.a-switch-ui{opacity:.5}
+.a-sorth{padding:0;border:0;background:transparent;color:#4E6488;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-align:left;cursor:pointer}
+.a-sorth:hover{color:#1B2A41}.a-sorth i{font-style:normal}
+.a-pagebar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:24px}
+.a-pagebar .a-pages{margin:0}
+.a-sync{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:#4E6488}.a-sync i{width:8px;height:8px;border-radius:50%;background:#7D9584}
+.a-warn{font-size:13px;color:#9A6B2F}
+.a-muted{color:#4E6488;font-size:14px}
+.a-chip-sel,.a-chip-sel:hover{background:#EEF2F8;border-color:#C9D1DB;color:#1B2A41}
+.a-chip-sel:hover{border-color:#1B2A41}
+.a-dd-q{height:36px;margin-bottom:6px;font-size:14px}
+.a-dd-opt{display:flex;align-items:center;gap:10px}
+.a-dd-img{width:28px;height:28px;flex:none;border-radius:4px;object-fit:contain;background:#DBE2EA}
+.a-dd-list{min-width:220px}
+.a-acts .a-dd-list{left:auto;right:0}
+.a-icon-lg{width:44px;height:44px;flex:none;font-size:18px}
+button.a-tile{display:block;width:100%;border:1px solid transparent;font-family:inherit;text-align:left;color:#252932;cursor:pointer}
+button.a-tile:hover{border-color:#C9D1DB}
+button.a-ph-img{width:100%;padding:0;border:0;cursor:zoom-in}
+.a-split{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+@media (max-width:1100px){.a-form,.a-split{grid-template-columns:minmax(0,1fr)}.a-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:800px){.a-app{grid-template-columns:minmax(0,1fr)}.a-side{position:static;height:auto;border-right:0;border-bottom:1px solid #DCE2EA}.a-main{padding:24px 20px 80px}.a-formhead{margin:-24px -20px 20px;padding:14px 20px}.a-grid2{grid-template-columns:minmax(0,1fr)}.a-topbar{height:auto;flex-wrap:wrap;padding:12px 16px}.a-topme{display:none}.a-tbl{overflow-x:auto}.a-tr{min-width:860px}}
+</style>
+</helmet>
+
+
+<sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}"><div class="a-gate"><p style="margin: 0; font-size: 17px; color: #4E6488">Загружаем данные…</p></div></sc-if>
+<sc-if value="{{ loadError }}" hint-placeholder-val="{{ false }}"><div class="a-gate"><div style="max-width: 460px"><h1 style="margin: 0; font-size: 28px; font-weight: 500; text-transform: uppercase">Не удалось загрузить</h1><p style="margin: 14px 0 0; font-size: 16px; line-height: 24px; color: #3E4A60">{{ loadErrorText }}</p></div></div></sc-if>
+<sc-if value="{{ denied }}" hint-placeholder-val="{{ false }}">
+<div class="a-gate"><div style="max-width: 460px">
+<p style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4E6488">КарболитЪ · Админ-панель</p>
+<h1 style="margin: 12px 0 0; font-size: 32px; font-weight: 500; line-height: 1.1; text-transform: uppercase">Нет доступа</h1>
+<p style="margin: 14px 0 0; font-size: 16px; line-height: 24px; color: #3E4A60">{{ deniedText }}</p>
+<div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap"><a href="Login.dc.html" class="a-btn">Войти на сайте</a><a href="Account.dc.html" class="a-ghost">Личный кабинет</a></div>
+</div></div>
+</sc-if>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ ddOpen }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-dd-shade" aria-label="Закрыть список" tabindex="-1" onClick="{{ ddClose }}"></button></sc-if>
+<header class="a-topbar">
+<button type="button" class="a-brand" onClick="{{ goHome }}" title="Обзор админ-панели"><img src="/_blob/ead7ee690ae7a722a357b0be0559583f" alt="" style="height: 30px; width: auto"><span>КарболитЪ<small>Админ-панель</small></span></button>
+<div class="a-me">
+<button type="button" class="a-ava" aria-label="Профиль" aria-haspopup="menu" aria-expanded="{{ me.exp }}" onClick="{{ me.toggle }}"><sc-if value="{{ me.hasAvatar }}" hint-placeholder-val="{{ false }}"><img src="{{ me.avatar }}" alt="" style="width: 100%; height: 100%; object-fit: cover"></sc-if><sc-if value="{{ me.noAvatar }}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B2A41" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8.5" r="4"></circle><path d="M4 21c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5" stroke-linecap="round"></path></svg></sc-if></button>
+<sc-if value="{{ me.open }}" hint-placeholder-val="{{ false }}">
+<div class="a-me-menu" role="menu">
+<p class="a-me-who">{{ me.name }}<small>{{ me.email }}</small></p>
+<a href="Account.dc.html" role="menuitem" class="a-me-item">Личный кабинет</a>
+<a href="Main.dc.html" role="menuitem" class="a-me-item">Открыть сайт</a>
+<button type="button" role="menuitem" class="a-me-item" onClick="{{ logout }}">Выйти</button>
+</div>
+</sc-if>
+</div>
+</header>
+<div class="a-app">
+<aside class="a-side" aria-label="Разделы админ-панели">
+<nav class="a-nav">
+<a href="Main.dc.html" class="a-navi a-navi-site"><span>Открыть сайт</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"></path></svg></a>
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="12">
+<sc-if value="{{ n.head }}" hint-placeholder-val="{{ false }}"><p class="a-navh">{{ n.label }}</p></sc-if>
+<sc-if value="{{ n.item }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-navi {{ n.cls }}" aria-current="{{ n.current }}" onClick="{{ n.go }}"><span>{{ n.label }}</span><b>{{ n.count }}</b></button></sc-if>
+</sc-for>
+</nav>
+<p class="a-side-copy">SovietPlastic © 2019–2026</p>
+</aside>
+
+<main class="a-main">
+<sc-if value="{{ previewNote }}" hint-placeholder-val="{{ false }}"><p class="a-note" style="margin: 0 0 24px">Предпросмотр холста: вход не выполнен, данные показаны от имени администратора. На сайте без входа эта страница закрыта.</p></sc-if>
+
+<!-- ОБЗОР -->
+<sc-if value="{{ s.dash }}" hint-placeholder-val="{{ true }}">
+<div class="a-top"><div><h1 class="a-h1">Обзор</h1><p class="a-sub">{{ dash.hello }}</p></div><button type="button" class="a-btn" onClick="{{ dash.addFigure }}">+ Добавить статуэтку</button></div>
+<div class="a-tiles" style="margin-top: 28px"><sc-for list="{{ dash.tiles }}" as="t" hint-placeholder-count="4"><button type="button" class="a-tile" onClick="{{ t.go }}"><p class="n">{{ t.n }}</p><p class="l">{{ t.l }}</p></button></sc-for></div>
+<p class="a-sync" style="margin-top: 16px"><i></i>{{ dash.sync }}</p>
+<div class="a-split" style="margin-top: 24px">
+<section class="a-card"><h2>Последние изменения</h2>
+<sc-if value="{{ dash.noRecent }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin-top: 12px">Изменений пока нет.</p></sc-if>
+<div style="margin-top: 12px"><sc-for list="{{ dash.recent }}" as="r" hint-placeholder-count="6"><div class="a-tr" style="grid-template-columns: 130px minmax(0,1fr) 170px"><span class="a-hint">{{ r.type }}</span><button type="button" class="a-tbtn" onClick="{{ r.go }}">{{ r.title }}</button><span class="a-hint">{{ r.date }}</span></div></sc-for></div>
+</section>
+<section class="a-card"><h2>Что заполнить</h2><p class="a-hint">Считается по текущим данным.</p>
+<div style="margin-top: 12px"><sc-for list="{{ dash.tasks }}" as="t" hint-placeholder-count="4"><div class="a-tr" style="grid-template-columns: minmax(0,1fr) 56px 90px"><span>{{ t.l }}</span><b style="font-weight: 500; text-align: right">{{ t.n }}</b><sc-if value="{{ t.has }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-link" style="justify-self: end" onClick="{{ t.go }}">Показать</button></sc-if></div></sc-for></div>
+</section>
+</div>
+</sc-if>
+
+<!-- ОБЩИЙ СПИСОК -->
+<sc-if value="{{ s.list }}" hint-placeholder-val="{{ false }}">
+<div class="a-top"><div><h1 class="a-h1">{{ L.title }}</h1><p class="a-sub">{{ L.count }}</p></div>
+<div class="a-row"><button type="button" class="a-ghost" onClick="{{ L.export }}" title="{{ L.exportHint }}">Экспорт в Excel</button><sc-if value="{{ L.hasAdd }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-btn" onClick="{{ L.add }}">{{ L.addText }}</button></sc-if></div></div>
+<p class="a-hint" style="margin: 8px 0 0">{{ L.exportHint }}</p>
+<div class="a-filters" style="margin-top: 20px">
+<label class="a-search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#4E6488" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5.5"></circle><path d="M11 11l4 4"></path></svg><input class="a-input" type="search" aria-label="{{ L.searchHint }}" placeholder="{{ L.searchHint }}" value="{{ L.q }}" onChange="{{ L.setQ }}"></label>
+<sc-for list="{{ L.filters }}" as="fl" hint-placeholder-count="3"><div class="a-dd {{ fl.dd.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ fl.dd.exp }}" aria-invalid="{{ fl.dd.inv }}" disabled="{{ fl.dd.disabled }}" onClick="{{ fl.dd.toggle }}"><span>{{ fl.dd.label }}</span></button><sc-if value="{{ fl.dd.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox"><sc-if value="{{ fl.dd.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ fl.dd.q }}" onChange="{{ fl.dd.setQ }}"></sc-if><sc-for list="{{ fl.dd.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ fl.dd.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></sc-for>
+<sc-if value="{{ L.hasCols }}" hint-placeholder-val="{{ false }}"><div class="a-dd {{ L.cols.wCls }}" style="width: auto"><button type="button" class="a-ghost" aria-haspopup="true" aria-expanded="{{ L.cols.exp }}" onClick="{{ L.cols.toggle }}">Колонки</button><sc-if value="{{ L.cols.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" style="right: 0; left: auto; padding: 10px 12px; min-width: 220px"><sc-for list="{{ L.cols.items }}" as="ci" hint-placeholder-count="3"><label class="a-row" style="gap: 10px; padding: 6px 0; font-size: 14px; cursor: pointer"><input type="checkbox" checked="{{ ci.on }}" onChange="{{ ci.toggle }}" style="width: 16px; height: 16px; accent-color: #1B2A41">{{ ci.l }}</label></sc-for></div></sc-if></div></sc-if>
+<sc-if value="{{ L.filtered }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-link" onClick="{{ L.reset }}">Сбросить</button></sc-if>
+</div>
+<sc-if value="{{ L.filtered }}" hint-placeholder-val="{{ false }}"><div class="a-chips" style="margin-top: 12px"><sc-for list="{{ L.chips }}" as="ch" hint-placeholder-count="2"><button type="button" class="a-chip a-chip-sel" aria-label="Убрать фильтр {{ ch.l }}" onClick="{{ ch.remove }}">{{ ch.l }} ×</button></sc-for></div></sc-if>
+<sc-if value="{{ L.none }}" hint-placeholder-val="{{ false }}"><div class="a-empty"><p class="t">{{ L.noneTitle }}</p><p class="s">{{ L.noneText }}</p></div></sc-if>
+<sc-if value="{{ L.noMatch }}" hint-placeholder-val="{{ false }}"><div class="a-empty"><p class="t">Ничего не найдено</p><p class="s">Измените запрос или сбросьте фильтры.</p><button type="button" class="a-ghost" style="margin-top: 18px" onClick="{{ L.reset }}">Сбросить фильтры</button></div></sc-if>
+<sc-if value="{{ L.isTable }}" hint-placeholder-val="{{ true }}">
+<div class="a-tbl" style="margin-top: 20px">
+<div class="a-tr a-th" style="grid-template-columns: {{ L.grid }}"><sc-for list="{{ L.heads }}" as="h" hint-placeholder-count="5"><sc-if value="{{ h.sortable }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-sorth" onClick="{{ h.go }}" aria-label="Сортировать: {{ h.l }}">{{ h.l }} <i>{{ h.ind }}</i></button></sc-if><sc-if value="{{ h.plain }}" hint-placeholder-val="{{ false }}"><span style="text-align: {{ h.align }}">{{ h.l }}</span></sc-if></sc-for></div>
+<sc-for list="{{ L.rows }}" as="r" hint-placeholder-count="8">
+<div class="a-tr" style="grid-template-columns: {{ L.grid }}">
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="5">
+<sc-if value="{{ c.isThumb }}" hint-placeholder-val="{{ false }}"><div class="a-thumb"><sc-if value="{{ c.hasSrc }}" hint-placeholder-val="{{ true }}"><img src="{{ c.src }}" alt=""></sc-if><sc-if value="{{ c.noSrc }}" hint-placeholder-val="{{ false }}"><span class="a-hint" style="font-size: 11px">нет фото</span></sc-if></div></sc-if>
+<sc-if value="{{ c.isLink }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-tbtn" onClick="{{ c.go }}">{{ c.t }}</button></sc-if>
+<sc-if value="{{ c.isText }}" hint-placeholder-val="{{ true }}"><span class="{{ c.cls }}">{{ c.t }}</span></sc-if>
+<sc-if value="{{ c.isBadge }}" hint-placeholder-val="{{ false }}"><span class="a-badge {{ c.cls }}"><i></i>{{ c.t }}</span></sc-if>
+<sc-if value="{{ c.isMenu }}" hint-placeholder-val="{{ false }}"><div class="a-acts"><button type="button" class="a-edit" onClick="{{ c.edit }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z"></path><path d="M9 4l3 3"></path></svg>{{ c.editText }}</button><div class="a-dd {{ c.dd.wCls }}" style="width: auto; min-width: 0"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ c.dd.exp }}" aria-label="Действия" aria-invalid="{{ c.dd.inv }}" disabled="{{ c.dd.disabled }}" onClick="{{ c.dd.toggle }}"><span>{{ c.dd.label }}</span></button><sc-if value="{{ c.dd.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Действия"><sc-if value="{{ c.dd.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ c.dd.q }}" onChange="{{ c.dd.setQ }}"></sc-if><sc-for list="{{ c.dd.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ c.dd.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div></sc-if>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ L.isGrid }}" hint-placeholder-val="{{ false }}">
+<div class="a-photos" style="margin-top: 20px"><sc-for list="{{ L.cards }}" as="p" hint-placeholder-count="8">
+<div class="a-ph {{ p.mainCls }}">
+<button type="button" class="a-ph-img" onClick="{{ p.viewer }}" aria-label="Просмотр фото"><img src="{{ p.src }}" alt=""><sc-if value="{{ p.isMain }}" hint-placeholder-val="{{ false }}"><span class="a-ph-tag">Главное</span></sc-if></button>
+<div class="a-ph-body"><button type="button" class="a-tbtn" style="font-size: 15px" onClick="{{ p.openFig }}">{{ p.fig }}</button><p class="a-hint" style="margin: 0">{{ p.sub }}</p><div class="a-acts" style="justify-content: flex-start"><button type="button" class="a-edit" onClick="{{ p.edit }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z"></path><path d="M9 4l3 3"></path></svg>Изменить</button><div class="a-dd {{ p.dd.wCls }}" style="width: auto; min-width: 0"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ p.dd.exp }}" aria-label="Действия фото" aria-invalid="{{ p.dd.inv }}" disabled="{{ p.dd.disabled }}" onClick="{{ p.dd.toggle }}"><span>{{ p.dd.label }}</span></button><sc-if value="{{ p.dd.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Действия фото"><sc-if value="{{ p.dd.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ p.dd.q }}" onChange="{{ p.dd.setQ }}"></sc-if><sc-for list="{{ p.dd.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ p.dd.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div></div>
+</div>
+</sc-for></div>
+</sc-if>
+<sc-if value="{{ L.has }}" hint-placeholder-val="{{ true }}">
+<div class="a-pagebar">
+<span class="a-hint">{{ L.range }}</span>
+<nav class="a-pages" aria-label="Страницы"><button type="button" class="a-page" disabled="{{ L.noPrev }}" onClick="{{ L.first }}" aria-label="Первая страница">«</button><button type="button" class="a-page" disabled="{{ L.noPrev }}" onClick="{{ L.prev }}" aria-label="Предыдущая">←</button><sc-for list="{{ L.pages }}" as="pg" hint-placeholder-count="3"><button type="button" class="a-page {{ pg.cls }}" onClick="{{ pg.go }}">{{ pg.n }}</button></sc-for><button type="button" class="a-page" disabled="{{ L.noNext }}" onClick="{{ L.next }}" aria-label="Следующая">→</button><button type="button" class="a-page" disabled="{{ L.noNext }}" onClick="{{ L.last }}" aria-label="Последняя страница">»</button></nav>
+<div class="a-row"><span class="a-hint">Строк на странице</span><div class="a-dd {{ L.perDD.wCls }}" style="width: auto; min-width: 84px"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ L.perDD.exp }}" aria-label="Строк на странице" aria-invalid="{{ L.perDD.inv }}" disabled="{{ L.perDD.disabled }}" onClick="{{ L.perDD.toggle }}"><span>{{ L.perDD.label }}</span></button><sc-if value="{{ L.perDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Строк на странице"><sc-if value="{{ L.perDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ L.perDD.q }}" onChange="{{ L.perDD.setQ }}"></sc-if><sc-for list="{{ L.perDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ L.perDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+</div>
+</sc-if>
+</sc-if>
+
+<!-- КАРТОЧКА СТАТУЭТКИ -->
+<sc-if value="{{ s.figure }}" hint-placeholder-val="{{ false }}">
+<div class="a-formhead">
+<div style="min-width: 0">
+<nav class="a-crumbs" aria-label="Путь"><sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3"><sc-if value="{{ c.link }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-crumb" onClick="{{ c.go }}">{{ c.l }}</button><span aria-hidden="true">→</span></sc-if><sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}"><span class="a-crumb-cur">{{ c.l }}</span></sc-if></sc-for></nav>
+<h1 class="a-h1" style="font-size: 30px; margin-top: 10px">{{ F.heading }}</h1>
+<sc-if value="{{ F.hasSub }}" hint-placeholder-val="{{ false }}"><p class="a-sub" style="margin-top: 6px">{{ F.sub }}</p></sc-if>
+</div>
+<div class="a-row" style="flex: none">
+<span class="{{ F.dirtyCls }}">{{ F.dirtyText }}</span>
+<sc-if value="{{ F.hasView }}" hint-placeholder-val="{{ false }}"><a href="{{ F.viewHref }}" class="a-ghost" onClick="{{ F.view }}">Открыть на сайте ↗</a></sc-if>
+<button type="button" class="a-ghost" onClick="{{ F.cancel }}">Отмена</button>
+<button type="button" class="a-btn" disabled="{{ saving }}" onClick="{{ F.save }}">{{ F.saveText }}</button>
+</div>
+</div>
+<sc-if value="{{ F.hasErrors }}" hint-placeholder-val="{{ false }}"><p class="a-alert" role="alert" style="margin: 0 0 20px">{{ F.errorText }}</p></sc-if>
+<div class="a-tabs" role="tablist"><sc-for list="{{ F.tabs }}" as="tb" hint-placeholder-count="5"><button type="button" role="tab" class="a-tab {{ tb.cls }}" aria-selected="{{ tb.sel }}" disabled="{{ tb.disabled }}" title="{{ tb.title }}" onClick="{{ tb.go }}">{{ tb.l }}<sc-if value="{{ tb.hasN }}" hint-placeholder-val="{{ false }}"><b>{{ tb.n }}</b></sc-if></button></sc-for></div>
+<sc-if value="{{ F.isNew }}" hint-placeholder-val="{{ false }}"><p class="a-note" style="margin: 0 0 20px">Фотографии, связи и заметки станут доступны после первого сохранения — у новой статуэтки ещё нет ID.</p></sc-if>
+
+<sc-if value="{{ F.t.main }}" hint-placeholder-val="{{ true }}">
+<section class="a-card" style="max-width: 880px"><div style="display: flex; flex-direction: column; gap: 20px">
+<div class="a-f"><label for="f-name">Название<span class="a-req">*</span></label><input id="f-name" class="a-input" type="text" value="{{ F.d.name }}" onChange="{{ F.set.name }}" aria-invalid="{{ F.inv.name }}"><sc-if value="{{ F.e.name }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.name }}</span></sc-if></div>
+<div class="a-grid2">
+<div class="a-f"><label for="f-kind">Тип статуэтки<span class="a-req">*</span></label><div class="a-row"><div class="a-dd {{ F.kindDD.wCls }}" style="flex: 1"><button type="button" id="f-kind" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ F.kindDD.exp }}" aria-label="Тип статуэтки" aria-invalid="{{ F.kindDD.inv }}" disabled="{{ F.kindDD.disabled }}" onClick="{{ F.kindDD.toggle }}"><span>{{ F.kindDD.label }}</span></button><sc-if value="{{ F.kindDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Тип статуэтки"><sc-if value="{{ F.kindDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ F.kindDD.q }}" onChange="{{ F.kindDD.setQ }}"></sc-if><sc-for list="{{ F.kindDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ F.kindDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div><button type="button" class="a-icon a-icon-lg" aria-label="Добавить тип" title="Добавить тип" onClick="{{ F.quickKind }}">+</button></div><sc-if value="{{ F.e.kind }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.kind }}</span></sc-if></div>
+<div class="a-f"><label for="f-author">Автор</label><div class="a-row"><div class="a-dd {{ F.authorDD.wCls }}" style="flex: 1"><button type="button" id="f-author" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ F.authorDD.exp }}" aria-label="Автор" aria-invalid="{{ F.authorDD.inv }}" disabled="{{ F.authorDD.disabled }}" onClick="{{ F.authorDD.toggle }}"><span>{{ F.authorDD.label }}</span></button><sc-if value="{{ F.authorDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Автор"><sc-if value="{{ F.authorDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ F.authorDD.q }}" onChange="{{ F.authorDD.setQ }}"></sc-if><sc-for list="{{ F.authorDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ F.authorDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div><button type="button" class="a-icon a-icon-lg" aria-label="Добавить автора" title="Добавить автора" onClick="{{ F.quickAuthor }}">+</button></div></div>
+</div>
+<sc-if value="{{ F.q.on }}" hint-placeholder-val="{{ false }}"><div class="a-quick"><span class="a-lab" style="flex: none">{{ F.q.label }}</span><input class="a-input" type="text" aria-label="{{ F.q.label }}" value="{{ F.q.name }}" onChange="{{ F.q.setName }}"><button type="button" class="a-btn" onClick="{{ F.q.add }}">Добавить</button><button type="button" class="a-link" onClick="{{ F.q.cancel }}">Отмена</button></div><sc-if value="{{ F.q.hasErr }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.q.err }}</span></sc-if></sc-if>
+<div class="a-f"><label for="f-factory">Производитель</label><input id="f-factory" class="a-input" type="text" placeholder="Не указан" value="{{ F.d.factoryName }}" onChange="{{ F.set.factoryName }}"><span class="a-hint">Обычная строка: отдельного справочника производителей в базе нет.</span></div>
+<div class="a-grid2">
+<div class="a-f"><label for="f-h">Высота, см</label><input id="f-h" class="a-input" type="text" inputmode="decimal" placeholder="Не указана" value="{{ F.d.height }}" onChange="{{ F.set.height }}" aria-invalid="{{ F.inv.height }}"><sc-if value="{{ F.e.height }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.height }}</span></sc-if></div>
+<div class="a-f"><label for="f-l">Длина, см</label><input id="f-l" class="a-input" type="text" inputmode="decimal" placeholder="Не указана" value="{{ F.d.length }}" onChange="{{ F.set.length }}" aria-invalid="{{ F.inv.length }}"><sc-if value="{{ F.e.length }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.length }}</span></sc-if></div>
+</div>
+<p class="a-hint" style="margin: -8px 0 0">Пустое поле — размер не указан. Старые нулевые значения при переносе тоже считаются «не указан», а не размером 0.</p>
+<div class="a-f"><span class="a-lab">Метки</span>
+<div class="a-chips"><sc-for list="{{ F.tagChips }}" as="tg" hint-placeholder-count="3"><button type="button" class="a-chip a-chip-sel" aria-label="Убрать метку {{ tg.l }}" onClick="{{ tg.remove }}">{{ tg.l }} ×</button></sc-for><sc-if value="{{ F.noTags }}" hint-placeholder-val="{{ false }}"><span class="a-hint">Метки не выбраны</span></sc-if></div>
+<div class="a-row" style="margin-top: 6px"><div class="a-dd {{ F.tagDD.wCls }}" style="max-width: 360px"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ F.tagDD.exp }}" aria-label="Добавить метку" aria-invalid="{{ F.tagDD.inv }}" disabled="{{ F.tagDD.disabled }}" onClick="{{ F.tagDD.toggle }}"><span>{{ F.tagDD.label }}</span></button><sc-if value="{{ F.tagDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Добавить метку"><sc-if value="{{ F.tagDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ F.tagDD.q }}" onChange="{{ F.tagDD.setQ }}"></sc-if><sc-for list="{{ F.tagDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ F.tagDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div><button type="button" class="a-link" onClick="{{ F.quickTag }}">+ Новая метка</button></div>
+</div>
+<label class="a-switch"><input type="checkbox" checked="{{ F.d.visible }}" onChange="{{ F.set.visibleBox }}"><span class="a-switch-ui" aria-hidden="true"></span><span><b style="font-weight: 500">Показывать на сайте</b><br><span class="a-hint">{{ F.visHint }}</span></span></label>
+<div class="a-f"><label for="f-comment">Комментарий</label><textarea id="f-comment" class="a-textarea" value="{{ F.d.comment }}" onChange="{{ F.set.comment }}"></textarea></div>
+</div></section>
+</sc-if>
+
+<sc-if value="{{ F.t.photos }}" hint-placeholder-val="{{ false }}">
+<section class="a-card">
+<div class="a-top" style="align-items: center"><div><h2>Фотографии</h2><p class="a-hint">Главное фото показывается на сайте. Сжатая копия создаётся автоматически. JPG, PNG или WEBP до 10 МБ.</p></div></div>
+<label class="a-drop" style="margin-top: 16px"><input type="file" multiple="" accept="image/jpeg,image/png,image/webp" aria-label="Добавить фотографии" onChange="{{ F.addPhotos }}"><span style="font-size: 15px; font-weight: 500; color: #1B2A41">Добавить фотографии</span><span class="a-hint">Выберите несколько файлов или перетащите их сюда</span></label>
+<sc-if value="{{ F.uploading }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 12px 0 0">Обрабатываем файлы: {{ F.uploadLeft }}…</p></sc-if>
+<sc-for list="{{ F.photoErrors }}" as="pe" hint-placeholder-count="0"><p class="a-err" style="margin: 10px 0 0">{{ pe.t }}</p></sc-for>
+<sc-if value="{{ F.noPhotos }}" hint-placeholder-val="{{ false }}"><div class="a-empty"><p class="t">Фотографий нет</p><p class="s">На сайте вместо фото будет заглушка.</p></div></sc-if>
+<div class="a-photos" style="margin-top: 16px"><sc-for list="{{ F.photos }}" as="p" hint-placeholder-count="3">
+<div class="a-ph {{ p.mainCls }}">
+<button type="button" class="a-ph-img" onClick="{{ p.viewer }}" aria-label="Просмотр фото"><img src="{{ p.thumb }}" alt=""><sc-if value="{{ p.isMain }}" hint-placeholder-val="{{ false }}"><span class="a-ph-tag">Главное</span></sc-if></button>
+<div class="a-ph-body">
+<p class="a-hint" style="margin: 0">{{ p.sub }}</p>
+<div class="a-ph-ctl">
+<div class="a-row" style="gap: 6px"><button type="button" class="a-icon" aria-label="Раньше" disabled="{{ p.cantUp }}" onClick="{{ p.up }}">←</button><button type="button" class="a-icon" aria-label="Позже" disabled="{{ p.cantDown }}" onClick="{{ p.down }}">→</button></div>
+<div class="a-dd {{ p.dd.wCls }}" style="width: auto; min-width: 0"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ p.dd.exp }}" aria-label="Действия фото" aria-invalid="{{ p.dd.inv }}" disabled="{{ p.dd.disabled }}" onClick="{{ p.dd.toggle }}"><span>{{ p.dd.label }}</span></button><sc-if value="{{ p.dd.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Действия фото"><sc-if value="{{ p.dd.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ p.dd.q }}" onChange="{{ p.dd.setQ }}"></sc-if><sc-for list="{{ p.dd.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ p.dd.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div>
+</div>
+</div>
+</div>
+</sc-for></div>
+<sc-if value="{{ F.hasReplace }}" hint-placeholder-val="{{ false }}"><div class="a-quick" style="margin-top: 16px"><span>Выберите новый файл для замены фото:</span><label class="a-ghost" style="position: relative; overflow: hidden">Выбрать файл<input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Файл для замены" onChange="{{ F.replaceFile }}" style="position: absolute; inset: 0; opacity: 0; cursor: pointer"></label><button type="button" class="a-link" onClick="{{ F.cancelReplace }}">Отмена</button></div></sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ F.t.links }}" hint-placeholder-val="{{ false }}">
+<section class="a-card" style="max-width: 880px"><div style="display: flex; flex-direction: column; gap: 20px">
+<div class="a-f"><label for="f-st">Источник</label><input id="f-st" class="a-input" type="text" value="{{ F.d.sourceText }}" onChange="{{ F.set.sourceText }}" placeholder="Название или описание источника"></div>
+<div class="a-f"><label for="f-su">Ссылка на источник</label><div class="a-row"><input id="f-su" class="a-input" type="url" placeholder="https://" value="{{ F.d.sourceUrl }}" onChange="{{ F.set.sourceUrl }}" aria-invalid="{{ F.inv.sourceUrl }}"><sc-if value="{{ F.urlOk }}" hint-placeholder-val="{{ false }}"><a href="{{ F.d.sourceUrl }}" target="_blank" rel="noopener" class="a-ghost">Открыть ссылку ↗</a></sc-if></div><sc-if value="{{ F.e.sourceUrl }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.sourceUrl }}</span></sc-if></div>
+<div class="a-f"><label for="f-orig">Оригинал (OriginalID)</label><div class="a-dd {{ F.origDD.wCls }}"><button type="button" id="f-orig" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ F.origDD.exp }}" aria-label="Оригинал" aria-invalid="{{ F.origDD.inv }}" disabled="{{ F.origDD.disabled }}" onClick="{{ F.origDD.toggle }}"><span>{{ F.origDD.label }}</span></button><sc-if value="{{ F.origDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Оригинал"><sc-if value="{{ F.origDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ F.origDD.q }}" onChange="{{ F.origDD.setQ }}"></sc-if><sc-for list="{{ F.origDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ F.origDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div><span class="a-hint">Статуэтка, вариантом которой является эта запись. Правила вариантов уточняются.</span></div>
+<div><p class="a-lab" style="margin: 0">Варианты этой статуэтки · {{ F.variantCount }}</p>
+<sc-if value="{{ F.noVariants }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 0 0">Нет записей, у которых эта статуэтка указана как оригинал.</p></sc-if>
+<div style="margin-top: 8px"><sc-for list="{{ F.variants }}" as="v" hint-placeholder-count="0"><div class="a-tr" style="grid-template-columns: 56px minmax(0,1fr)"><div class="a-thumb"><img src="{{ v.src }}" alt=""></div><button type="button" class="a-tbtn" onClick="{{ v.go }}">{{ v.l }}</button></div></sc-for></div></div>
+</div></section>
+</sc-if>
+
+<sc-if value="{{ F.t.notes }}" hint-placeholder-val="{{ false }}">
+<section class="a-card">
+<div class="a-top" style="align-items: center"><div><h2>Заметки пользователей</h2><p class="a-hint">Личные записи пользователей. На сайте в карточке статуэтки не публикуются.</p></div><button type="button" class="a-btn" onClick="{{ F.addNote }}">+ Добавить заметку</button></div>
+<sc-if value="{{ F.noNotes }}" hint-placeholder-val="{{ false }}"><div class="a-empty"><p class="t">Заметок нет</p></div></sc-if>
+<div style="margin-top: 12px"><sc-for list="{{ F.notes }}" as="nt" hint-placeholder-count="0"><div class="a-tr" style="grid-template-columns: minmax(0,1fr) minmax(0,2fr) 120px 90px 110px"><span>{{ nt.user }}</span><span class="a-hint" style="font-size: 14px">{{ nt.text }}</span><span>{{ nt.price }}</span><span class="a-hint">{{ nt.cur }}</span><div style="justify-self: end"><div class="a-dd {{ nt.dd.wCls }}" style="width: auto; min-width: 0"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ nt.dd.exp }}" aria-label="Действия заметки" aria-invalid="{{ nt.dd.inv }}" disabled="{{ nt.dd.disabled }}" onClick="{{ nt.dd.toggle }}"><span>{{ nt.dd.label }}</span></button><sc-if value="{{ nt.dd.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Действия заметки"><sc-if value="{{ nt.dd.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ nt.dd.q }}" onChange="{{ nt.dd.setQ }}"></sc-if><sc-for list="{{ nt.dd.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ nt.dd.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div></div></sc-for></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ F.t.svc }}" hint-placeholder-val="{{ false }}">
+<section class="a-card" style="max-width: 640px">
+<div class="a-meta">
+<span>Создано: <b>{{ F.svc.created }}</b></span>
+<span>Кем создано: <b>{{ F.svc.createdBy }}</b></span>
+<span>Изменено: <b>{{ F.svc.modified }}</b></span>
+<span>Кем изменено: <b>{{ F.svc.modifiedBy }}</b></span>
+</div>
+<label class="a-row" style="gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #DCE2EA; cursor: pointer"><input type="checkbox" checked="{{ F.d.final }}" onChange="{{ F.set.finalBox }}" style="width: 18px; height: 18px; accent-color: #1B2A41"><span><b style="font-weight: 500">final</b> <span class="a-hint">— старое свойство записи. Назначение уточняется.</span></span></label>
+<sc-if value="{{ F.canDelete }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-ghost a-danger" style="margin-top: 24px" onClick="{{ F.del }}">Удалить статуэтку</button></sc-if>
+</section>
+</sc-if>
+</sc-if>
+
+<!-- СТАТЬЯ -->
+<sc-if value="{{ s.info }}" hint-placeholder-val="{{ false }}">
+<div class="a-formhead">
+<div style="min-width: 0">
+<nav class="a-crumbs" aria-label="Путь"><sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3"><sc-if value="{{ c.link }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-crumb" onClick="{{ c.go }}">{{ c.l }}</button><span aria-hidden="true">→</span></sc-if><sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}"><span class="a-crumb-cur">{{ c.l }}</span></sc-if></sc-for></nav>
+<h1 class="a-h1" style="font-size: 30px; margin-top: 10px">{{ F.heading }}</h1>
+<sc-if value="{{ F.hasSub }}" hint-placeholder-val="{{ false }}"><p class="a-sub" style="margin-top: 6px">{{ F.sub }}</p></sc-if>
+</div>
+<div class="a-row" style="flex: none">
+<span class="{{ F.dirtyCls }}">{{ F.dirtyText }}</span>
+<sc-if value="{{ F.hasView }}" hint-placeholder-val="{{ false }}"><a href="{{ F.viewHref }}" class="a-ghost" onClick="{{ F.view }}">Открыть на сайте ↗</a></sc-if>
+<button type="button" class="a-ghost" onClick="{{ F.cancel }}">Отмена</button>
+<button type="button" class="a-btn" disabled="{{ saving }}" onClick="{{ F.save }}">{{ F.saveText }}</button>
+</div>
+</div>
+<sc-if value="{{ F.hasErrors }}" hint-placeholder-val="{{ false }}"><p class="a-alert" role="alert" style="margin: 0 0 20px">{{ F.errorText }}</p></sc-if>
+<div class="a-tabs" role="tablist"><button type="button" role="tab" class="a-tab {{ F.editCls }}" onClick="{{ F.toEdit }}">Редактор</button><button type="button" role="tab" class="a-tab {{ F.prevCls }}" onClick="{{ F.toPrev }}">Предпросмотр</button></div>
+<sc-if value="{{ F.editing }}" hint-placeholder-val="{{ true }}">
+<section class="a-card" style="max-width: 900px"><div style="display: flex; flex-direction: column; gap: 20px">
+<div class="a-f"><label for="i-name">Название<span class="a-req">*</span></label><input id="i-name" class="a-input" type="text" value="{{ F.d.name }}" onChange="{{ F.set.name }}" aria-invalid="{{ F.inv.name }}"><sc-if value="{{ F.e.name }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.name }}</span></sc-if></div>
+<div class="a-f" style="max-width: 260px"><label for="i-date">Дата материала<span class="a-req">*</span></label><input id="i-date" class="a-input" type="date" value="{{ F.d.infoDate }}" onChange="{{ F.set.infoDate }}" aria-invalid="{{ F.inv.infoDate }}"><sc-if value="{{ F.e.infoDate }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.infoDate }}</span></sc-if></div>
+<div class="a-f"><label for="a-body">Основной текст</label>
+<div class="a-tool" role="toolbar" aria-label="Форматирование"><button type="button" onClick="{{ F.fmt.h }}">Заголовок</button><button type="button" onClick="{{ F.fmt.b }}"><b>Жирный</b></button><button type="button" onClick="{{ F.fmt.i }}"><i>Курсив</i></button><button type="button" onClick="{{ F.fmt.ul }}">Список</button><button type="button" onClick="{{ F.fmt.q }}">Цитата</button><button type="button" onClick="{{ F.fmt.a }}">Ссылка</button></div>
+<textarea id="a-body" class="a-textarea" style="min-height: 360px; font-size: 16px" value="{{ F.d.text }}" onChange="{{ F.set.text }}"></textarea>
+<p class="a-hint" style="margin: 0">Выделите текст и нажмите кнопку. Пустая строка начинает новый абзац.</p></div>
+<div class="a-grid2">
+<div class="a-f"><label for="i-st">Источник</label><input id="i-st" class="a-input" type="text" value="{{ F.d.sourceText }}" onChange="{{ F.set.sourceText }}"></div>
+<div class="a-f"><label for="i-su">Ссылка на источник</label><input id="i-su" class="a-input" type="url" placeholder="https://" value="{{ F.d.sourceUrl }}" onChange="{{ F.set.sourceUrl }}" aria-invalid="{{ F.inv.sourceUrl }}"><sc-if value="{{ F.e.sourceUrl }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.sourceUrl }}</span></sc-if></div>
+</div>
+<div style="padding-top: 16px; border-top: 1px solid #DCE2EA"><div class="a-meta">
+<span>Создано: <b>{{ F.svc.created }}</b></span>
+<span>Кем создано: <b>{{ F.svc.createdBy }}</b></span>
+<span>Изменено: <b>{{ F.svc.modified }}</b></span>
+<span>Кем изменено: <b>{{ F.svc.modifiedBy }}</b></span>
+</div></div>
+<p class="a-hint" style="margin: 0">В базе у статей нет признака публикации: все статьи видны на сайте.</p>
+<sc-if value="{{ F.canDelete }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-ghost a-danger" style="align-self: flex-start" onClick="{{ F.del }}">Удалить статью</button></sc-if>
+</div></section>
+</sc-if>
+<sc-if value="{{ F.preview }}" hint-placeholder-val="{{ false }}">
+<article class="a-prev">
+<p class="a-hint" style="margin: 0 0 8px">{{ F.prevDate }}</p>
+<h2 style="margin: 0 0 20px; font-size: 36px; font-weight: 500; line-height: 1.05; text-transform: uppercase; letter-spacing: -0.02em">{{ F.prevTitle }}</h2>
+<sc-for list="{{ F.blocks }}" as="b" hint-placeholder-count="3">
+<sc-if value="{{ b.h }}" hint-placeholder-val="{{ false }}"><h3>{{ b.text }}</h3></sc-if>
+<sc-if value="{{ b.p }}" hint-placeholder-val="{{ true }}"><p><sc-for list="{{ b.segs }}" as="g" hint-placeholder-count="1"><sc-if value="{{ g.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ g.href }}" target="_blank" rel="noopener">{{ g.t }}</a></sc-if><sc-if value="{{ g.plain }}" hint-placeholder-val="{{ true }}"><span style="font-weight: {{ g.fw }}; font-style: {{ g.fs }}">{{ g.t }}</span></sc-if></sc-for></p></sc-if>
+<sc-if value="{{ b.q }}" hint-placeholder-val="{{ false }}"><blockquote>{{ b.text }}</blockquote></sc-if>
+<sc-if value="{{ b.ul }}" hint-placeholder-val="{{ false }}"><ul><sc-for list="{{ b.items }}" as="li" hint-placeholder-count="2"><li>{{ li.t }}</li></sc-for></ul></sc-if>
+</sc-for>
+<sc-if value="{{ F.hasSource }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 24px 0 0">Источник: <a href="{{ F.d.sourceUrl }}" target="_blank" rel="noopener">{{ F.sourceLabel }}</a></p></sc-if>
+</article>
+</sc-if>
+</sc-if>
+
+<!-- СПРАВОЧНИК: ТИП / АВТОР / МЕТКА -->
+<sc-if value="{{ s.dict }}" hint-placeholder-val="{{ false }}">
+<div class="a-formhead">
+<div style="min-width: 0">
+<nav class="a-crumbs" aria-label="Путь"><sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3"><sc-if value="{{ c.link }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-crumb" onClick="{{ c.go }}">{{ c.l }}</button><span aria-hidden="true">→</span></sc-if><sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}"><span class="a-crumb-cur">{{ c.l }}</span></sc-if></sc-for></nav>
+<h1 class="a-h1" style="font-size: 30px; margin-top: 10px">{{ F.heading }}</h1>
+<sc-if value="{{ F.hasSub }}" hint-placeholder-val="{{ false }}"><p class="a-sub" style="margin-top: 6px">{{ F.sub }}</p></sc-if>
+</div>
+<div class="a-row" style="flex: none">
+<span class="{{ F.dirtyCls }}">{{ F.dirtyText }}</span>
+<sc-if value="{{ F.hasView }}" hint-placeholder-val="{{ false }}"><a href="{{ F.viewHref }}" class="a-ghost" onClick="{{ F.view }}">Открыть на сайте ↗</a></sc-if>
+<button type="button" class="a-ghost" onClick="{{ F.cancel }}">Отмена</button>
+<button type="button" class="a-btn" disabled="{{ saving }}" onClick="{{ F.save }}">{{ F.saveText }}</button>
+</div>
+</div>
+<sc-if value="{{ F.hasErrors }}" hint-placeholder-val="{{ false }}"><p class="a-alert" role="alert" style="margin: 0 0 20px">{{ F.errorText }}</p></sc-if>
+<section class="a-card" style="max-width: 880px"><div style="display: flex; flex-direction: column; gap: 20px">
+<div class="a-f"><label for="d-name">{{ F.nameLabel }}<span class="a-req">*</span></label><input id="d-name" class="a-input" type="text" value="{{ F.d.name }}" onChange="{{ F.set.name }}" aria-invalid="{{ F.inv.name }}"><sc-if value="{{ F.e.name }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.name }}</span></sc-if><sc-if value="{{ F.hasSimilar }}" hint-placeholder-val="{{ false }}"><span class="a-warn">{{ F.similar }}</span></sc-if></div>
+<sc-if value="{{ F.isKind }}" hint-placeholder-val="{{ false }}"><label class="a-switch"><input type="checkbox" checked="{{ F.d.visible }}" onChange="{{ F.set.visibleBox }}"><span class="a-switch-ui" aria-hidden="true"></span><span><b style="font-weight: 500">Показывать на сайте</b><br><span class="a-hint">Скрытый тип убирает с сайта и все статуэтки этого типа.</span></span></label></sc-if>
+<sc-if value="{{ F.isAuthor }}" hint-placeholder-val="{{ false }}">
+<div class="a-f"><label for="d-text">Текст об авторе</label><textarea id="d-text" class="a-textarea" style="min-height: 180px" value="{{ F.d.text }}" onChange="{{ F.set.text }}"></textarea></div>
+<div class="a-grid2"><div class="a-f"><label for="d-st">Источник</label><input id="d-st" class="a-input" type="text" value="{{ F.d.sourceText }}" onChange="{{ F.set.sourceText }}"></div><div class="a-f"><label for="d-su">Ссылка на источник</label><input id="d-su" class="a-input" type="url" placeholder="https://" value="{{ F.d.sourceUrl }}" onChange="{{ F.set.sourceUrl }}" aria-invalid="{{ F.inv.sourceUrl }}"><sc-if value="{{ F.e.sourceUrl }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.sourceUrl }}</span></sc-if></div></div>
+</sc-if>
+<sc-if value="{{ F.showLinked }}" hint-placeholder-val="{{ false }}"><div><p class="a-lab" style="margin: 0">{{ F.linkedTitle }} · {{ F.linkedCount }}</p>
+<sc-if value="{{ F.noLinked }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 0 0">Связанных статуэток нет.</p></sc-if>
+<div style="margin-top: 8px"><sc-for list="{{ F.linked }}" as="v" hint-placeholder-count="0"><div class="a-tr" style="grid-template-columns: 56px minmax(0,1fr)"><div class="a-thumb"><img src="{{ v.src }}" alt=""></div><button type="button" class="a-tbtn" onClick="{{ v.go }}">{{ v.l }}</button></div></sc-for></div>
+<sc-if value="{{ F.moreLinked }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-link" style="margin-top: 10px" onClick="{{ F.allLinked }}">Показать все в списке статуэток</button></sc-if>
+</div></sc-if>
+<div style="padding-top: 16px; border-top: 1px solid #DCE2EA"><div class="a-meta">
+<span>Создано: <b>{{ F.svc.created }}</b></span>
+<span>Кем создано: <b>{{ F.svc.createdBy }}</b></span>
+<span>Изменено: <b>{{ F.svc.modified }}</b></span>
+<span>Кем изменено: <b>{{ F.svc.modifiedBy }}</b></span>
+</div></div>
+<sc-if value="{{ F.canDelete }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-ghost a-danger" style="align-self: flex-start" onClick="{{ F.del }}">{{ F.delText }}</button></sc-if>
+</div></section>
+</sc-if>
+
+<!-- ПОЛЬЗОВАТЕЛЬ -->
+<sc-if value="{{ s.user }}" hint-placeholder-val="{{ false }}">
+<div class="a-formhead">
+<div style="min-width: 0">
+<nav class="a-crumbs" aria-label="Путь"><sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3"><sc-if value="{{ c.link }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-crumb" onClick="{{ c.go }}">{{ c.l }}</button><span aria-hidden="true">→</span></sc-if><sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}"><span class="a-crumb-cur">{{ c.l }}</span></sc-if></sc-for></nav>
+<h1 class="a-h1" style="font-size: 30px; margin-top: 10px">{{ F.heading }}</h1>
+<sc-if value="{{ F.hasSub }}" hint-placeholder-val="{{ false }}"><p class="a-sub" style="margin-top: 6px">{{ F.sub }}</p></sc-if>
+</div>
+<div class="a-row" style="flex: none">
+<span class="{{ F.dirtyCls }}">{{ F.dirtyText }}</span>
+<sc-if value="{{ F.hasView }}" hint-placeholder-val="{{ false }}"><a href="{{ F.viewHref }}" class="a-ghost" onClick="{{ F.view }}">Открыть на сайте ↗</a></sc-if>
+<button type="button" class="a-ghost" onClick="{{ F.cancel }}">Отмена</button>
+<button type="button" class="a-btn" disabled="{{ saving }}" onClick="{{ F.save }}">{{ F.saveText }}</button>
+</div>
+</div>
+<sc-if value="{{ F.hasErrors }}" hint-placeholder-val="{{ false }}"><p class="a-alert" role="alert" style="margin: 0 0 20px">{{ F.errorText }}</p></sc-if>
+<section class="a-card" style="max-width: 880px"><div style="display: flex; flex-direction: column; gap: 20px">
+<div class="a-grid2">
+<div class="a-f"><label for="u-login">Логин<span class="a-req">*</span></label><input id="u-login" class="a-input" type="text" autocomplete="off" value="{{ F.d.login }}" onChange="{{ F.set.login }}" aria-invalid="{{ F.inv.login }}"><sc-if value="{{ F.e.login }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.login }}</span></sc-if></div>
+<div class="a-f"><label for="u-name">Имя</label><input id="u-name" class="a-input" type="text" value="{{ F.d.name }}" onChange="{{ F.set.name }}"></div>
+</div>
+<div class="a-grid2">
+<div class="a-f"><label for="u-email">Электронная почта<span class="a-req">*</span></label><input id="u-email" class="a-input" type="email" autocomplete="off" value="{{ F.d.email }}" onChange="{{ F.set.email }}" aria-invalid="{{ F.inv.email }}"><sc-if value="{{ F.e.email }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.email }}</span></sc-if></div>
+<div class="a-f"><label for="u-cur">Валюта по умолчанию</label><div class="a-dd {{ F.curDD.wCls }}"><button type="button" id="u-cur" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ F.curDD.exp }}" aria-label="Валюта по умолчанию" aria-invalid="{{ F.curDD.inv }}" disabled="{{ F.curDD.disabled }}" onClick="{{ F.curDD.toggle }}"><span>{{ F.curDD.label }}</span></button><sc-if value="{{ F.curDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Валюта по умолчанию"><sc-if value="{{ F.curDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ F.curDD.q }}" onChange="{{ F.curDD.setQ }}"></sc-if><sc-for list="{{ F.curDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ F.curDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+</div>
+<div style="padding: 18px 20px; border-radius: 8px; background: #F8FAFD">
+<p class="a-lab" style="margin: 0">{{ F.passTitle }}</p><p class="a-hint" style="margin: 6px 0 0">{{ F.passHint }}</p>
+<div class="a-grid2" style="margin-top: 14px"><div class="a-f"><label for="u-p1">Новый пароль</label><input id="u-p1" class="a-input" type="password" autocomplete="new-password" value="{{ F.d.p1 }}" onChange="{{ F.set.p1 }}" aria-invalid="{{ F.inv.p1 }}"><sc-if value="{{ F.e.p1 }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.p1 }}</span></sc-if></div><div class="a-f"><label for="u-p2">Повторите пароль</label><input id="u-p2" class="a-input" type="password" autocomplete="new-password" value="{{ F.d.p2 }}" onChange="{{ F.set.p2 }}" aria-invalid="{{ F.inv.p2 }}"><sc-if value="{{ F.e.p2 }}" hint-placeholder-val="{{ false }}"><span class="a-err">{{ F.em.p2 }}</span></sc-if></div></div>
+</div>
+<label class="a-switch"><input type="checkbox" checked="{{ F.d.isAdmin }}" disabled="{{ F.isMe }}" onChange="{{ F.set.adminBox }}"><span class="a-switch-ui" aria-hidden="true"></span><span><b style="font-weight: 500">Доступ к админ-панели (isAdmin)</b><br><span class="a-hint">{{ F.adminHint }}</span></span></label>
+<sc-if value="{{ F.showNotes }}" hint-placeholder-val="{{ false }}"><div><p class="a-lab" style="margin: 0">Заметки пользователя · {{ F.noteCount }}</p><sc-if value="{{ F.hasNotes }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-link" style="margin-top: 10px" onClick="{{ F.openNotes }}">Открыть в «Заметках пользователей»</button></sc-if></div></sc-if>
+<div style="padding-top: 16px; border-top: 1px solid #DCE2EA"><div class="a-meta">
+<span>Создано: <b>{{ F.svc.created }}</b></span>
+<span>Кем создано: <b>{{ F.svc.createdBy }}</b></span>
+<span>Изменено: <b>{{ F.svc.modified }}</b></span>
+<span>Кем изменено: <b>{{ F.svc.modifiedBy }}</b></span>
+</div></div>
+<sc-if value="{{ F.canDelete }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-ghost a-danger" style="align-self: flex-start" onClick="{{ F.del }}">Удалить пользователя</button></sc-if>
+</div></section>
+</sc-if>
+</main>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ЗАПИСИ (заметка, фото, привязка) -->
+<sc-if value="{{ M.open }}" hint-placeholder-val="{{ false }}">
+<div class="a-modal">
+<button type="button" class="a-modal-bg" aria-label="Закрыть окно" onClick="{{ M.cancel }}"></button>
+<div class="a-modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title" style="max-width: 600px">
+<h2 id="m-title">{{ M.title }}</h2>
+<sc-if value="{{ M.hasErr }}" hint-placeholder-val="{{ false }}"><p class="a-alert" role="alert" style="margin: 16px 0 0">{{ M.err }}</p></sc-if>
+<div style="margin-top: 20px; display: flex; flex-direction: column; gap: 16px">
+<sc-if value="{{ M.isNote }}" hint-placeholder-val="{{ false }}">
+<div class="a-f"><label>Пользователь<span class="a-req">*</span></label><div class="a-dd {{ M.userDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.userDD.exp }}" aria-label="Пользователь" aria-invalid="{{ M.userDD.inv }}" disabled="{{ M.userDD.disabled }}" onClick="{{ M.userDD.toggle }}"><span>{{ M.userDD.label }}</span></button><sc-if value="{{ M.userDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Пользователь"><sc-if value="{{ M.userDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.userDD.q }}" onChange="{{ M.userDD.setQ }}"></sc-if><sc-for list="{{ M.userDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.userDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+<div class="a-f"><label>Статуэтка<span class="a-req">*</span></label><div class="a-dd {{ M.figDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.figDD.exp }}" aria-label="Статуэтка" aria-invalid="{{ M.figDD.inv }}" disabled="{{ M.figDD.disabled }}" onClick="{{ M.figDD.toggle }}"><span>{{ M.figDD.label }}</span></button><sc-if value="{{ M.figDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Статуэтка"><sc-if value="{{ M.figDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.figDD.q }}" onChange="{{ M.figDD.setQ }}"></sc-if><sc-for list="{{ M.figDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.figDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+<label class="a-row" style="gap: 10px; cursor: pointer"><input type="checkbox" checked="{{ M.d.enable }}" onChange="{{ M.set.enableBox }}" style="width: 18px; height: 18px; accent-color: #1B2A41"><span><b style="font-weight: 500">Enable</b> <span class="a-hint">— назначение уточняется</span></span></label>
+<div class="a-f"><label for="m-c1">Комментарий 1</label><textarea id="m-c1" class="a-textarea" style="min-height: 70px" value="{{ M.d.comment1 }}" onChange="{{ M.set.comment1 }}"></textarea></div>
+<div class="a-f"><label for="m-c2">Комментарий 2</label><textarea id="m-c2" class="a-textarea" style="min-height: 70px" value="{{ M.d.comment2 }}" onChange="{{ M.set.comment2 }}"></textarea></div>
+<div class="a-f"><label for="m-c3">Комментарий 3</label><textarea id="m-c3" class="a-textarea" style="min-height: 70px" value="{{ M.d.comment3 }}" onChange="{{ M.set.comment3 }}"></textarea></div>
+<div class="a-grid2"><div class="a-f"><label for="m-price">Цена</label><input id="m-price" class="a-input" type="text" inputmode="decimal" placeholder="Цена неизвестна" value="{{ M.d.price }}" onChange="{{ M.set.price }}" aria-invalid="{{ M.inv.price }}"><span class="a-hint">Пустое поле — цена неизвестна, а не 0.</span></div><div class="a-f"><label>Валюта</label><div class="a-dd {{ M.curDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.curDD.exp }}" aria-label="Валюта" aria-invalid="{{ M.curDD.inv }}" disabled="{{ M.curDD.disabled }}" onClick="{{ M.curDD.toggle }}"><span>{{ M.curDD.label }}</span></button><sc-if value="{{ M.curDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Валюта"><sc-if value="{{ M.curDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.curDD.q }}" onChange="{{ M.curDD.setQ }}"></sc-if><sc-for list="{{ M.curDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.curDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div></div>
+</sc-if>
+<sc-if value="{{ M.isPhoto }}" hint-placeholder-val="{{ false }}">
+<div class="a-f"><span class="a-lab">Файл</span>
+<sc-if value="{{ M.hasImg }}" hint-placeholder-val="{{ false }}"><div class="a-ph-img" style="max-width: 260px; border-radius: 8px"><img src="{{ M.d.pictureCompressed }}" alt="Предпросмотр"></div></sc-if>
+<label class="a-ghost" style="position: relative; overflow: hidden; align-self: flex-start">{{ M.fileLabel }}<input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Выбрать файл" onChange="{{ M.pickFile }}" style="position: absolute; inset: 0; opacity: 0; cursor: pointer"></label>
+<sc-if value="{{ M.busy }}" hint-placeholder-val="{{ false }}"><span class="a-hint">Обрабатываем файл…</span></sc-if></div>
+<div class="a-f"><label>Статуэтка<span class="a-req">*</span></label><div class="a-dd {{ M.figDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.figDD.exp }}" aria-label="Статуэтка" aria-invalid="{{ M.figDD.inv }}" disabled="{{ M.figDD.disabled }}" onClick="{{ M.figDD.toggle }}"><span>{{ M.figDD.label }}</span></button><sc-if value="{{ M.figDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Статуэтка"><sc-if value="{{ M.figDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.figDD.q }}" onChange="{{ M.figDD.setQ }}"></sc-if><sc-for list="{{ M.figDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.figDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+<label class="a-row" style="gap: 10px; cursor: pointer"><input type="checkbox" checked="{{ M.d.isMain }}" onChange="{{ M.set.mainBox }}" style="width: 18px; height: 18px; accent-color: #1B2A41"><span><b style="font-weight: 500">Главное фото</b> <span class="a-hint">— у статуэтки будет только одно главное фото</span></span></label>
+</sc-if>
+<sc-if value="{{ M.isBind }}" hint-placeholder-val="{{ false }}">
+<div class="a-f"><label>Статуэтка<span class="a-req">*</span></label><div class="a-dd {{ M.figDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.figDD.exp }}" aria-label="Статуэтка" aria-invalid="{{ M.figDD.inv }}" disabled="{{ M.figDD.disabled }}" onClick="{{ M.figDD.toggle }}"><span>{{ M.figDD.label }}</span></button><sc-if value="{{ M.figDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Статуэтка"><sc-if value="{{ M.figDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.figDD.q }}" onChange="{{ M.figDD.setQ }}"></sc-if><sc-for list="{{ M.figDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.figDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div>
+<div class="a-f"><span class="a-lab">{{ M.tagLabel }}<span class="a-req">*</span></span>
+<div class="a-chips"><sc-for list="{{ M.tagChips }}" as="tg" hint-placeholder-count="0"><button type="button" class="a-chip a-chip-sel" onClick="{{ tg.remove }}">{{ tg.l }} ×</button></sc-for></div>
+<div class="a-dd {{ M.tagDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ M.tagDD.exp }}" aria-label="Метка" aria-invalid="{{ M.tagDD.inv }}" disabled="{{ M.tagDD.disabled }}" onClick="{{ M.tagDD.toggle }}"><span>{{ M.tagDD.label }}</span></button><sc-if value="{{ M.tagDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Метка"><sc-if value="{{ M.tagDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ M.tagDD.q }}" onChange="{{ M.tagDD.setQ }}"></sc-if><sc-for list="{{ M.tagDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ M.tagDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div>
+<sc-if value="{{ M.hasDup }}" hint-placeholder-val="{{ false }}"><span class="a-warn">{{ M.dup }}</span></sc-if></div>
+</sc-if>
+<sc-if value="{{ M.hasSvc }}" hint-placeholder-val="{{ false }}"><div class="a-meta" style="padding-top: 14px; border-top: 1px solid #DCE2EA"><span>Создано: <b>{{ M.svc.created }}</b>, {{ M.svc.createdBy }}</span><span>Изменено: <b>{{ M.svc.modified }}</b>, {{ M.svc.modifiedBy }}</span></div></sc-if>
+</div>
+<div class="a-row" style="margin-top: 26px; justify-content: flex-end"><button type="button" class="a-ghost" onClick="{{ M.cancel }}">Отмена</button><button type="button" class="a-btn" disabled="{{ M.busy }}" onClick="{{ M.save }}">{{ M.saveText }}</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ V.open }}" hint-placeholder-val="{{ false }}">
+<div class="a-modal"><button type="button" class="a-modal-bg" aria-label="Закрыть просмотр" onClick="{{ V.close }}"></button>
+<div class="a-modal-box" role="dialog" aria-modal="true" aria-label="Просмотр фото" style="max-width: 900px; text-align: center"><img src="{{ V.src }}" alt="" style="max-width: 100%; max-height: 70vh; border-radius: 6px; background: #DBE2EA"><p style="margin: 14px 0 0; font-size: 15px">{{ V.caption }}</p><button type="button" class="a-ghost" style="margin-top: 18px" onClick="{{ V.close }}">Закрыть</button></div></div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ confirm.open }}" hint-placeholder-val="{{ false }}">
+<div class="a-modal">
+<button type="button" class="a-modal-bg" aria-label="Закрыть окно" onClick="{{ confirm.no }}"></button>
+<div class="a-modal-box" role="alertdialog" aria-modal="true" aria-labelledby="c-title">
+<h2 id="c-title">{{ confirm.title }}</h2>
+<p style="margin: 14px 0 0; font-size: 16px; line-height: 24px; color: #3E4A60">{{ confirm.text }}</p>
+<sc-if value="{{ confirm.hasLinked }}" hint-placeholder-val="{{ false }}"><div style="margin-top: 16px; padding: 14px 16px; border-radius: 6px; background: #F8FAFD">
+<p class="a-lab" style="margin: 0">Связано · {{ confirm.linkedCount }}</p>
+<ul style="margin: 8px 0 0; padding-left: 18px; font-size: 14px; line-height: 22px"><sc-for list="{{ confirm.linked }}" as="l" hint-placeholder-count="2"><li>{{ l.t }}</li></sc-for></ul>
+<sc-if value="{{ confirm.more }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 6px 0 0">{{ confirm.moreText }}</p></sc-if>
+<sc-if value="{{ confirm.hasRepl }}" hint-placeholder-val="{{ false }}"><div class="a-f" style="margin-top: 14px"><label>{{ confirm.replLabel }}</label><div class="a-dd {{ confirm.replDD.wCls }}"><button type="button" class="a-select a-dd-btn" aria-haspopup="listbox" aria-expanded="{{ confirm.replDD.exp }}" aria-label="Замена" aria-invalid="{{ confirm.replDD.inv }}" disabled="{{ confirm.replDD.disabled }}" onClick="{{ confirm.replDD.toggle }}"><span>{{ confirm.replDD.label }}</span></button><sc-if value="{{ confirm.replDD.open }}" hint-placeholder-val="{{ false }}"><div class="a-dd-list" role="listbox" aria-label="Замена"><sc-if value="{{ confirm.replDD.searchable }}" hint-placeholder-val="{{ false }}"><input class="a-input a-dd-q" type="search" placeholder="Поиск" aria-label="Поиск в списке" value="{{ confirm.replDD.q }}" onChange="{{ confirm.replDD.setQ }}"></sc-if><sc-for list="{{ confirm.replDD.opts }}" as="o" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{ o.sel }}" class="a-dd-opt {{ o.cls }}" onClick="{{ o.pick }}"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" class="a-dd-img"></sc-if><span>{{ o.l }}</span></button></sc-for><sc-if value="{{ confirm.replDD.none }}" hint-placeholder-val="{{ false }}"><p class="a-hint" style="margin: 8px 10px">Ничего не найдено</p></sc-if></div></sc-if></div></div></sc-if>
+</div></sc-if>
+<div class="a-row" style="margin-top: 28px; justify-content: flex-end; flex-wrap: wrap"><button type="button" class="a-ghost" onClick="{{ confirm.no }}">{{ confirm.noText }}</button><sc-if value="{{ confirm.hasAlt }}" hint-placeholder-val="{{ false }}"><button type="button" class="a-ghost" onClick="{{ confirm.alt }}">{{ confirm.altText }}</button></sc-if><sc-if value="{{ confirm.hasYes }}" hint-placeholder-val="{{ true }}"><button type="button" class="a-btn {{ confirm.yesCls }}" disabled="{{ confirm.yesDisabled }}" onClick="{{ confirm.yes }}">{{ confirm.yesText }}</button></sc-if></div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ toast.on }}" hint-placeholder-val="{{ false }}"><div class="a-toast {{ toast.cls }}" role="status">{{ toast.text }}</div></sc-if>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script data-props='{"canvasPreview":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { db: null, me: null, preview: false, denied: '', loadErr: '', sec: 'dash', lists: {}, cols: {}, form: null, modal: null, viewer: null, dd: null, ddq: {}, confirm: null, toast: null, saving: false };
+  }
+  componentDidMount() {
+    var self = this;
+    this.boot();
+    this._sync = function (e) { if (!e || !e.key || e.key === 'sp-db' || e.key === 'sp-admin') self.boot(); };
+    this._leave = function (e) { if (self.isDirty()) { e.preventDefault(); e.returnValue = ''; return ''; } };
+    try { window.addEventListener('storage', this._sync); window.addEventListener('beforeunload', this._leave); } catch (e) {}
+  }
+  componentWillUnmount() {
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('beforeunload', this._leave); } catch (e) {}
+    if (this._tt) clearTimeout(this._tt);
+  }
+  spHash(s) { var h = 5381; s = String(s || ''); for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return 'h' + (h >>> 0).toString(36); }
+  spSeed() {
+    var now = Date.now(), day = 86400000, who = 'Мамаа';
+    var iso = function (t) { return new Date(t).toISOString(); };
+    var svc = function (t) { return { createDate: iso(t), createdBy: who, modifyDate: iso(t + day), modifiedBy: who }; };
+    var TAGS = ['Фигурное катание', 'Спорт', 'Балет', 'Детство', 'Зима', 'Цирк', 'Танец', 'Музыка', 'Женский образ', 'Пионеры'];
+    var KINDS = ['Статуэтка', 'Шкатулка', 'Животные', 'Бюст', 'Пепельница', 'Чернильный прибор'];
+    var IMG = ['/_blob/71c672eab5ec5354e8696155720ef67e', '/_blob/1abde048756c885343125ae104d78e21', '/_blob/6093db140d0917325323fbdbf569d997'];
+    var titles = ['Название статуэтки', 'Название статуэтки средней длины', 'Длинное название статуэтки, которое переносится на несколько строк без многоточия'];
+    var t0 = now - 90 * day;
+    var db = { v: 2, seq: 1000, figures: [], photos: [], figureTags: [], infos: [], kinds: [], authors: [], tags: [], users: [], userNotes: [] };
+    KINDS.forEach(function (k, i) { db.kinds.push(Object.assign({ id: i + 1, name: k, visible: true }, svc(t0))); });
+    TAGS.forEach(function (t, i) { db.tags.push(Object.assign({ id: i + 1, tagText: t }, svc(t0))); });
+    [1, 2, 3].forEach(function (n) { db.authors.push(Object.assign({ id: n, name: 'Автор ' + n, text: '', sourceText: '', sourceUrl: '' }, svc(t0))); });
+    for (var i = 0; i < 24; i++) {
+      var idx = [i % 10, (i * 3 + 1) % 10, (i * 7 + 4) % 10, (i * 9 + 2) % 10, (i + 5) % 10, (i * 3 + 6) % 10, (i + 3) % 10, (i * 7 + 8) % 10, (i + 1) % 10, (i + 7) % 10];
+      var want = i % 5 + 4, seen = {}, tags = [];
+      for (var k = 0; k < idx.length && tags.length < want; k++) {
+        var t = idx[k]; if (seen[t]) continue; seen[t] = 1;
+        tags.push({ t: t, w: (i * 37 + k * 53 + t * 11) % 85 + 15 });
+      }
+      tags.sort(function (a, b) { return b.w - a.w; });
+      var made = now - (40 - i) * day, id = i + 1;
+      db.photos.push(Object.assign({ id: id, figureId: id, isMain: true, picture: IMG[i % 3], pictureCompressed: IMG[i % 3], sort: 1, fileName: 'Заглушка' }, svc(made)));
+      db.figures.push(Object.assign({
+        id: id, name: titles[i % 3],
+        kindId: [0, 0, 1, 2, 0, 3, 0, 4, 2, 0, 5, 1][i % 12] + 1,
+        authorId: i % 4 === 1 ? i % 3 + 1 : null,
+        factoryName: i % 3 === 0 ? 'Фабрика ' + (i % 2 + 1) : '',
+        height: i % 2 === 0 ? 12 + i % 9 : null, length: i % 4 === 0 ? 6 + i % 5 : null,
+        visible: true, sourceText: '', sourceUrl: '', final: false, comment: '',
+        originalId: null, pictureMainId: id
+      }, svc(made)));
+      tags.forEach(function (x) { db.figureTags.push({ figureId: id, tagId: x.t + 1 }); });
+    }
+    var arts = [['Название статьи', 'Краткое описание: о чём статья и зачем её читать.'], ['Название статьи средней длины', 'Краткое описание в одно-два предложения.'], ['Длинное название статьи, которое занимает две строки в списке статей', 'Краткое описание: о чём статья и зачем её читать.'], ['Название статьи', 'Краткое описание в одно-два предложения.'], ['Название статьи средней длины', 'Краткое описание: о чём статья и зачем её читать.']];
+    arts.forEach(function (a, n) { var d = now - (n * 9 + 2) * day; db.infos.push(Object.assign({ id: n + 1, infoDate: iso(d).slice(0, 10), name: a[0], text: a[1] + '\n\n## Заголовок раздела\nАбзац основного текста. **Важная мысль** выделяется жирным.\n\n- Первый пункт\n- Второй пункт', sourceText: '', sourceUrl: '' }, svc(d))); });
+    db.users.push(Object.assign({ id: 1, login: 'mamaa', name: 'Мамаа', email: 'admin@karbolit.ru', defaultCurrency: 'RUB', isAdmin: true, pass: this.spHash('karbolit') }, svc(now - 60 * day)));
+    db.users.push(Object.assign({ id: 2, login: 'anna', name: 'Анна', email: 'anna@example.ru', defaultCurrency: 'RUB', isAdmin: false, pass: this.spHash('anna123') }, svc(now - 12 * day)));
+    db.userNotes.push(Object.assign({ id: 1, userId: 2, figureId: 3, enable: true, comment1: 'Видела на барахолке', comment2: '', comment3: '', price: 3500, currency: 'RUB' }, svc(now - 3 * day)));
+    return db;
+  }
+  spMigrate(o) {
+    var who = 'Мамаа', now = new Date().toISOString();
+    var db = { v: 2, seq: o.seq || 1000, figures: [], photos: [], figureTags: [], infos: [], kinds: [], authors: [], tags: [], users: [], userNotes: [] };
+    var map = { c: {}, a: {}, t: {}, u: {} }, n = 0;
+    var svc = function (x) { return { createDate: x.createdAt || now, createdBy: x.updatedBy || who, modifyDate: x.updatedAt || x.createdAt || now, modifiedBy: x.updatedBy || who }; };
+    (o.categories || []).forEach(function (c, i) { map.c[c.id] = i + 1; db.kinds.push(Object.assign({ id: i + 1, name: c.name, visible: c.visible !== false }, svc({}))); });
+    (o.authors || []).forEach(function (a, i) { map.a[a.id] = i + 1; db.authors.push(Object.assign({ id: i + 1, name: a.name, text: a.bio || '', sourceText: a.sourceName || '', sourceUrl: a.sourceUrl || '' }, svc({}))); });
+    (o.tags || []).forEach(function (t, i) { map.t[t.id] = i + 1; db.tags.push(Object.assign({ id: i + 1, tagText: t.name }, svc({}))); });
+    var num = function (v) { var x = parseFloat(String(v == null ? '' : v).replace(',', '.')); return isFinite(x) && x > 0 ? x : null; };
+    (o.figurines || []).forEach(function (f) {
+      var mainId = null;
+      (f.photos || []).forEach(function (p, k) { n++; var pid = n; if (p.id === f.mainPhotoId || (!f.mainPhotoId && k === 0)) mainId = pid; db.photos.push(Object.assign({ id: pid, figureId: f.id, isMain: false, picture: p.src, pictureCompressed: p.src, sort: k + 1, fileName: p.name || '' }, svc(f))); });
+      db.photos.forEach(function (p) { if (p.id === mainId) p.isMain = true; });
+      db.figures.push(Object.assign({ id: f.id, name: f.title, kindId: map.c[f.categoryId] || null, authorId: map.a[f.authorId] || null, factoryName: f.factory || '', height: num(f.height && f.height.value), length: num(f.length && f.length.value), visible: f.status === 'published', sourceText: f.sourceName || '', sourceUrl: f.sourceUrl || '', final: false, comment: [f.description, f.comment].filter(Boolean).join('\n\n'), originalId: null, pictureMainId: mainId }, svc(f)));
+      (f.tagIds || []).forEach(function (t) { if (map.t[t]) db.figureTags.push({ figureId: f.id, tagId: map.t[t] }); });
+    });
+    (o.articles || []).forEach(function (a, i) { db.infos.push(Object.assign({ id: i + 1, infoDate: a.date || now.slice(0, 10), name: a.title, text: [a.summary, a.body].filter(Boolean).join('\n\n'), sourceText: a.sourceName || '', sourceUrl: a.sourceUrl || '' }, svc(a))); });
+    (o.users || []).forEach(function (u, i) { map.u[u.id] = i + 1; db.users.push(Object.assign({ id: i + 1, login: u.login || String(u.email || '').split('@')[0], name: u.name || '', email: u.email || '', defaultCurrency: 'RUB', isAdmin: !!u.isAdmin, pass: u.pass || '', status: u.status === 'blocked' ? 'blocked' : undefined }, svc(u))); });
+    db.seq = Math.max(db.seq, n + 1000);
+    return db;
+  }
+  spReadDb() {
+    var db = null;
+    try { db = JSON.parse(window.localStorage.getItem('sp-db') || 'null'); } catch (e) { db = null; }
+    if (db && db.v === 2 && db.figures) return db;
+    db = db && db.figurines ? this.spMigrate(db) : this.spSeed();
+    try { window.localStorage.setItem('sp-db', JSON.stringify(db)); } catch (e) {}
+    return db;
+  }
+  boot() {
+    var db, sid = null;
+    try { db = this.spReadDb(); } catch (e) { this.setState({ loadErr: 'Хранилище браузера недоступно. Разрешите сайту сохранять данные и обновите страницу.' }); return; }
+    var prof = {}, auth = false;
+    try { sid = window.localStorage.getItem('sp-admin'); prof = JSON.parse(window.localStorage.getItem('sp-profile') || '{}') || {}; auth = window.localStorage.getItem('sp-auth') === '1'; } catch (e) {}
+    var me = (db.users || []).filter(function (u) { return String(u.id) === String(sid); })[0] || null;
+    if (!me && auth && prof.email) { var em = String(prof.email).toLowerCase(); me = (db.users || []).filter(function (u) { return String(u.email || '').toLowerCase() === em; })[0] || null; if (me) sid = me.id; }
+    var ok = me && me.isAdmin && me.status !== 'blocked', denied = '', preview = false;
+    if (!ok) {
+      if (this.props.canvasPreview && !sid) { me = (db.users || []).filter(function (u) { return u.isAdmin; })[0] || null; preview = !!me; }
+      if (!preview) {
+        if (!me) denied = 'Войдите на сайте под учётной записью администратора и откройте панель из личного кабинета.';
+        else if (me.status === 'blocked') denied = 'Аккаунт «' + me.email + '» заблокирован.';
+        else denied = 'У аккаунта «' + me.email + '» нет прав администратора. Панель открыта только пользователям с отметкой isAdmin.';
+        me = null;
+      }
+    }
+    this.setState({ db: db, me: me, preview: preview, denied: denied, loadErr: '', avatar: prof.avatar || '' });
+  }
+  // ---------- общие помощники ----------
+  isDirty() { var f = this.state.form; return !!(f && JSON.stringify(f.d) !== f.orig); }
+  nowIso() { return new Date().toISOString(); }
+  fmt(iso, t) {
+    if (!iso) return '—';
+    var d = new Date(iso); if (isNaN(d.getTime())) return '—';
+    var m = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    var s = d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear();
+    if (t) s += ', ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+    return s;
+  }
+  num(v) { return v == null || v === '' ? '' : String(v).replace('.', ','); }
+  plural(n, f) { var a = n % 100, b = n % 10; if (a > 10 && a < 20) return f[2]; if (b === 1) return f[0]; if (b >= 2 && b <= 4) return f[1]; return f[2]; }
+  norm(s) { return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase(); }
+  clone(x) { return JSON.parse(JSON.stringify(x)); }
+  find(arr, id) { for (var i = 0; i < (arr || []).length; i++) if (String(arr[i].id) === String(id)) return arr[i]; return null; }
+  nextId(arr) { return (arr || []).reduce(function (m, x) { return Math.max(m, Number(x.id) || 0); }, 0) + 1; }
+  stamp(rec, isNew) { var now = this.nowIso(), who = this.state.me ? this.state.me.name || this.state.me.login : ''; if (isNew) { rec.createDate = now; rec.createdBy = who; } rec.modifyDate = now; rec.modifiedBy = who; return rec; }
+  svc(r) { r = r || {}; return { created: r.createDate ? this.fmt(r.createDate, true) : 'появится после сохранения', createdBy: r.createdBy || '—', modified: r.modifyDate ? this.fmt(r.modifyDate, true) : '—', modifiedBy: r.modifiedBy || '—' }; }
+  toast(text, err) { var self = this; if (this._tt) clearTimeout(this._tt); this.setState({ toast: { text: text, err: !!err } }); this._tt = setTimeout(function () { self.setState({ toast: null }); }, err ? 5500 : 3000); }
+  persist(db, msg) {
+    db.lastSave = this.nowIso();
+    try { window.localStorage.setItem('sp-db', JSON.stringify(db)); }
+    catch (e) { this.toast('Не удалось сохранить: в хранилище браузера не хватило места. Уменьшите число или размер фотографий. Введённые данные не потеряны.', true); return false; }
+    this.setState({ db: db });
+    if (msg) this.toast(msg);
+    return true;
+  }
+  ask(c) { this.setState({ confirm: Object.assign({ yesText: 'Удалить', noText: 'Отмена', danger: true, linked: [], repl: '', hasYes: true }, c), dd: null }); }
+  guard(fn) {
+    var self = this;
+    if (!this.isDirty()) { fn(); return; }
+    this.ask({ title: 'Есть несохранённые изменения', text: 'Сохранить изменения перед уходом со страницы?', yesText: 'Выйти без сохранения', noText: 'Остаться', danger: false, altText: 'Сохранить и выйти',
+      alt: function () { if (self.saveForm()) fn(); },
+      onYes: function () { self.setState({ form: null }); fn(); } });
+  }
+  go(sec, extra) { var self = this; this.guard(function () { self.setState(Object.assign({ sec: sec, form: null, modal: null, dd: null }, extra || {})); try { window.scrollTo(0, 0); } catch (e) {} }); }
+  dd(key, opts, cur, onPick, more) {
+    var self = this, open = this.state.dd === key, q = (this.state.ddq[key] || '');
+    more = more || {};
+    var searchable = more.searchable != null ? more.searchable : opts.length > 8;
+    var curL = ''; opts.forEach(function (o) { if (String(o[0]) === String(cur)) curL = o[1]; });
+    var shown = !searchable || !q ? opts : opts.filter(function (o) { return self.norm(o[1]).indexOf(self.norm(q)) >= 0; });
+    return {
+      label: more.label || curL || (opts[0] ? opts[0][1] : ''), open: open, exp: open ? 'true' : 'false', wCls: open ? 'a-dd-up' : '', inv: more.inv || 'false', disabled: !!more.disabled,
+      searchable: searchable, q: q, none: shown.length === 0,
+      setQ: function (e) { var x = Object.assign({}, self.state.ddq); x[key] = e.target.value; self.setState({ ddq: x }); },
+      toggle: function () { var x = Object.assign({}, self.state.ddq); x[key] = ''; self.setState({ dd: open ? null : key, ddq: x }); },
+      opts: shown.map(function (o) { var on = cur != null && String(o[0]) === String(cur); return { l: o[1], img: o[2] || '', hasImg: !!o[2], sel: on ? 'true' : 'false', cls: on ? 'a-dd-on' : '', pick: function () { self.setState({ dd: null }); onPick(o[0]); } }; })
+    };
+  }
+  menu(key, items) { return this.dd(key, items.map(function (it, i) { return [i, it[0]]; }), null, function (i) { items[i][1](); }, { label: '⋯', searchable: false }); }
+  readImages(files, done) {
+    var ok = ['image/jpeg', 'image/png', 'image/webp'], errs = [], out = [], left = 0;
+    var shrink = function (img, max, q) { var k = Math.min(1, max / Math.max(img.width, img.height)); var c = document.createElement('canvas'); c.width = Math.max(1, Math.round(img.width * k)); c.height = Math.max(1, Math.round(img.height * k)); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); return c.toDataURL('image/jpeg', q); };
+    Array.prototype.slice.call(files || []).forEach(function (f) {
+      if (ok.indexOf(f.type) < 0) { errs.push({ t: '«' + f.name + '»: формат не поддерживается. Подойдут JPG, PNG или WEBP.' }); return; }
+      if (f.size > 10 * 1024 * 1024) { errs.push({ t: '«' + f.name + '»: файл больше 10 МБ.' }); return; }
+      left++;
+      var fin = function () { if (--left === 0) done(out, errs); };
+      var rd = new FileReader();
+      rd.onerror = function () { errs.push({ t: '«' + f.name + '»: не удалось прочитать файл.' }); fin(); };
+      rd.onload = function () {
+        var img = new Image();
+        img.onerror = function () { errs.push({ t: '«' + f.name + '»: файл повреждён или не является изображением.' }); fin(); };
+        img.onload = function () { out.push({ name: f.name, picture: shrink(img, 1600, 0.85), pictureCompressed: shrink(img, 420, 0.72) }); fin(); };
+        img.src = rd.result;
+      };
+      rd.readAsDataURL(f);
+    });
+    if (left === 0) done(out, errs);
+    return left;
+  }
+  download(name, rows) {
+    var csv = '﻿' + rows.map(function (r) { return r.map(function (v) { var s = v == null ? '' : String(v); return /[";\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(';'); }).join('\r\n');
+    try {
+      var url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      var a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      this.toast('Файл «' + name + '» сформирован: ' + (rows.length - 1) + ' ' + this.plural(rows.length - 1, ['строка', 'строки', 'строк']) + '.');
+    } catch (e) { this.toast('Не удалось скачать файл в этом окне.', true); }
+  }
+  // ---------- данные ----------
+  kindName(db, id) { var k = this.find(db.kinds, id); return k ? k.name : ''; }
+  authorName(db, id) { var a = this.find(db.authors, id); return a ? a.name : ''; }
+  userName(db, id) { var u = this.find(db.users, id); return u ? (u.name || u.login) : 'Удалённый пользователь'; }
+  figLabel(db, id) { var f = this.find(db.figures, id); return f ? f.name + ' · ID ' + f.id : 'ID ' + id; }
+  figPhotos(db, id) { return (db.photos || []).filter(function (p) { return String(p.figureId) === String(id); }).sort(function (a, b) { return (b.isMain ? 1 : 0) - (a.isMain ? 1 : 0) || (a.sort || 0) - (b.sort || 0) || a.id - b.id; }); }
+  mainThumb(db, f) { var p = this.find(db.photos, f.pictureMainId) || this.figPhotos(db, f.id)[0]; return p ? (p.pictureCompressed || p.picture) : ''; }
+  figTags(db, id) { return (db.figureTags || []).filter(function (x) { return String(x.figureId) === String(id); }).map(function (x) { return x.tagId; }); }
+  syncMain(db, figureId, preferId) {
+    var ps = (db.photos || []).filter(function (p) { return String(p.figureId) === String(figureId); });
+    var main = preferId != null ? this.find(ps, preferId) : null;
+    if (!main) main = ps.filter(function (p) { return p.isMain; })[0] || null;
+    if (!main) main = ps.slice().sort(function (a, b) { return (a.sort || 0) - (b.sort || 0) || a.id - b.id; })[0] || null;
+    ps.forEach(function (p) { p.isMain = !!main && p.id === main.id; });
+    var f = this.find(db.figures, figureId); if (f) f.pictureMainId = main ? main.id : null;
+  }
+  curName(c) { return ({ RUB: '₽ Рубль', USD: '$ Доллар', EUR: '€ Евро' })[c] || 'Не указана'; }
+  curOpts() { return [['', 'Не указана'], ['RUB', '₽ Рубль'], ['USD', '$ Доллар'], ['EUR', '€ Евро']]; }
+  secTitle(s) { return ({ figures: 'Статуэтки', photos: 'Фотографии', bindings: 'Привязка меток', infos: 'Статьи', kinds: 'Типы статуэток', authors: 'Авторы', tags: 'Метки', users: 'Пользователи', notes: 'Заметки пользователей' })[s]; }
+  ls(sec) { return Object.assign({ q: '', f: {}, page: 1, per: 25, sort: '', dir: 1 }, this.state.lists[sec] || {}); }
+  setLs(sec, patch, keepPage) { var x = Object.assign({}, this.state.lists); x[sec] = Object.assign(this.ls(sec), patch, keepPage ? {} : { page: 1 }); this.setState({ lists: x }); }
+  openList(sec, f) { var x = Object.assign({}, this.state.lists); if (f) x[sec] = Object.assign(this.ls(sec), { f: f, q: '', page: 1 }); this.go(sec, { lists: x }); }
+  // ---------- формы ----------
+  openForm(type, id, tab) {
+    var db = this.state.db, r = id == null ? null : this.find(this.coll(type), id), d;
+    if (type === 'figure') d = r ? { name: r.name, kindId: r.kindId, authorId: r.authorId, factoryName: r.factoryName || '', height: this.num(r.height), length: this.num(r.length), tagIds: this.figTags(db, r.id), visible: !!r.visible, comment: r.comment || '', sourceText: r.sourceText || '', sourceUrl: r.sourceUrl || '', originalId: r.originalId, final: !!r.final }
+      : { name: '', kindId: null, authorId: null, factoryName: '', height: '', length: '', tagIds: [], visible: true, comment: '', sourceText: '', sourceUrl: '', originalId: null, final: false };
+    else if (type === 'info') d = r ? { name: r.name, infoDate: r.infoDate || '', text: r.text || '', sourceText: r.sourceText || '', sourceUrl: r.sourceUrl || '' } : { name: '', infoDate: new Date().toISOString().slice(0, 10), text: '', sourceText: '', sourceUrl: '' };
+    else if (type === 'kind') d = r ? { name: r.name, visible: r.visible !== false } : { name: '', visible: true };
+    else if (type === 'author') d = r ? { name: r.name, text: r.text || '', sourceText: r.sourceText || '', sourceUrl: r.sourceUrl || '' } : { name: '', text: '', sourceText: '', sourceUrl: '' };
+    else if (type === 'tag') d = r ? { name: r.tagText } : { name: '' };
+    else if (type === 'user') d = r ? { login: r.login || '', name: r.name || '', email: r.email || '', defaultCurrency: r.defaultCurrency || '', isAdmin: !!r.isAdmin, p1: '', p2: '' } : { login: '', name: '', email: '', defaultCurrency: 'RUB', isAdmin: false, p1: '', p2: '' };
+    this.go(type, { form: { type: type, id: r ? r.id : null, d: d, orig: JSON.stringify(d), err: {}, tab: tab || 'main', prev: tab === 'preview', quick: null, photoErr: [], upl: 0, replaceId: null } });
+  }
+  coll(type) { var db = this.state.db; return ({ figure: db.figures, info: db.infos, kind: db.kinds, author: db.authors, tag: db.tags, user: db.users })[type]; }
+  setD(patch) { var f = this.state.form; this.setState({ form: Object.assign({}, f, { d: Object.assign({}, f.d, patch), err: {} }) }); }
+  setF(patch) { this.setState({ form: Object.assign({}, this.state.form, patch) }); }
+  validUrl(u) { return !u || /^https?:\/\/[^\s]+\.[^\s]+/i.test(u); }
+  parseNum(s) { s = String(s || '').trim().replace(',', '.'); if (!s) return { ok: true, v: null }; if (!/^\d+(\.\d+)?$/.test(s)) return { ok: false }; var v = parseFloat(s); return v > 0 ? { ok: true, v: v } : { ok: false }; }
+  saveForm() {
+    var self = this, f = this.state.form; if (!f || this.state.saving) return false;
+    var d = f.d, e = {}, db = this.clone(this.state.db), isNew = f.id == null, rec, list, name;
+    var err = function (k, m) { e[k] = m; };
+    if (f.type === 'figure') {
+      if (!d.name.trim()) err('name', 'Укажите название.');
+      if (!d.kindId) err('kind', 'Выберите тип статуэтки.');
+      var h = this.parseNum(d.height), l = this.parseNum(d.length);
+      if (!h.ok) err('height', 'Введите положительное число, например 14 или 14,5.');
+      if (!l.ok) err('length', 'Введите положительное число, например 8 или 8,5.');
+      if (!this.validUrl(d.sourceUrl.trim())) err('sourceUrl', 'Ссылка должна начинаться с http:// или https://');
+      if (Object.keys(e).length) return this.formFail(e);
+      list = db.figures; rec = isNew ? { id: this.nextId(list), pictureMainId: null } : this.find(list, f.id);
+      Object.assign(rec, { name: d.name.trim(), kindId: d.kindId, authorId: d.authorId || null, factoryName: d.factoryName.trim(), height: h.v, length: l.v, visible: !!d.visible, comment: d.comment, sourceText: d.sourceText.trim(), sourceUrl: d.sourceUrl.trim(), originalId: d.originalId || null, final: !!d.final });
+      this.stamp(rec, isNew); if (isNew) list.unshift(rec);
+      db.figureTags = db.figureTags.filter(function (x) { return String(x.figureId) !== String(rec.id); });
+      d.tagIds.forEach(function (t) { if (!db.figureTags.some(function (x) { return String(x.figureId) === String(rec.id) && String(x.tagId) === String(t); })) db.figureTags.push({ figureId: rec.id, tagId: t }); });
+      name = rec.name;
+    } else if (f.type === 'info') {
+      if (!d.name.trim()) err('name', 'Укажите название.');
+      if (!d.infoDate) err('infoDate', 'Укажите дату материала.');
+      if (!this.validUrl(d.sourceUrl.trim())) err('sourceUrl', 'Ссылка должна начинаться с http:// или https://');
+      if (Object.keys(e).length) return this.formFail(e);
+      list = db.infos; rec = isNew ? { id: this.nextId(list) } : this.find(list, f.id);
+      Object.assign(rec, { name: d.name.trim(), infoDate: d.infoDate, text: d.text, sourceText: d.sourceText.trim(), sourceUrl: d.sourceUrl.trim() });
+      this.stamp(rec, isNew); if (isNew) list.unshift(rec); name = rec.name;
+    } else if (f.type === 'kind' || f.type === 'author' || f.type === 'tag') {
+      var key = f.type === 'kind' ? 'kinds' : (f.type === 'author' ? 'authors' : 'tags'), fld = f.type === 'tag' ? 'tagText' : 'name';
+      list = db[key];
+      if (!d.name.trim()) err('name', f.type === 'author' ? 'Укажите имя.' : 'Укажите название.');
+      else if (list.some(function (x) { return String(x.id) !== String(f.id) && self.norm(x[fld]) === self.norm(d.name); })) err('name', 'Такое значение уже есть в справочнике — повторы и лишние пробелы не учитываются.');
+      if (f.type === 'author' && !this.validUrl(d.sourceUrl.trim())) err('sourceUrl', 'Ссылка должна начинаться с http:// или https://');
+      if (Object.keys(e).length) return this.formFail(e);
+      rec = isNew ? { id: this.nextId(list) } : this.find(list, f.id);
+      rec[fld] = d.name.replace(/\s+/g, ' ').trim();
+      if (f.type === 'kind') rec.visible = !!d.visible;
+      if (f.type === 'author') { rec.text = d.text; rec.sourceText = d.sourceText.trim(); rec.sourceUrl = d.sourceUrl.trim(); }
+      this.stamp(rec, isNew); if (isNew) list.push(rec); name = rec[fld];
+    } else if (f.type === 'user') {
+      list = db.users;
+      var login = d.login.trim(), email = d.email.trim().toLowerCase();
+      if (!/^[A-Za-z0-9_.-]{3,}$/.test(login)) err('login', 'Логин: не меньше 3 символов — латиница, цифры, точка, дефис, подчёркивание.');
+      else if (list.some(function (u) { return String(u.id) !== String(f.id) && self.norm(u.login) === self.norm(login); })) err('login', 'Такой логин уже занят.');
+      if (!/^\S+@\S+\.\S+$/.test(email)) err('email', 'Проверьте адрес электронной почты.');
+      else if (list.some(function (u) { return String(u.id) !== String(f.id) && self.norm(u.email) === email; })) err('email', 'Эта почта уже используется.');
+      if (isNew && !d.p1) err('p1', 'Задайте пароль для нового пользователя.');
+      else if (d.p1 && d.p1.length < 6) err('p1', 'Пароль — не короче 6 символов.');
+      if (d.p1 && d.p1 !== d.p2) err('p2', 'Пароли не совпадают.');
+      var admins = list.filter(function (u) { return u.isAdmin && u.status !== 'blocked' && String(u.id) !== String(f.id); }).length;
+      if (!d.isAdmin && !admins) err('login', 'Должен остаться хотя бы один администратор.');
+      if (Object.keys(e).length) return this.formFail(e);
+      rec = isNew ? { id: this.nextId(list) } : this.find(list, f.id);
+      Object.assign(rec, { login: login, name: d.name.trim(), email: email, defaultCurrency: d.defaultCurrency || '', isAdmin: !!d.isAdmin });
+      if (d.p1) rec.pass = this.spHash(d.p1);
+      this.stamp(rec, isNew); if (isNew) list.push(rec); name = rec.name || rec.login;
+    }
+    this.setState({ saving: true });
+    var ok = this.persist(db, (isNew ? 'Создано: «' : 'Сохранено: «') + name + '»');
+    if (!ok) { this.setState({ saving: false }); return false; }
+    var nd = Object.assign({}, d); if (f.type === 'user') { nd.p1 = ''; nd.p2 = ''; }
+    if (f.type === 'kind' || f.type === 'author' || f.type === 'tag') nd.name = name;
+    this.setState({ saving: false, form: Object.assign({}, f, { id: rec.id, d: nd, orig: JSON.stringify(nd), err: {} }) });
+    return true;
+  }
+  formFail(e) {
+    var f = this.state.form, tab = f.tab;
+    if (f.type === 'figure') { if (e.name || e.kind || e.height || e.length) tab = 'main'; else if (e.sourceUrl) tab = 'links'; }
+    this.setState({ form: Object.assign({}, f, { err: e, tab: tab, prev: false }) });
+    this.toast('Не сохранено: проверьте отмеченные поля. Введённые данные остались в форме.', true);
+    return false;
+  }
+  quickAdd() {
+    var self = this, f = this.state.form, q = f.quick, nm = (q.name || '').replace(/\s+/g, ' ').trim();
+    if (!nm) { this.setF({ quick: Object.assign({}, q, { err: 'Введите название.' }) }); return; }
+    var db = this.clone(this.state.db), key = q.kind === 'kind' ? 'kinds' : (q.kind === 'author' ? 'authors' : 'tags'), fld = q.kind === 'tag' ? 'tagText' : 'name';
+    var ex = db[key].filter(function (x) { return self.norm(x[fld]) === self.norm(nm); })[0], id;
+    if (ex) { id = ex.id; this.toast('«' + ex[fld] + '» уже есть в справочнике — выбрано существующее значение.'); }
+    else {
+      var rec = { id: this.nextId(db[key]) }; rec[fld] = nm;
+      if (q.kind === 'kind') rec.visible = true;
+      if (q.kind === 'author') { rec.text = ''; rec.sourceText = ''; rec.sourceUrl = ''; }
+      this.stamp(rec, true); db[key].push(rec); id = rec.id;
+      if (!this.persist(db, 'Добавлено в справочник: «' + nm + '». Данные карточки не потеряны.')) return;
+    }
+    var p = {}; if (q.kind === 'kind') p.kindId = id; else if (q.kind === 'author') p.authorId = id; else if (f.d.tagIds.indexOf(id) < 0) p.tagIds = f.d.tagIds.concat([id]);
+    var nf = this.state.form;
+    this.setState({ form: Object.assign({}, nf, { quick: null, d: Object.assign({}, nf.d, p) }) });
+  }
+  // ---------- фото ----------
+  addPhotos(figureId, files, cb) {
+    var self = this;
+    var n = this.readImages(files, function (list, errs) {
+      var db = self.clone(self.state.db), maxSort = self.figPhotos(db, figureId).reduce(function (m, p) { return Math.max(m, p.sort || 0); }, 0);
+      list.forEach(function (x, i) { var p = self.stamp({ id: self.nextId(db.photos), figureId: figureId, isMain: false, picture: x.picture, pictureCompressed: x.pictureCompressed, sort: maxSort + i + 1, fileName: x.name }, true); db.photos.push(p); });
+      self.syncMain(db, figureId, null);
+      var ok = list.length ? self.persist(db, 'Загружено фото: ' + list.length + (errs.length ? '. Часть файлов не загружена — см. ошибки.' : '')) : true;
+      if (cb) cb(errs, ok);
+    });
+    return n;
+  }
+  setMainPhoto(p) {
+    var self = this;
+    this.ask({ title: 'Сделать фото главным?', text: 'Это фото будет показываться в карточке на сайте для «' + this.figLabel(this.state.db, p.figureId) + '». Предыдущее главное фото останется среди дополнительных.', yesText: 'Сделать главным', danger: false, onYes: function () {
+      var db = self.clone(self.state.db); self.syncMain(db, p.figureId, p.id); var f = self.find(db.figures, p.figureId); if (f) self.stamp(f, false);
+      self.persist(db, 'Главное фото назначено');
+    } });
+  }
+  delPhoto(p) {
+    var self = this, db0 = this.state.db, others = this.figPhotos(db0, p.figureId).filter(function (x) { return x.id !== p.id; });
+    this.ask({ title: 'Удалить фото' + (p.fileName ? ' «' + p.fileName + '»' : '') + '?', text: 'Фото будет удалено у статуэтки «' + this.figLabel(db0, p.figureId) + '».' + (p.isMain ? (others.length ? ' Это главное фото: главным станет следующее по порядку.' : ' Это единственное фото: на сайте появится заглушка.') : ''), onYes: function () {
+      var db = self.clone(self.state.db); db.photos = db.photos.filter(function (x) { return x.id !== p.id; }); self.syncMain(db, p.figureId, null);
+      self.persist(db, 'Фото удалено');
+    } });
+  }
+  movePhoto(p, dir) {
+    var db = this.clone(this.state.db), list = this.figPhotos(db, p.figureId).filter(function (x) { return !x.isMain; });
+    list.forEach(function (x, i) { x.sort = i + 1; });
+    var i = -1; list.forEach(function (x, k) { if (x.id === p.id) i = k; }); var j = i + dir; if (i < 0 || j < 0 || j >= list.length) return;
+    var t = list[i].sort; list[i].sort = list[j].sort; list[j].sort = t;
+    this.persist(db, 'Порядок фото изменён');
+  }
+  replacePhoto(id, files) {
+    var self = this;
+    this.readImages(files, function (list, errs) {
+      if (errs.length) { self.toast(errs[0].t, true); return; }
+      if (!list.length) return;
+      var db = self.clone(self.state.db), p = self.find(db.photos, id); if (!p) return;
+      p.picture = list[0].picture; p.pictureCompressed = list[0].pictureCompressed; p.fileName = list[0].name; self.stamp(p, false);
+      if (self.persist(db, 'Фото заменено')) self.setF({ replaceId: null });
+    });
+  }
+  // ---------- удаление ----------
+  delRecord(type, id) {
+    var self = this, db = this.state.db, r = this.find(this.coll(type), id); if (!r) return;
+    var after = function () { var f = self.state.form; if (f && f.type === type && String(f.id) === String(id)) self.setState({ form: null, sec: ({ figure: 'figures', info: 'infos', kind: 'kinds', author: 'authors', tag: 'tags', user: 'users' })[type] }); };
+    var figsOf = function (fn) { return db.figures.filter(fn); };
+    var lk = function (arr) { return arr.slice(0, 8).map(function (f) { return { t: f.name + ' · ID ' + f.id }; }); };
+    if (type === 'figure') {
+      var ph = this.figPhotos(db, id).length, bt = this.figTags(db, id).length, nt = db.userNotes.filter(function (n) { return String(n.figureId) === String(id); }).length, vr = figsOf(function (f) { return String(f.originalId) === String(id); });
+      this.ask({ title: 'Удалить статуэтку «' + r.name + '»?', text: 'Вместе с ней будут удалены: фото — ' + ph + ', привязки меток — ' + bt + ', заметки пользователей — ' + nt + '.' + (vr.length ? ' У вариантов (' + vr.length + ') пропадёт ссылка на оригинал.' : '') + ' Если нужно только убрать запись с сайта, выключите «Показывать на сайте».', onYes: function () {
+        var d = self.clone(self.state.db), s = String(id);
+        d.figures = d.figures.filter(function (f) { return String(f.id) !== s; }); d.figures.forEach(function (f) { if (String(f.originalId) === s) f.originalId = null; });
+        d.photos = d.photos.filter(function (p) { return String(p.figureId) !== s; }); d.figureTags = d.figureTags.filter(function (x) { return String(x.figureId) !== s; }); d.userNotes = d.userNotes.filter(function (n) { return String(n.figureId) !== s; });
+        if (self.persist(d, 'Статуэтка «' + r.name + '» удалена')) after();
+      } });
+    } else if (type === 'kind') {
+      var used = figsOf(function (f) { return String(f.kindId) === String(id); }), others = db.kinds.filter(function (k) { return String(k.id) !== String(id); });
+      if (used.length && !others.length) { this.ask({ title: 'Нельзя удалить тип «' + r.name + '»', text: 'Тип используется в ' + used.length + ' ' + this.plural(used.length, ['статуэтке', 'статуэтках', 'статуэтках']) + ', а другого типа для переноса нет. Сначала создайте другой тип.', hasYes: false, noText: 'Понятно', linked: lk(used), linkedCount: used.length }); return; }
+      this.ask({ title: 'Удалить тип «' + r.name + '»?', text: used.length ? 'Тип используется. Выберите, в какой тип перенести статуэтки — без типа запись сохранить нельзя.' : 'Тип не используется ни в одной статуэтке.', linked: lk(used), linkedCount: used.length, hasRepl: used.length > 0, replLabel: 'Перенести статуэтки в тип', replList: others.map(function (k) { return [k.id, k.name]; }), needRepl: used.length > 0, onYes: function (repl) {
+        var d = self.clone(self.state.db); d.figures.forEach(function (f) { if (String(f.kindId) === String(id)) { f.kindId = repl; self.stamp(f, false); } }); d.kinds = d.kinds.filter(function (k) { return String(k.id) !== String(id); });
+        if (self.persist(d, 'Тип «' + r.name + '» удалён' + (used.length ? ', статуэтки перенесены' : ''))) after();
+      } });
+    } else if (type === 'author') {
+      var ua = figsOf(function (f) { return String(f.authorId) === String(id); });
+      this.ask({ title: 'Удалить автора «' + r.name + '»?', text: ua.length ? 'Автор указан у статуэток. Выберите замену или оставьте «Не указан» — сами статуэтки не удаляются.' : 'Автор не указан ни у одной статуэтки.', linked: lk(ua), linkedCount: ua.length, hasRepl: ua.length > 0, replLabel: 'Заменить автора на', replList: [['', 'Не указан']].concat(db.authors.filter(function (a) { return String(a.id) !== String(id); }).map(function (a) { return [a.id, a.name]; })), onYes: function (repl) {
+        var d = self.clone(self.state.db); d.figures.forEach(function (f) { if (String(f.authorId) === String(id)) { f.authorId = repl || null; self.stamp(f, false); } }); d.authors = d.authors.filter(function (a) { return String(a.id) !== String(id); });
+        if (self.persist(d, 'Автор «' + r.name + '» удалён')) after();
+      } });
+    } else if (type === 'tag') {
+      var bf = db.figureTags.filter(function (x) { return String(x.tagId) === String(id); }).map(function (x) { return self.find(db.figures, x.figureId); }).filter(Boolean);
+      this.ask({ title: 'Удалить метку «' + r.tagText + '»?', text: bf.length ? 'Будут удалены привязки к ' + bf.length + ' ' + this.plural(bf.length, ['статуэтке', 'статуэткам', 'статуэткам']) + '. Сами статуэтки останутся. Можно перенести привязки на другую метку.' : 'Метка ни к чему не привязана.', linked: lk(bf), linkedCount: bf.length, hasRepl: bf.length > 0, replLabel: 'Перенести привязки на метку', replList: [['', 'Не переносить, удалить привязки']].concat(db.tags.filter(function (t) { return String(t.id) !== String(id); }).map(function (t) { return [t.id, t.tagText]; })), onYes: function (repl) {
+        var d = self.clone(self.state.db), out = [];
+        d.figureTags.forEach(function (x) { if (String(x.tagId) !== String(id)) { out.push(x); return; } if (repl && !d.figureTags.some(function (y) { return String(y.figureId) === String(x.figureId) && String(y.tagId) === String(repl); }) && !out.some(function (y) { return String(y.figureId) === String(x.figureId) && String(y.tagId) === String(repl); })) out.push({ figureId: x.figureId, tagId: repl }); });
+        d.figureTags = out; d.tags = d.tags.filter(function (t) { return String(t.id) !== String(id); });
+        if (self.persist(d, 'Метка «' + r.tagText + '» удалена')) after();
+      } });
+    } else if (type === 'info') {
+      this.ask({ title: 'Удалить статью «' + r.name + '»?', text: 'Статья будет удалена с сайта без возможности восстановления.', onYes: function () { var d = self.clone(self.state.db); d.infos = d.infos.filter(function (x) { return String(x.id) !== String(id); }); if (self.persist(d, 'Статья удалена')) after(); } });
+    } else if (type === 'user') {
+      if (this.state.me && String(this.state.me.id) === String(id)) { this.ask({ title: 'Нельзя удалить свой аккаунт', text: 'Вы сейчас работаете под этим пользователем.', hasYes: false, noText: 'Понятно' }); return; }
+      if (r.isAdmin && db.users.filter(function (u) { return u.isAdmin; }).length <= 1) { this.ask({ title: 'Нельзя удалить последнего администратора', text: 'Сначала выдайте доступ к админ-панели другому пользователю.', hasYes: false, noText: 'Понятно' }); return; }
+      var un = db.userNotes.filter(function (n) { return String(n.userId) === String(id); }).length;
+      this.ask({ title: 'Удалить пользователя «' + (r.name || r.login) + '»?', text: 'Аккаунт будет удалён' + (un ? ' вместе с заметками (' + un + ')' : '') + '.', onYes: function () { var d = self.clone(self.state.db); d.users = d.users.filter(function (u) { return String(u.id) !== String(id); }); d.userNotes = d.userNotes.filter(function (n) { return String(n.userId) !== String(id); }); if (self.persist(d, 'Пользователь удалён')) after(); } });
+    }
+  }
+  toggleVisible(type, id) {
+    var db = this.clone(this.state.db), r = this.find(type === 'figure' ? db.figures : db.kinds, id); if (!r) return;
+    r.visible = !r.visible; this.stamp(r, false);
+    this.persist(db, '«' + r.name + '» ' + (r.visible ? 'показывается на сайте' : 'скрыто с сайта'));
+  }
+  // ---------- модальные записи ----------
+  openModal(type, mode, d, rec) { this.setState({ modal: { type: type, mode: mode, d: d, id: rec ? rec.id : null, err: '', busy: false }, dd: null }); }
+  setM(patch) { var m = this.state.modal; this.setState({ modal: Object.assign({}, m, { d: Object.assign({}, m.d, patch), err: '' }) }); }
+  noteModal(rec, preset) {
+    var d = rec ? { userId: rec.userId, figureId: rec.figureId, enable: !!rec.enable, comment1: rec.comment1 || '', comment2: rec.comment2 || '', comment3: rec.comment3 || '', price: this.num(rec.price), currency: rec.currency || '' } : Object.assign({ userId: null, figureId: null, enable: false, comment1: '', comment2: '', comment3: '', price: '', currency: '' }, preset || {});
+    this.openModal('note', rec ? 'edit' : 'add', d, rec);
+  }
+  photoModal(rec, preset) {
+    var d = rec ? { figureId: rec.figureId, isMain: !!rec.isMain, picture: rec.picture, pictureCompressed: rec.pictureCompressed, fileName: rec.fileName || '' } : Object.assign({ figureId: null, isMain: false, picture: '', pictureCompressed: '', fileName: '' }, preset || {});
+    this.openModal('photo', rec ? 'edit' : 'add', d, rec);
+  }
+  bindModal(mode, preset) { this.openModal('bind', mode, Object.assign({ figureId: null, tagIds: [], oldTagId: null }, preset || {}), null); }
+  saveModal() {
+    var self = this, m = this.state.modal, d = m.d, db = this.clone(this.state.db), rec;
+    var fail = function (t) { self.setState({ modal: Object.assign({}, m, { err: t }) }); };
+    if (m.type === 'note') {
+      if (!d.userId) return fail('Выберите пользователя.');
+      if (!d.figureId) return fail('Выберите статуэтку.');
+      var pr = String(d.price || '').trim().replace(',', '.');
+      if (pr && !/^\d+(\.\d+)?$/.test(pr)) return fail('Цена: введите число или оставьте поле пустым, если цена неизвестна.');
+      rec = m.id != null ? this.find(db.userNotes, m.id) : { id: this.nextId(db.userNotes) };
+      Object.assign(rec, { userId: d.userId, figureId: d.figureId, enable: !!d.enable, comment1: d.comment1, comment2: d.comment2, comment3: d.comment3, price: pr ? parseFloat(pr) : null, currency: d.currency || '' });
+      this.stamp(rec, m.id == null); if (m.id == null) db.userNotes.unshift(rec);
+      if (this.persist(db, 'Заметка сохранена')) this.setState({ modal: null });
+    } else if (m.type === 'photo') {
+      if (!d.picture) return fail('Выберите файл изображения.');
+      if (!d.figureId) return fail('Выберите статуэтку.');
+      var oldFig = null;
+      if (m.id != null) { rec = this.find(db.photos, m.id); oldFig = rec.figureId; }
+      else rec = { id: this.nextId(db.photos), sort: this.figPhotos(db, d.figureId).length + 1 };
+      Object.assign(rec, { figureId: d.figureId, picture: d.picture, pictureCompressed: d.pictureCompressed || d.picture, fileName: d.fileName, isMain: !!d.isMain });
+      this.stamp(rec, m.id == null); if (m.id == null) db.photos.push(rec);
+      if (oldFig != null && String(oldFig) !== String(d.figureId)) this.syncMain(db, oldFig, null);
+      this.syncMain(db, d.figureId, d.isMain ? rec.id : null);
+      if (this.persist(db, m.id == null ? 'Фото добавлено' : 'Фото сохранено')) this.setState({ modal: null });
+    } else if (m.type === 'bind') {
+      if (!d.figureId) return fail('Выберите статуэтку.');
+      var has = function (t) { return db.figureTags.some(function (x) { return String(x.figureId) === String(d.figureId) && String(x.tagId) === String(t); }); };
+      if (m.mode === 'replace') {
+        if (!d.tagIds.length) return fail('Выберите новую метку.');
+        var nt = d.tagIds[0];
+        if (String(nt) === String(d.oldTagId)) { this.setState({ modal: null }); return; }
+        if (has(nt)) return fail('Такая привязка уже есть — повтор пары «статуэтка + метка» не создаётся.');
+        db.figureTags = db.figureTags.map(function (x) { return String(x.figureId) === String(d.figureId) && String(x.tagId) === String(d.oldTagId) ? { figureId: x.figureId, tagId: nt } : x; });
+        if (this.persist(db, 'Привязка заменена')) this.setState({ modal: null });
+      } else {
+        if (!d.tagIds.length) return fail('Выберите хотя бы одну метку.');
+        var add = d.tagIds.filter(function (t) { return !has(t); }), skip = d.tagIds.length - add.length;
+        add.forEach(function (t) { db.figureTags.push({ figureId: d.figureId, tagId: t }); });
+        if (!add.length) return fail('Все выбранные метки уже привязаны к этой статуэтке.');
+        if (this.persist(db, 'Привязано меток: ' + add.length + (skip ? ', пропущено повторов: ' + skip : ''))) this.setState({ modal: null });
+      }
+    }
+  }
+  fmtBody(kind) {
+    var f = this.state.form; if (!f) return;
+    var el = document.getElementById('a-body'), v = f.d.text || '', s = el ? el.selectionStart : v.length, e = el ? el.selectionEnd : v.length, sel = v.slice(s, e), ins;
+    if (kind === 'b') ins = '**' + (sel || 'жирный текст') + '**';
+    else if (kind === 'i') ins = '_' + (sel || 'курсив') + '_';
+    else if (kind === 'a') ins = '[' + (sel || 'текст ссылки') + '](https://)';
+    else { var pre = kind === 'h' ? '## ' : (kind === 'ul' ? '- ' : '> '); ins = (sel || (kind === 'h' ? 'Заголовок раздела' : (kind === 'ul' ? 'Пункт списка' : 'Цитата'))).split('\n').map(function (l) { return pre + l.replace(/^(## |- |> )/, ''); }).join('\n'); if (s > 0 && v[s - 1] !== '\n') ins = '\n' + ins; }
+    this.setD({ text: v.slice(0, s) + ins + v.slice(e) });
+  }
+  parseBody(txt) {
+    var blocks = [], para = [], list = null;
+    var segs = function (t) {
+      var out = [], re = /(\*\*[^*]+\*\*|_[^_]+_|\[[^\]]+\]\([^)\s]+\))/g, last = 0, m;
+      while ((m = re.exec(t))) {
+        if (m.index > last) out.push({ t: t.slice(last, m.index), plain: true, isLink: false, fw: 400, fs: 'normal' });
+        var x = m[0];
+        if (x[0] === '[') { var mm = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(x); out.push({ t: mm[1], href: /^https?:\/\//i.test(mm[2]) ? mm[2] : '#', isLink: true, plain: false }); }
+        else if (x[0] === '*') out.push({ t: x.slice(2, -2), plain: true, isLink: false, fw: 600, fs: 'normal' });
+        else out.push({ t: x.slice(1, -1), plain: true, isLink: false, fw: 400, fs: 'italic' });
+        last = m.index + x.length;
+      }
+      if (last < t.length) out.push({ t: t.slice(last), plain: true, isLink: false, fw: 400, fs: 'normal' });
+      return out;
+    };
+    var flush = function () { if (para.length) { blocks.push({ p: true, segs: segs(para.join(' ')) }); para = []; } if (list) { blocks.push({ ul: true, items: list }); list = null; } };
+    String(txt || '').split('\n').forEach(function (l) {
+      var t = l.trim();
+      if (!t) { flush(); return; }
+      if (t.indexOf('## ') === 0) { flush(); blocks.push({ h: true, text: t.slice(3) }); return; }
+      if (t.indexOf('- ') === 0) { if (para.length) { blocks.push({ p: true, segs: segs(para.join(' ')) }); para = []; } list = list || []; list.push({ t: t.slice(2).replace(/\*\*|_/g, '') }); return; }
+      if (t.indexOf('> ') === 0) { flush(); blocks.push({ q: true, text: t.slice(2) }); return; }
+      if (list) { blocks.push({ ul: true, items: list }); list = null; }
+      para.push(t);
+    });
+    flush();
+    return blocks.map(function (b) { return Object.assign({ h: false, p: false, q: false, ul: false, text: '', segs: [], items: [] }, b); });
+  }
+  // ---------- списки ----------
+  buildList(sec) {
+    var self = this, db = this.state.db, st = this.ls(sec), f = st.f, q = this.norm(st.q), cfg;
+    var T = function (t, cls) { return { isText: true, t: t == null || t === '' ? '—' : t, cls: cls || '' }; };
+    var Lk = function (t, go) { return { isLink: true, isText: false, t: t, go: go }; };
+    var Th = function (src) { return { isThumb: true, isText: false, src: src, hasSrc: !!src, noSrc: !src }; };
+    var B = function (t, cls) { return { isBadge: true, isText: false, t: t, cls: cls }; };
+    var Mn = function (key, items) { return { isMenu: true, isText: false, edit: items[0][1], editText: 'Изменить', dd: self.menu(key, items.slice(1)) }; };
+    var none = function (t) { return T(t, 'a-muted'); };
+    var cnt = function (fn) { return db.figures.filter(fn).length; };
+    var fopt = function (all) { return [['', all]]; };
+    var figOpts = db.figures.slice().sort(function (a, b) { return a.id - b.id; }).map(function (x) { return [x.id, x.name + ' · ID ' + x.id, self.mainThumb(db, x)]; });
+    var tagOpts = db.tags.slice().sort(function (a, b) { return a.tagText.localeCompare(b.tagText, 'ru'); }).map(function (t) { return [t.id, t.tagText]; });
+    if (sec === 'figures') {
+      var factories = []; db.figures.forEach(function (x) { if (x.factoryName && factories.indexOf(x.factoryName) < 0) factories.push(x.factoryName); }); factories.sort();
+      var C = this.state.cols, extra = [['source', 'Источник'], ['comment', 'Комментарий'], ['final', 'final'], ['modified', 'Изменено']].filter(function (c) { return C[c[0]]; });
+      cfg = {
+        addText: '+ Добавить статуэтку', add: function () { self.openForm('figure', null); }, searchHint: 'Название или ID',
+        filters: [
+          { k: 'kind', l: 'Все типы', o: db.kinds.map(function (k) { return [k.id, k.name]; }) },
+          { k: 'author', l: 'Все авторы', o: [['none', 'Автор не указан']].concat(db.authors.map(function (a) { return [a.id, a.name]; })) },
+          { k: 'factory', l: 'Все производители', o: [['none', 'Производитель не указан']].concat(factories.map(function (x) { return [x, x]; })) },
+          { k: 'tag', l: 'Все метки', o: tagOpts },
+          { k: 'visible', l: 'Любая видимость', o: [['yes', 'Показываются на сайте'], ['no', 'Скрыты']] },
+          { k: 'photo', l: 'С фото и без', o: [['yes', 'Есть фото'], ['no', 'Нет фото']] },
+          { k: 'size', l: 'Любые размеры', o: [['unknown', 'Размеры не указаны'], ['known', 'Размеры указаны']] }
+        ],
+        rows: db.figures.filter(function (x) {
+          if (q && self.norm(x.name).indexOf(q) < 0 && String(x.id) !== q) return false;
+          if (f.kind && String(x.kindId) !== String(f.kind)) return false;
+          if (f.author && (f.author === 'none' ? x.authorId : String(x.authorId) !== String(f.author))) return false;
+          if (f.factory && (f.factory === 'none' ? x.factoryName : x.factoryName !== f.factory)) return false;
+          if (f.tag && self.figTags(db, x.id).map(String).indexOf(String(f.tag)) < 0) return false;
+          if (f.visible && (f.visible === 'yes') !== !!x.visible) return false;
+          var hp = self.figPhotos(db, x.id).length > 0; if (f.photo && (f.photo === 'yes') !== hp) return false;
+          var unk = x.height == null || x.length == null; if (f.size && (f.size === 'unknown') !== unk) return false;
+          return true;
+        }),
+        sorts: { id: function (x) { return x.id; }, name: function (x) { return self.norm(x.name); }, kind: function (x) { return self.norm(self.kindName(db, x.kindId)); }, author: function (x) { return self.norm(self.authorName(db, x.authorId)) || '￿'; }, factory: function (x) { return self.norm(x.factoryName) || '￿'; }, height: function (x) { return x.height == null ? 1e9 : x.height; }, length: function (x) { return x.length == null ? 1e9 : x.length; }, modified: function (x) { return x.modifyDate || ''; } },
+        defSort: 'modified', defDir: -1,
+        heads: [['Фото'], ['ID', 'id'], ['Название', 'name'], ['Тип', 'kind'], ['Автор', 'author'], ['Производитель', 'factory'], ['Высота, см', 'height'], ['Длина, см', 'length']].concat(extra.map(function (c) { return [c[1], c[0] === 'modified' ? 'modified' : null]; })).concat([['Видимость'], ['', null, 'right']]),
+        grid: '64px 56px minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 92px 92px' + extra.map(function () { return ' minmax(0,1fr)'; }).join('') + ' 130px 210px',
+        cells: function (x) {
+          var c = [Th(self.mainThumb(db, x)), T(x.id, 'a-muted'), Lk(x.name, function () { self.openForm('figure', x.id); }), T(self.kindName(db, x.kindId) || '—'), x.authorId ? T(self.authorName(db, x.authorId)) : none('Не указан'), x.factoryName ? T(x.factoryName) : none('Не указан'), x.height == null ? none('Не указана') : T(self.num(x.height)), x.length == null ? none('Не указана') : T(self.num(x.length))];
+          extra.forEach(function (e) { c.push(e[0] === 'source' ? T(x.sourceText) : e[0] === 'comment' ? T(x.comment ? x.comment.slice(0, 60) : '', 'a-muted') : e[0] === 'final' ? T(x.final ? 'да' : 'нет', 'a-muted') : T(self.fmt(x.modifyDate), 'a-muted')); });
+          c.push(B(x.visible ? 'Показывается' : 'Скрыта', x.visible ? 'a-pub' : 'a-hid'));
+          c.push(Mn('m-f-' + x.id, [['Открыть карточку', function () { self.openForm('figure', x.id); }], ['Фотографии', function () { self.openForm('figure', x.id, 'photos'); }], [x.visible ? 'Скрыть с сайта' : 'Показать на сайте', function () { self.toggleVisible('figure', x.id); }], ['Удалить', function () { self.delRecord('figure', x.id); }]]));
+          return c;
+        },
+        exp: [['ID', 'id'], ['Название', 'name'], ['Тип', function (x) { return self.kindName(db, x.kindId); }], ['Автор', function (x) { return self.authorName(db, x.authorId); }], ['Производитель', 'factoryName'], ['Высота, см', function (x) { return self.num(x.height); }], ['Длина, см', function (x) { return self.num(x.length); }], ['Показывать на сайте', function (x) { return x.visible ? 'да' : 'нет'; }], ['Источник', 'sourceText'], ['Ссылка на источник', 'sourceUrl'], ['final', function (x) { return x.final ? 'да' : 'нет'; }], ['Комментарий', 'comment'], ['Метки', function (x) { return self.figTags(db, x.id).map(function (t) { var g = self.find(db.tags, t); return g ? g.tagText : ''; }).join(', '); }], ['Фото, шт.', function (x) { return self.figPhotos(db, x.id).length; }], ['OriginalID', 'originalId'], ['Создано', 'createDate'], ['Кем создано', 'createdBy'], ['Изменено', 'modifyDate'], ['Кем изменено', 'modifiedBy']],
+        noneTitle: 'Статуэток пока нет', noneText: 'Добавьте первую статуэтку.', cols: [['source', 'Источник'], ['comment', 'Комментарий'], ['final', 'final'], ['modified', 'Изменено']]
+      };
+    } else if (sec === 'photos') {
+      cfg = {
+        addText: '+ Добавить фотографии', add: function () { self.photoModal(null); }, searchHint: 'Название или ID статуэтки',
+        filters: [{ k: 'fig', l: 'Все статуэтки', o: figOpts }, { k: 'main', l: 'Все фото', o: [['yes', 'Главные'], ['no', 'Дополнительные']] }],
+        rows: db.photos.filter(function (p) { var fg = self.find(db.figures, p.figureId); if (q && !(fg && (self.norm(fg.name).indexOf(q) >= 0 || String(fg.id) === q))) return false; if (f.fig && String(p.figureId) !== String(f.fig)) return false; if (f.main && (f.main === 'yes') !== !!p.isMain) return false; return true; }),
+        sorts: { fig: function (p) { return p.figureId * 1000 + (p.isMain ? 0 : (p.sort || 1)); } }, defSort: 'fig', defDir: 1, grid: '', heads: [],
+        card: function (p) { return { src: p.pictureCompressed || p.picture, isMain: !!p.isMain, mainCls: p.isMain ? 'a-ph-main' : '', fig: self.figLabel(db, p.figureId), sub: (p.isMain ? 'Главное фото' : 'Дополнительное') + (p.fileName ? ' · ' + p.fileName : ''), viewer: function () { self.setState({ viewer: { src: p.picture, caption: self.figLabel(db, p.figureId) } }); }, openFig: function () { self.openForm('figure', p.figureId, 'photos'); }, edit: function () { self.photoModal(p); },
+          dd: self.menu('m-p-' + p.id, [['Просмотр', function () { self.setState({ viewer: { src: p.picture, caption: self.figLabel(db, p.figureId) } }); }]].concat(p.isMain ? [] : [['Сделать главным', function () { self.setMainPhoto(p); }]]).concat([['Изменить или заменить', function () { self.photoModal(p); }], ['Открыть статуэтку', function () { self.openForm('figure', p.figureId, 'photos'); }], ['Удалить', function () { self.delPhoto(p); }]])) }; },
+        exp: [['ID фото', 'id'], ['ID статуэтки', 'figureId'], ['Статуэтка', function (p) { var x = self.find(db.figures, p.figureId); return x ? x.name : ''; }], ['Главное', function (p) { return p.isMain ? 'да' : 'нет'; }], ['Порядок', 'sort'], ['Файл', 'fileName'], ['Создано', 'createDate'], ['Изменено', 'modifyDate']],
+        noneTitle: 'Фотографий нет', noneText: 'Фото добавляются здесь или во вкладке «Фотографии» карточки статуэтки.'
+      };
+    } else if (sec === 'bindings') {
+      cfg = {
+        addText: '+ Привязать метки', add: function () { self.bindModal('add', f.fig ? { figureId: Number(f.fig) } : {}); }, searchHint: 'Статуэтка, ID или метка',
+        filters: [{ k: 'fig', l: 'Все статуэтки', o: figOpts }, { k: 'tag', l: 'Все метки', o: tagOpts }],
+        rows: db.figureTags.map(function (x) { return { id: x.figureId + '-' + x.tagId, figureId: x.figureId, tagId: x.tagId }; }).filter(function (x) { var fg = self.find(db.figures, x.figureId), tg = self.find(db.tags, x.tagId); if (q && !((fg && (self.norm(fg.name).indexOf(q) >= 0 || String(fg.id) === q)) || (tg && self.norm(tg.tagText).indexOf(q) >= 0))) return false; if (f.fig && String(x.figureId) !== String(f.fig)) return false; if (f.tag && String(x.tagId) !== String(f.tag)) return false; return true; }),
+        sorts: { fig: function (x) { var fg = self.find(db.figures, x.figureId); return fg ? self.norm(fg.name) : ''; }, id: function (x) { return x.figureId; }, tag: function (x) { var t = self.find(db.tags, x.tagId); return t ? self.norm(t.tagText) : ''; } }, defSort: 'id', defDir: 1,
+        heads: [['Фото'], ['ID', 'id'], ['Статуэтка', 'fig'], ['Метка', 'tag'], ['', null, 'right']], grid: '64px 56px minmax(0,2fr) minmax(0,1fr) 210px',
+        cells: function (x) { var fg = self.find(db.figures, x.figureId), tg = self.find(db.tags, x.tagId); return [Th(fg ? self.mainThumb(db, fg) : ''), T(x.figureId, 'a-muted'), Lk(fg ? fg.name : 'ID ' + x.figureId, function () { self.openForm('figure', x.figureId); }), T(tg ? tg.tagText : '—'), Mn('m-b-' + x.id, [['Заменить метку', function () { self.bindModal('replace', { figureId: x.figureId, oldTagId: x.tagId, tagIds: [x.tagId] }); }], ['Открыть статуэтку', function () { self.openForm('figure', x.figureId); }], ['Удалить привязку', function () { self.ask({ title: 'Удалить привязку?', text: 'Метка «' + (tg ? tg.tagText : '') + '» будет отвязана от «' + (fg ? fg.name : '') + '». Статуэтка и метка останутся.', onYes: function () { var d = self.clone(self.state.db); d.figureTags = d.figureTags.filter(function (y) { return !(String(y.figureId) === String(x.figureId) && String(y.tagId) === String(x.tagId)); }); self.persist(d, 'Привязка удалена'); } }); }]])]; },
+        exp: [['ID статуэтки', 'figureId'], ['Статуэтка', function (x) { var fg = self.find(db.figures, x.figureId); return fg ? fg.name : ''; }], ['ID метки', 'tagId'], ['Метка', function (x) { var t = self.find(db.tags, x.tagId); return t ? t.tagText : ''; }]],
+        noneTitle: 'Привязок нет', noneText: 'Привяжите метки к статуэткам здесь или в карточке статуэтки.'
+      };
+    } else if (sec === 'infos') {
+      var years = []; db.infos.forEach(function (x) { var y = String(x.infoDate || '').slice(0, 4); if (y && years.indexOf(y) < 0) years.push(y); }); years.sort().reverse();
+      cfg = {
+        addText: '+ Добавить статью', add: function () { self.openForm('info', null); }, searchHint: 'Название статьи',
+        filters: [{ k: 'year', l: 'Любой год', o: years.map(function (y) { return [y, y + ' год']; }) }],
+        rows: db.infos.filter(function (x) { if (q && self.norm(x.name).indexOf(q) < 0) return false; if (f.year && String(x.infoDate || '').slice(0, 4) !== f.year) return false; return true; }),
+        sorts: { name: function (x) { return self.norm(x.name); }, date: function (x) { return x.infoDate || ''; }, modified: function (x) { return x.modifyDate || ''; } }, defSort: 'date', defDir: -1,
+        heads: [['Название', 'name'], ['Дата материала', 'date'], ['Последнее изменение', 'modified'], ['', null, 'right']], grid: 'minmax(0,1fr) 180px 220px 210px',
+        cells: function (x) { return [Lk(x.name, function () { self.openForm('info', x.id); }), T(self.fmt(x.infoDate)), T(self.fmt(x.modifyDate, true) + (x.modifiedBy ? ', ' + x.modifiedBy : ''), 'a-muted'), Mn('m-i-' + x.id, [['Изменить', function () { self.openForm('info', x.id); }], ['Предпросмотр', function () { self.openForm('info', x.id, 'preview'); }], ['Удалить', function () { self.delRecord('info', x.id); }]])]; },
+        exp: [['ID', 'id'], ['Дата материала', 'infoDate'], ['Название', 'name'], ['Текст', 'text'], ['Источник', 'sourceText'], ['Ссылка на источник', 'sourceUrl'], ['Создано', 'createDate'], ['Кем создано', 'createdBy'], ['Изменено', 'modifyDate'], ['Кем изменено', 'modifiedBy']],
+        noneTitle: 'Статей пока нет', noneText: 'Нажмите «Добавить статью», чтобы написать первую.'
+      };
+    } else if (sec === 'kinds' || sec === 'authors' || sec === 'tags') {
+      var isK = sec === 'kinds', isA = sec === 'authors', fld = sec === 'tags' ? 'tagText' : 'name', type = isK ? 'kind' : (isA ? 'author' : 'tag');
+      var useN = function (x) { return isK ? cnt(function (y) { return String(y.kindId) === String(x.id); }) : isA ? cnt(function (y) { return String(y.authorId) === String(x.id); }) : db.figureTags.filter(function (y) { return String(y.tagId) === String(x.id); }).length; };
+      var flt = isK ? [{ k: 'visible', l: 'Любая видимость', o: [['yes', 'Показываются'], ['no', 'Скрыты']] }] : [];
+      cfg = {
+        addText: isK ? '+ Добавить тип' : (isA ? '+ Добавить автора' : '+ Добавить метку'), add: function () { self.openForm(type, null); }, searchHint: isA ? 'Имя автора' : 'Название',
+        filters: flt,
+        rows: db[sec].filter(function (x) { if (q && self.norm(x[fld]).indexOf(q) < 0) return false; if (f.visible && (f.visible === 'yes') !== (x.visible !== false)) return false; return true; }),
+        sorts: { name: function (x) { return self.norm(x[fld]); }, n: function (x) { return useN(x); }, modified: function (x) { return x.modifyDate || ''; } }, defSort: 'name', defDir: 1,
+        heads: isK ? [['Название', 'name'], ['Статуэток', 'n'], ['Видимость'], ['', null, 'right']] : isA ? [['Имя', 'name'], ['Статуэток', 'n'], ['Последнее изменение', 'modified'], ['', null, 'right']] : [['Название', 'name'], ['Привязок', 'n'], ['', null, 'right']],
+        grid: isK ? 'minmax(0,1fr) 120px 150px 210px' : isA ? 'minmax(0,1fr) 120px 220px 210px' : 'minmax(0,1fr) 120px 210px',
+        cells: function (x) {
+          var c = [Lk(x[fld], function () { self.openForm(type, x.id); }), T(useN(x))];
+          if (isK) c.push(B(x.visible !== false ? 'Показывается' : 'Скрыт', x.visible !== false ? 'a-pub' : 'a-hid'));
+          if (isA) c.push(T(self.fmt(x.modifyDate, true), 'a-muted'));
+          var items = [['Изменить', function () { self.openForm(type, x.id); }], [isK ? 'Статуэтки этого типа' : (isA ? 'Статуэтки автора' : 'Статуэтки с меткой'), function () { var ff = {}; ff[isK ? 'kind' : (isA ? 'author' : 'tag')] = x.id; self.openList('figures', ff); }]];
+          if (isK) items.push([x.visible !== false ? 'Скрыть с сайта' : 'Показать на сайте', function () { self.toggleVisible('kind', x.id); }]);
+          items.push(['Удалить', function () { self.delRecord(type, x.id); }]);
+          c.push(Mn('m-' + sec + '-' + x.id, items));
+          return c;
+        },
+        exp: [['ID', 'id'], [isA ? 'Имя' : 'Название', fld]].concat(isK ? [['Показывать на сайте', function (x) { return x.visible !== false ? 'да' : 'нет'; }]] : []).concat(isA ? [['Текст', 'text'], ['Источник', 'sourceText'], ['Ссылка на источник', 'sourceUrl']] : []).concat([[isK || isA ? 'Статуэток' : 'Привязок', function (x) { return useN(x); }], ['Создано', 'createDate'], ['Кем создано', 'createdBy'], ['Изменено', 'modifyDate'], ['Кем изменено', 'modifiedBy']]),
+        noneTitle: 'Справочник пуст', noneText: 'Добавьте первое значение.'
+      };
+    } else if (sec === 'users') {
+      cfg = {
+        addText: '+ Добавить пользователя', add: function () { self.openForm('user', null); }, searchHint: 'Логин, имя или почта',
+        filters: [{ k: 'admin', l: 'Все пользователи', o: [['yes', 'С доступом к админ-панели'], ['no', 'Без доступа']] }],
+        rows: db.users.filter(function (u) { if (q && self.norm([u.login, u.name, u.email].join(' ')).indexOf(q) < 0) return false; if (f.admin && (f.admin === 'yes') !== !!u.isAdmin) return false; return true; }),
+        sorts: { login: function (u) { return self.norm(u.login); }, name: function (u) { return self.norm(u.name); }, email: function (u) { return self.norm(u.email); } }, defSort: 'login', defDir: 1,
+        heads: [['Логин', 'login'], ['Имя', 'name'], ['Почта', 'email'], ['Валюта'], ['Админ-панель'], ['', null, 'right']], grid: 'minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr) 130px 140px 210px',
+        cells: function (u) { return [Lk(u.login || '—', function () { self.openForm('user', u.id); }), T(u.name), T(u.email, 'a-muted'), T(self.curName(u.defaultCurrency)), u.isAdmin ? B('Есть доступ', 'a-pub') : T('Нет', 'a-muted'), Mn('m-u-' + u.id, [['Изменить', function () { self.openForm('user', u.id); }], ['Заметки пользователя', function () { self.openList('notes', { user: u.id }); }], ['Удалить', function () { self.delRecord('user', u.id); }]])]; },
+        exp: [['ID', 'id'], ['Логин', 'login'], ['Имя', 'name'], ['Почта', 'email'], ['Валюта по умолчанию', 'defaultCurrency'], ['Доступ к админ-панели', function (u) { return u.isAdmin ? 'да' : 'нет'; }], ['Создано', 'createDate'], ['Кем создано', 'createdBy'], ['Изменено', 'modifyDate'], ['Кем изменено', 'modifiedBy']],
+        noneTitle: 'Пользователей нет', noneText: ''
+      };
+    } else if (sec === 'notes') {
+      cfg = {
+        addText: '+ Добавить заметку', add: function () { self.noteModal(null, { userId: f.user ? Number(f.user) : null, figureId: f.fig ? Number(f.fig) : null }); }, searchHint: 'Текст заметки',
+        filters: [{ k: 'user', l: 'Все пользователи', o: db.users.map(function (u) { return [u.id, (u.name || u.login) + ' · ' + u.login]; }) }, { k: 'fig', l: 'Все статуэтки', o: figOpts }, { k: 'enable', l: 'Enable: любой', o: [['yes', 'Enable: да'], ['no', 'Enable: нет']] }],
+        rows: db.userNotes.filter(function (n) { if (q && self.norm([n.comment1, n.comment2, n.comment3].join(' ')).indexOf(q) < 0) return false; if (f.user && String(n.userId) !== String(f.user)) return false; if (f.fig && String(n.figureId) !== String(f.fig)) return false; if (f.enable && (f.enable === 'yes') !== !!n.enable) return false; return true; }),
+        sorts: { user: function (n) { return self.norm(self.userName(db, n.userId)); }, fig: function (n) { return self.norm(self.figLabel(db, n.figureId)); }, price: function (n) { return n.price == null ? -1 : n.price; } }, defSort: 'user', defDir: 1,
+        heads: [['Пользователь', 'user'], ['Статуэтка', 'fig'], ['Заметки'], ['Цена', 'price'], ['Валюта'], ['Enable'], ['', null, 'right']], grid: 'minmax(0,1fr) minmax(0,1.4fr) minmax(0,1.6fr) 100px 110px 80px 210px',
+        cells: function (n) { var txt = [n.comment1, n.comment2, n.comment3].filter(Boolean).join(' · '); return [T(self.userName(db, n.userId)), Lk(self.figLabel(db, n.figureId), function () { self.openForm('figure', n.figureId, 'notes'); }), T(txt ? txt.slice(0, 80) : '', 'a-muted'), n.price == null ? none('Неизвестна') : T(self.num(n.price)), T(self.curName(n.currency), 'a-muted'), T(n.enable ? 'да' : 'нет', 'a-muted'), Mn('m-n-' + n.id, [['Изменить', function () { self.noteModal(n); }], ['Открыть статуэтку', function () { self.openForm('figure', n.figureId, 'notes'); }], ['Удалить', function () { self.ask({ title: 'Удалить заметку?', text: 'Заметка пользователя «' + self.userName(db, n.userId) + '» к «' + self.figLabel(db, n.figureId) + '» будет удалена.', onYes: function () { var d = self.clone(self.state.db); d.userNotes = d.userNotes.filter(function (y) { return y.id !== n.id; }); self.persist(d, 'Заметка удалена'); } }); }]])]; },
+        exp: [['ID', 'id'], ['Пользователь', function (n) { return self.userName(db, n.userId); }], ['ID статуэтки', 'figureId'], ['Статуэтка', function (n) { var x = self.find(db.figures, n.figureId); return x ? x.name : ''; }], ['Enable', function (n) { return n.enable ? 'да' : 'нет'; }], ['Комментарий 1', 'comment1'], ['Комментарий 2', 'comment2'], ['Комментарий 3', 'comment3'], ['Цена', function (n) { return self.num(n.price); }], ['Валюта', 'currency'], ['Создано', 'createDate'], ['Изменено', 'modifyDate']],
+        noneTitle: 'Заметок нет', noneText: 'Заметки пользователей к статуэткам появятся здесь.'
+      };
+    }
+    var sortKey = st.sort || cfg.defSort, dir = st.sort ? st.dir : cfg.defDir, sf = cfg.sorts[sortKey];
+    var rows = cfg.rows.slice();
+    if (sf) rows.sort(function (a, b) { var x = sf(a), y = sf(b); return (x < y ? -1 : x > y ? 1 : 0) * dir; });
+    var total = (sec === 'bindings' ? db.figureTags : sec === 'notes' ? db.userNotes : sec === 'figures' ? db.figures : sec === 'infos' ? db.infos : db[sec]).length;
+    var per = st.per, pc = Math.max(1, Math.ceil(rows.length / per)), pg = Math.min(st.page, pc), from = (pg - 1) * per;
+    var chips = [], anyF = !!st.q;
+    if (st.q) chips.push({ l: '«' + st.q + '»', remove: function () { self.setLs(sec, { q: '' }); } });
+    var filters = cfg.filters.map(function (fl) {
+      var v = f[fl.k] || '';
+      if (v) { anyF = true; var lab = ''; fl.o.forEach(function (o) { if (String(o[0]) === String(v)) lab = o[1]; }); chips.push({ l: lab, remove: function () { var nf = Object.assign({}, self.ls(sec).f); delete nf[fl.k]; self.setLs(sec, { f: nf }); } }); }
+      return { dd: self.dd('flt-' + sec + '-' + fl.k, fopt(fl.l).concat(fl.o), v, function (val) { var nf = Object.assign({}, self.ls(sec).f); if (val === '') delete nf[fl.k]; else nf[fl.k] = val; self.setLs(sec, { f: nf }); }) };
+    });
+    var pages = []; var lo = Math.max(1, pg - 2), hi = Math.min(pc, lo + 4); lo = Math.max(1, hi - 4);
+    for (var i = lo; i <= hi; i++) (function (n) { pages.push({ n: n, cls: n === pg ? 'a-page-on' : '', go: function () { self.setLs(sec, { page: n }, true); } }); })(i);
+    var expRows = function () { return [cfg.exp.map(function (c) { return c[0]; })].concat(rows.map(function (r) { return cfg.exp.map(function (c) { return typeof c[1] === 'function' ? c[1](r) : r[c[1]]; }); })); };
+    var colsOpen = this.state.dd === 'cols-' + sec;
+    return {
+      title: this.secTitle(sec), count: (anyF ? 'Найдено ' + rows.length + ' из ' + total : 'Всего ' + total) + ' ' + this.plural(anyF ? total : total, ['запись', 'записи', 'записей']),
+      hasAdd: true, addText: cfg.addText, add: cfg.add, searchHint: cfg.searchHint, q: st.q, setQ: function (e) { self.setLs(sec, { q: e.target.value }); },
+      filters: filters, filtered: anyF, chips: chips, reset: function () { self.setLs(sec, { q: '', f: {} }); },
+      hasCols: !!cfg.cols, cols: { open: colsOpen, exp: colsOpen ? 'true' : 'false', wCls: colsOpen ? 'a-dd-up' : '', toggle: function () { self.setState({ dd: colsOpen ? null : 'cols-' + sec }); }, items: (cfg.cols || []).map(function (c) { var on = !!self.state.cols[c[0]]; return { l: c[1], on: on, toggle: function () { var x = Object.assign({}, self.state.cols); x[c[0]] = !on; self.setState({ cols: x }); } }; }) },
+      none: total === 0, noneTitle: cfg.noneTitle, noneText: cfg.noneText, noMatch: total > 0 && rows.length === 0, has: rows.length > 0,
+      isTable: !cfg.card && rows.length > 0, isGrid: !!cfg.card && rows.length > 0, grid: cfg.grid,
+      heads: cfg.heads.map(function (h) { var on = h[1] && h[1] === sortKey; return { l: h[0], sortable: !!h[1], plain: !h[1], align: h[2] || 'left', ind: on ? (dir > 0 ? '↑' : '↓') : '', go: function () { self.setLs(sec, { sort: h[1], dir: on ? -dir : 1 }, true); } }; }),
+      rows: cfg.card ? [] : rows.slice(from, from + per).map(function (r) { return { cells: cfg.cells(r) }; }),
+      cards: cfg.card ? rows.slice(from, from + per).map(cfg.card) : [],
+      range: rows.length ? 'Строки ' + (from + 1) + '–' + Math.min(rows.length, from + per) + ' из ' + rows.length : '',
+      pages: pages, noPrev: pg <= 1, noNext: pg >= pc,
+      first: function () { self.setLs(sec, { page: 1 }, true); }, prev: function () { self.setLs(sec, { page: pg - 1 }, true); }, next: function () { self.setLs(sec, { page: pg + 1 }, true); }, last: function () { self.setLs(sec, { page: pc }, true); },
+      perDD: this.dd('per-' + sec, [[25, '25'], [50, '50'], [100, '100']], per, function (v) { self.setLs(sec, { per: Number(v) }); }),
+      exportHint: 'Экспорт выгружает все найденные строки (' + rows.length + ') с учётом поиска и фильтров' + (sec === 'users' ? '. Пароли не выгружаются.' : '.'),
+      export: function () { if (!rows.length) { self.toast('Нечего выгружать: список пуст.', true); return; } self.download('karbolit-' + sec + '-' + new Date().toISOString().slice(0, 10) + '.csv', expRows()); }
+    };
+  }
+  // ---------- отображение ----------
+  formVals() {
+    var self = this, db = this.state.db, fm = this.state.form; if (!fm) return {};
+    var d = fm.d, e = fm.err || {}, isNew = fm.id == null, dirty = this.isDirty();
+    var rec = isNew ? null : this.find(this.coll(fm.type), fm.id);
+    var set = {}; Object.keys(d).forEach(function (k) { set[k] = function (ev) { var p = {}; p[k] = ev.target.value; self.setD(p); }; });
+    set.visibleBox = function (ev) { self.setD({ visible: !!ev.target.checked }); };
+    set.finalBox = function (ev) { self.setD({ final: !!ev.target.checked }); };
+    set.adminBox = function (ev) { self.setD({ isAdmin: !!ev.target.checked }); };
+    var inv = {}, em = {}, eb = {}; ['name', 'kind', 'height', 'length', 'sourceUrl', 'infoDate', 'login', 'email', 'p1', 'p2'].forEach(function (k) { inv[k] = e[k] ? 'true' : 'false'; eb[k] = !!e[k]; em[k] = e[k] || ''; });
+    var secOf = ({ figure: 'figures', info: 'infos', kind: 'kinds', author: 'authors', tag: 'tags', user: 'users' })[fm.type];
+    var newTitle = ({ figure: 'Новая статуэтка', info: 'Новая статья', kind: 'Новый тип статуэтки', author: 'Новый автор', tag: 'Новая метка', user: 'Новый пользователь' })[fm.type];
+    var recName = rec ? (fm.type === 'tag' ? rec.tagText : (fm.type === 'user' ? (rec.name || rec.login) : rec.name)) : '';
+    var F = {
+      heading: isNew ? newTitle : recName, hasSub: !isNew, sub: '', svc: this.svc(rec),
+      d: d, set: set, e: eb, em: em, inv: inv, hasErrors: Object.keys(e).length > 0, errorText: 'Не удалось сохранить. Исправьте отмеченные поля — введённые данные сохранились.',
+      dirtyCls: dirty ? 'a-dirty' : 'a-hint', dirtyText: dirty ? 'Есть несохранённые изменения' : (isNew ? 'Ещё не сохранено' : 'Всё сохранено'),
+      saveText: isNew ? 'Создать' : 'Сохранить', save: function () { self.saveForm(); }, cancel: function () { self.go(secOf); },
+      canDelete: !isNew, del: function () { self.delRecord(fm.type, fm.id); }, hasView: false
+    };
+    if (fm.type === 'figure') {
+      var tab = isNew ? 'main' : fm.tab, ph = isNew ? [] : this.figPhotos(db, fm.id), notes = isNew ? [] : db.userNotes.filter(function (n) { return String(n.figureId) === String(fm.id); });
+      var kind = this.find(db.kinds, d.kindId);
+      F.sub = 'ID ' + fm.id + ' · ' + (rec && rec.visible ? (kind && kind.visible === false ? 'отмечена для сайта, но её тип скрыт' : 'показывается на сайте') : 'скрыта с сайта');
+      F.hasView = !isNew && !!(rec && rec.visible && (!kind || kind.visible !== false)); F.viewHref = 'Figurine.dc.html'; F.view = function () { try { window.localStorage.setItem('sp-item', String(fm.id)); } catch (x) {} };
+      F.isNew = isNew;
+      F.tabs = [['main', 'Основное'], ['photos', 'Фотографии', ph.length], ['links', 'Источники и связи'], ['notes', 'Заметки пользователей', notes.length], ['svc', 'Служебное']].map(function (t) { var on = tab === t[0], dis = isNew && t[0] !== 'main' && t[0] !== 'svc' && t[0] !== 'links'; return { l: t[1], n: t[2], hasN: t[2] != null, cls: on ? 'a-tab-on' : '', sel: on ? 'true' : 'false', disabled: dis && t[0] !== 'links', title: dis ? 'Доступно после первого сохранения' : '', go: function () { self.setF({ tab: t[0] }); } }; });
+      F.t = { main: tab === 'main', photos: tab === 'photos' && !isNew, links: tab === 'links', notes: tab === 'notes' && !isNew, svc: tab === 'svc' };
+      F.kindDD = this.dd('f-kind', db.kinds.map(function (k) { return [k.id, k.name + (k.visible === false ? ' (скрыт)' : '')]; }), d.kindId, function (v) { self.setD({ kindId: v }); }, { label: d.kindId ? null : 'Выберите тип', inv: e.kind ? 'true' : 'false', searchable: true });
+      F.authorDD = this.dd('f-author', [['', 'Не указан']].concat(db.authors.map(function (a) { return [a.id, a.name]; })), d.authorId || '', function (v) { self.setD({ authorId: v || null }); }, { searchable: true });
+      var qk = fm.quick;
+      F.q = { on: !!qk, label: qk ? ({ kind: 'Новый тип', author: 'Новый автор', tag: 'Новая метка' })[qk.kind] : '', name: qk ? qk.name : '', hasErr: !!(qk && qk.err), err: qk ? qk.err : '', setName: function (ev) { self.setF({ quick: Object.assign({}, self.state.form.quick, { name: ev.target.value, err: '' }) }); }, add: function () { self.quickAdd(); }, cancel: function () { self.setF({ quick: null }); } };
+      F.quickKind = function () { self.setF({ quick: { kind: 'kind', name: '' } }); }; F.quickAuthor = function () { self.setF({ quick: { kind: 'author', name: '' } }); }; F.quickTag = function () { self.setF({ quick: { kind: 'tag', name: '' } }); };
+      F.tagChips = d.tagIds.map(function (t) { var g = self.find(db.tags, t); return { l: g ? g.tagText : 'ID ' + t, remove: function () { self.setD({ tagIds: self.state.form.d.tagIds.filter(function (x) { return String(x) !== String(t); }) }); } }; });
+      F.noTags = !d.tagIds.length;
+      F.tagDD = this.dd('f-tags', db.tags.filter(function (t) { return d.tagIds.map(String).indexOf(String(t.id)) < 0; }).sort(function (a, b) { return a.tagText.localeCompare(b.tagText, 'ru'); }).map(function (t) { return [t.id, t.tagText]; }), null, function (v) { self.setD({ tagIds: self.state.form.d.tagIds.concat([v]) }); }, { label: 'Добавить метку…', searchable: true });
+      F.visHint = d.visible ? (kind && kind.visible === false ? 'Тип статуэтки скрыт — пока он скрыт, запись на сайте не видна.' : 'Статуэтка видна в каталоге и на главной.') : 'Запись хранится в базе, но посетители её не видят.';
+      F.urlOk = !!d.sourceUrl && this.validUrl(d.sourceUrl) && /^https?:/i.test(d.sourceUrl);
+      F.origDD = this.dd('f-orig', [['', 'Не указан']].concat(db.figures.filter(function (x) { return String(x.id) !== String(fm.id); }).map(function (x) { return [x.id, x.name + ' · ID ' + x.id, self.mainThumb(db, x)]; })), d.originalId || '', function (v) { self.setD({ originalId: v || null }); }, { searchable: true });
+      var vars = isNew ? [] : db.figures.filter(function (x) { return String(x.originalId) === String(fm.id); });
+      F.variantCount = vars.length; F.noVariants = !vars.length; F.variants = vars.map(function (x) { return { l: x.name + ' · ID ' + x.id, src: self.mainThumb(db, x), go: function () { self.openForm('figure', x.id, 'links'); } }; });
+      F.noPhotos = !ph.length; F.uploading = fm.upl > 0; F.uploadLeft = fm.upl; F.photoErrors = fm.photoErr || [];
+      F.addPhotos = function (ev) { var n = self.addPhotos(fm.id, ev.target.files, function (errs) { self.setF({ upl: 0, photoErr: errs }); }); self.setF({ upl: n, photoErr: [] }); try { ev.target.value = ''; } catch (x) {} };
+      F.hasReplace = fm.replaceId != null; F.cancelReplace = function () { self.setF({ replaceId: null }); };
+      F.replaceFile = function (ev) { self.replacePhoto(fm.replaceId, ev.target.files); try { ev.target.value = ''; } catch (x) {} };
+      var extras = ph.filter(function (p) { return !p.isMain; });
+      F.photos = ph.map(function (p) { var k = -1; extras.forEach(function (x, i) { if (x.id === p.id) k = i; }); return { thumb: p.pictureCompressed || p.picture, isMain: !!p.isMain, mainCls: p.isMain ? 'a-ph-main' : '', sub: (p.isMain ? 'Главное фото' : 'Дополнительное, №' + (k + 1)) + (p.fileName ? ' · ' + p.fileName : ''), cantUp: p.isMain || k <= 0, cantDown: p.isMain || k < 0 || k >= extras.length - 1, up: function () { self.movePhoto(p, -1); }, down: function () { self.movePhoto(p, 1); }, viewer: function () { self.setState({ viewer: { src: p.picture, caption: (rec ? rec.name : '') + (p.isMain ? ' — главное фото' : '') } }); },
+        dd: self.menu('f-ph-' + p.id, [['Просмотр', function () { self.setState({ viewer: { src: p.picture, caption: rec ? rec.name : '' } }); }]].concat(p.isMain ? [] : [['Сделать главным', function () { self.setMainPhoto(p); }]]).concat([['Заменить файл', function () { self.setF({ replaceId: p.id }); }], ['Удалить', function () { self.delPhoto(p); }]])) }; });
+      F.noNotes = !notes.length; F.addNote = function () { self.noteModal(null, { figureId: fm.id }); };
+      F.notes = notes.map(function (n) { var t = [n.comment1, n.comment2, n.comment3].filter(Boolean).join(' · '); return { user: self.userName(db, n.userId), text: t ? t.slice(0, 90) : '—', price: n.price == null ? 'Неизвестна' : self.num(n.price), cur: self.curName(n.currency), dd: self.menu('f-nt-' + n.id, [['Открыть и изменить', function () { self.noteModal(n); }], ['Удалить', function () { self.ask({ title: 'Удалить заметку?', text: 'Заметка пользователя «' + self.userName(db, n.userId) + '» будет удалена.', onYes: function () { var x = self.clone(self.state.db); x.userNotes = x.userNotes.filter(function (y) { return y.id !== n.id; }); self.persist(x, 'Заметка удалена'); } }); }]]) }; });
+    } else if (fm.type === 'info') {
+      F.sub = 'ID ' + fm.id + ' · дата материала ' + this.fmt(rec && rec.infoDate);
+      F.preview = !!fm.prev; F.editing = !fm.prev; F.editCls = fm.prev ? '' : 'a-tab-on'; F.prevCls = fm.prev ? 'a-tab-on' : '';
+      F.toEdit = function () { self.setF({ prev: false }); }; F.toPrev = function () { self.setF({ prev: true }); };
+      F.prevTitle = d.name || 'Без названия'; F.prevDate = this.fmt(d.infoDate); F.blocks = this.parseBody(d.text);
+      F.hasSource = !!(d.sourceUrl && /^https?:\/\//i.test(d.sourceUrl)); F.sourceLabel = d.sourceText || d.sourceUrl;
+      F.fmt = { h: function () { self.fmtBody('h'); }, b: function () { self.fmtBody('b'); }, i: function () { self.fmtBody('i'); }, ul: function () { self.fmtBody('ul'); }, q: function () { self.fmtBody('q'); }, a: function () { self.fmtBody('a'); } };
+    } else if (fm.type === 'kind' || fm.type === 'author' || fm.type === 'tag') {
+      var isK = fm.type === 'kind', isA = fm.type === 'author', fld = isK || isA ? 'name' : 'tagText', key = isK ? 'kinds' : (isA ? 'authors' : 'tags');
+      F.sub = 'ID ' + fm.id; F.isKind = isK; F.isAuthor = isA; F.nameLabel = isA ? 'Имя' : 'Название';
+      var nm = this.norm(d.name), sim = nm.length >= 3 ? db[key].filter(function (x) { return String(x.id) !== String(fm.id) && self.norm(x[fld]) !== nm && (self.norm(x[fld]).indexOf(nm) >= 0 || nm.indexOf(self.norm(x[fld])) >= 0); }).slice(0, 3) : [];
+      F.hasSimilar = sim.length > 0; F.similar = 'Похожие значения уже есть: ' + sim.map(function (x) { return '«' + x[fld] + '»'; }).join(', ') + '. Проверьте, не дубль ли это.';
+      var lf = isNew ? [] : db.figures.filter(function (x) { return isK ? String(x.kindId) === String(fm.id) : isA ? String(x.authorId) === String(fm.id) : self.figTags(db, x.id).map(String).indexOf(String(fm.id)) >= 0; });
+      F.showLinked = !isNew; F.linkedTitle = 'Связанные статуэтки'; F.linkedCount = lf.length; F.noLinked = !lf.length; F.moreLinked = lf.length > 10;
+      F.linked = lf.slice(0, 10).map(function (x) { return { l: x.name + ' · ID ' + x.id, src: self.mainThumb(db, x), go: function () { self.openForm('figure', x.id); } }; });
+      F.allLinked = function () { var ff = {}; ff[isK ? 'kind' : (isA ? 'author' : 'tag')] = fm.id; self.openList('figures', ff); };
+      F.delText = isK ? 'Удалить тип' : (isA ? 'Удалить автора' : 'Удалить метку');
+    } else if (fm.type === 'user') {
+      var isMe = !isNew && this.state.me && String(this.state.me.id) === String(fm.id), un = isNew ? [] : db.userNotes.filter(function (n) { return String(n.userId) === String(fm.id); });
+      F.sub = 'ID ' + fm.id + (rec ? ' · ' + rec.login : '');
+      F.curDD = this.dd('u-cur', this.curOpts(), d.defaultCurrency || '', function (v) { self.setD({ defaultCurrency: v }); }, { searchable: false });
+      F.passTitle = isNew ? 'Пароль' : 'Смена пароля'; F.passHint = isNew ? 'Задайте пароль для входа. Он хранится только в зашифрованном виде.' : 'Текущий пароль не показывается. Заполните поля, только если нужно задать новый.';
+      F.isMe = isMe; F.adminHint = isMe ? 'Свой доступ отключить нельзя — вы сейчас в панели.' : 'Отметка isAdmin открывает админ-панель и кнопку в личном кабинете.';
+      F.showNotes = !isNew; F.noteCount = un.length; F.hasNotes = un.length > 0; F.openNotes = function () { self.openList('notes', { user: fm.id }); };
+      F.canDelete = !isNew && !isMe;
+    }
+    return F;
+  }
+  modalVals() {
+    var self = this, db = this.state.db, m = this.state.modal; if (!m) return { open: false };
+    var d = m.d, rec = m.id != null ? this.find(m.type === 'note' ? db.userNotes : db.photos, m.id) : null;
+    var figDD = this.dd('m-fig', db.figures.map(function (x) { return [x.id, x.name + ' · ID ' + x.id, self.mainThumb(db, x)]; }), d.figureId, function (v) { self.setM({ figureId: v }); }, { label: d.figureId ? null : 'Выберите статуэтку', searchable: true });
+    var M = { open: true, err: m.err, hasErr: !!m.err, busy: !!m.busy, d: d, inv: { price: 'false' }, isNote: m.type === 'note', isPhoto: m.type === 'photo', isBind: m.type === 'bind', figDD: figDD, hasSvc: !!rec, svc: this.svc(rec), cancel: function () { self.setState({ modal: null }); }, save: function () { self.saveModal(); }, saveText: m.mode === 'add' ? (m.type === 'bind' ? 'Привязать' : 'Добавить') : (m.mode === 'replace' ? 'Заменить' : 'Сохранить') };
+    var set = {}; Object.keys(d).forEach(function (k) { set[k] = function (ev) { var p = {}; p[k] = ev.target.value; self.setM(p); }; });
+    set.enableBox = function (ev) { self.setM({ enable: !!ev.target.checked }); }; set.mainBox = function (ev) { self.setM({ isMain: !!ev.target.checked }); };
+    M.set = set;
+    if (m.type === 'note') {
+      M.title = m.mode === 'add' ? 'Новая заметка пользователя' : 'Заметка пользователя';
+      M.userDD = this.dd('m-user', db.users.map(function (u) { return [u.id, (u.name || u.login) + ' · ' + u.login]; }), d.userId, function (v) { self.setM({ userId: v }); }, { label: d.userId ? null : 'Выберите пользователя', searchable: true });
+      M.curDD = this.dd('m-cur', this.curOpts(), d.currency || '', function (v) { self.setM({ currency: v }); }, { searchable: false });
+    } else if (m.type === 'photo') {
+      M.title = m.mode === 'add' ? 'Добавить фотографию' : 'Фотография';
+      M.hasImg = !!d.pictureCompressed; M.fileLabel = d.picture ? 'Заменить файл' : 'Выбрать файл';
+      M.pickFile = function (ev) { self.setState({ modal: Object.assign({}, self.state.modal, { busy: true, err: '' }) }); self.readImages(ev.target.files, function (list, errs) { var mm = self.state.modal; if (!mm) return; if (errs.length) { self.setState({ modal: Object.assign({}, mm, { busy: false, err: errs[0].t }) }); return; } var x = list[0]; self.setState({ modal: Object.assign({}, mm, { busy: false, d: Object.assign({}, mm.d, x ? { picture: x.picture, pictureCompressed: x.pictureCompressed, fileName: x.name } : {}) }) }); }); try { ev.target.value = ''; } catch (x) {} };
+    } else if (m.type === 'bind') {
+      var rep = m.mode === 'replace';
+      M.title = rep ? 'Заменить метку в привязке' : 'Привязать метки к статуэтке';
+      M.tagLabel = rep ? 'Новая метка' : 'Метки';
+      M.figDD.disabled = rep;
+      M.tagChips = rep ? [] : d.tagIds.map(function (t) { var g = self.find(db.tags, t); return { l: g ? g.tagText : t, remove: function () { self.setM({ tagIds: self.state.modal.d.tagIds.filter(function (x) { return String(x) !== String(t); }) }); } }; });
+      var existing = d.figureId ? this.figTags(db, d.figureId).map(String) : [];
+      M.tagDD = this.dd('m-tag', db.tags.filter(function (t) { return rep || d.tagIds.map(String).indexOf(String(t.id)) < 0; }).sort(function (a, b) { return a.tagText.localeCompare(b.tagText, 'ru'); }).map(function (t) { return [t.id, t.tagText + (existing.indexOf(String(t.id)) >= 0 && !rep ? ' (уже привязана)' : '')]; }), rep ? d.tagIds[0] : null, function (v) { self.setM({ tagIds: rep ? [v] : self.state.modal.d.tagIds.concat([v]) }); }, { label: rep ? null : 'Добавить метку…', searchable: true });
+      var dups = rep ? [] : d.tagIds.filter(function (t) { return existing.indexOf(String(t)) >= 0; });
+      M.hasDup = dups.length > 0; M.dup = 'Уже привязаны и будут пропущены: ' + dups.map(function (t) { var g = self.find(db.tags, t); return g ? g.tagText : t; }).join(', ') + '.';
+    }
+    return M;
+  }
+  viewVals() {
+    var self = this, st = this.state, db = st.db;
+    var base = { loading: !db && !st.loadErr, loadError: !!st.loadErr, loadErrorText: st.loadErr, denied: !!(db && !st.me), deniedText: st.denied, ready: !!(db && st.me) };
+    var empty = { opts: [] };
+    var c = st.confirm;
+    base.confirm = !c ? { open: false, linked: [], replDD: empty } : {
+      open: true, title: c.title, text: c.text, yesText: c.yesText, noText: c.noText, yesCls: c.danger ? 'a-btn-red' : '', hasYes: c.hasYes !== false, yesDisabled: !!(c.needRepl && !c.repl),
+      hasAlt: !!c.alt, altText: c.altText || '', alt: function () { var cc = self.state.confirm; self.setState({ confirm: null }); if (cc && cc.alt) cc.alt(); },
+      hasLinked: !!c.linkedCount, linked: c.linked || [], linkedCount: c.linkedCount || 0, more: (c.linkedCount || 0) > 8, moreText: 'и ещё ' + ((c.linkedCount || 0) - 8),
+      hasRepl: !!c.hasRepl, replLabel: c.replLabel || '', replDD: this.dd('c-repl', c.replList || [], c.repl || (c.needRepl ? null : ''), function (v) { self.setState({ confirm: Object.assign({}, self.state.confirm, { repl: v }) }); }, { label: c.needRepl && !c.repl ? 'Выберите…' : null }),
+      no: function () { self.setState({ confirm: null }); }, yes: function () { var cc = self.state.confirm; if (cc && cc.needRepl && !cc.repl) return; self.setState({ confirm: null }); if (cc && cc.onYes) cc.onYes(cc.repl || ''); }
+    };
+    base.toast = { on: !!st.toast, text: st.toast ? st.toast.text : '', cls: st.toast && st.toast.err ? 'a-toast-err' : '' };
+    if (!base.ready) return Object.assign(base, { s: {}, nav: [], me: {}, crumbs: [], dash: { tiles: [], recent: [], tasks: [] }, L: { filters: [], chips: [], heads: [], rows: [], cards: [], pages: [], perDD: empty, cols: { items: [] } }, F: { d: {}, set: {}, e: {}, em: {}, inv: {}, svc: {}, tabs: [], t: {}, q: {}, kindDD: empty, authorDD: empty, tagDD: empty, origDD: empty, curDD: empty, tagChips: [], photos: [], photoErrors: [], notes: [], variants: [], linked: [], blocks: [], fmt: {} }, M: { open: false }, V: { open: false }, ddOpen: false });
+    var sec = st.sec, me = st.me;
+    var listSecs = ['figures', 'photos', 'bindings', 'infos', 'kinds', 'authors', 'tags', 'users', 'notes'];
+    var formSec = ({ figure: 'figures', info: 'infos', kind: 'kinds', author: 'authors', tag: 'tags', user: 'users' })[sec];
+    var counts = { figures: db.figures.length, photos: db.photos.length, bindings: db.figureTags.length, infos: db.infos.length, kinds: db.kinds.length, authors: db.authors.length, tags: db.tags.length, users: db.users.length, notes: db.userNotes.length };
+    var navDef = [['h', 'Основная информация'], ['figures'], ['photos'], ['bindings'], ['infos'], ['h', 'Справочники'], ['kinds'], ['authors'], ['tags'], ['h', 'Администрирование'], ['users'], ['notes']];
+    var nav = navDef.map(function (n) {
+      if (n[0] === 'h') return { head: true, item: false, label: n[1] };
+      var on = sec === n[0] || formSec === n[0];
+      return { head: false, item: true, label: n[1] || self.secTitle(n[0]), count: counts[n[0]] != null ? counts[n[0]] : '', cls: on ? 'a-navi-on' : '', current: on ? 'page' : 'false', go: function () { self.go(n[0]); } };
+    });
+    var out = Object.assign(base, {
+      nav: nav, me: { name: me.name || me.login, email: me.email, avatar: st.avatar || '', hasAvatar: !!st.avatar, noAvatar: !st.avatar, open: !!st.meOpen, exp: st.meOpen ? 'true' : 'false', toggle: function () { self.setState({ meOpen: !self.state.meOpen, dd: null }); } }, previewNote: st.preview, saving: st.saving,
+      s: { dash: sec === 'dash', list: listSecs.indexOf(sec) >= 0, figure: sec === 'figure', info: sec === 'info', dict: sec === 'kind' || sec === 'author' || sec === 'tag', user: sec === 'user' },
+      ddOpen: !!(st.dd || st.meOpen), ddClose: function () { self.setState({ dd: null, meOpen: false }); },
+      goHome: function () { self.go('dash'); },
+      logout: function () { self.guard(function () { try { window.localStorage.removeItem('sp-admin'); } catch (e) {} self.setState({ me: null, meOpen: false, preview: false, denied: 'Вы вышли из админ-панели.', form: null }); }); }
+    });
+    // обзор
+    var noPhoto = db.figures.filter(function (x) { return !self.figPhotos(db, x.id).length; }).length;
+    out.dash = {
+      hello: 'Здравствуйте, ' + (me.name || me.login) + '. Сводка по данным сайта.',
+      addFigure: function () { self.openForm('figure', null); },
+      tiles: [['figures', 'Статуэтки'], ['photos', 'Фотографии'], ['authors', 'Авторы'], ['infos', 'Статьи']].map(function (t) { return { n: counts[t[0]], l: t[1], go: function () { self.go(t[0]); } }; }),
+      sync: 'Сайт читает данные сразу после сохранения — задержки из-за кэша нет. Последнее сохранение: ' + (db.lastSave ? this.fmt(db.lastSave, true) : 'ещё не было') + '.',
+      tasks: [['Статуэтки без фото', noPhoto, { photo: 'no' }], ['Без автора', db.figures.filter(function (x) { return !x.authorId; }).length, { author: 'none' }], ['Без производителя', db.figures.filter(function (x) { return !x.factoryName; }).length, { factory: 'none' }], ['С неизвестными размерами', db.figures.filter(function (x) { return x.height == null || x.length == null; }).length, { size: 'unknown' }]].map(function (t) { return { l: t[0], n: t[1], has: t[1] > 0, go: function () { self.openList('figures', t[2]); } }; })
+    };
+    var recent = [];
+    db.figures.forEach(function (x) { recent.push({ type: 'Статуэтка', title: x.name, ts: x.modifyDate, go: function () { self.openForm('figure', x.id); } }); });
+    db.infos.forEach(function (x) { recent.push({ type: 'Статья', title: x.name, ts: x.modifyDate, go: function () { self.openForm('info', x.id); } }); });
+    db.authors.forEach(function (x) { recent.push({ type: 'Автор', title: x.name, ts: x.modifyDate, go: function () { self.openForm('author', x.id); } }); });
+    recent.sort(function (a, b) { return (a.ts || '') < (b.ts || '') ? 1 : -1; });
+    out.dash.recent = recent.slice(0, 8).map(function (r) { return Object.assign(r, { date: self.fmt(r.ts, true) }); });
+    out.dash.noRecent = !recent.length;
+    out.L = out.s.list ? this.buildList(sec) : { filters: [], chips: [], heads: [], rows: [], cards: [], pages: [], perDD: empty, cols: { items: [] } };
+    out.F = st.form ? this.formVals() : { d: {}, set: {}, e: {}, em: {}, inv: {}, svc: {}, tabs: [], t: {}, q: {}, kindDD: empty, authorDD: empty, tagDD: empty, origDD: empty, curDD: empty, tagChips: [], photos: [], photoErrors: [], notes: [], variants: [], linked: [], blocks: [], fmt: {} };
+    var fm = st.form;
+    out.crumbs = !fm ? [] : (function () {
+      var secOf = formSec, rec = fm.id == null ? null : self.find(self.coll(fm.type), fm.id);
+      var nm = fm.id == null ? out.F.heading : (fm.type === 'tag' ? rec.tagText : (fm.type === 'user' ? (rec.name || rec.login) : rec.name));
+      var list = [{ l: self.secTitle(secOf), link: true, last: false, go: function () { self.go(secOf); } }];
+      if (fm.id == null) list.push({ l: nm, link: false, last: true }); else { list.push({ l: nm, link: true, last: false, go: function () { if (self.state.form) self.setF({ tab: 'main', prev: false }); } }); list.push({ l: 'Редактирование', link: false, last: true }); }
+      return list;
+    })();
+    out.M = this.modalVals();
+    out.V = st.viewer ? { open: true, src: st.viewer.src, caption: st.viewer.caption, close: function () { self.setState({ viewer: null }); } } : { open: false };
+    return out;
+  }
+  renderVals() {
+    var v = this.viewVals(), L = ["F.authorDD.opts", "F.blocks", "F.curDD.opts", "F.kindDD.opts", "F.linked", "F.notes", "F.origDD.opts", "F.photoErrors", "F.photos", "F.tabs", "F.tagChips", "F.tagDD.opts", "F.variants", "L.cards", "L.chips", "L.cols.items", "L.filters", "L.heads", "L.pages", "L.perDD.opts", "L.rows", "M.curDD.opts", "M.figDD.opts", "M.tagChips", "M.tagDD.opts", "M.userDD.opts", "confirm.linked", "confirm.replDD.opts", "crumbs", "dash.recent", "dash.tasks", "dash.tiles", "nav"], H = ["F.addNote", "F.addPhotos", "F.adminHint", "F.allLinked", "F.authorDD.disabled", "F.authorDD.exp", "F.authorDD.inv", "F.authorDD.label", "F.authorDD.none", "F.authorDD.open", "F.authorDD.q", "F.authorDD.searchable", "F.authorDD.setQ", "F.authorDD.toggle", "F.authorDD.wCls", "F.canDelete", "F.cancel", "F.cancelReplace", "F.curDD.disabled", "F.curDD.exp", "F.curDD.inv", "F.curDD.label", "F.curDD.none", "F.curDD.open", "F.curDD.q", "F.curDD.searchable", "F.curDD.setQ", "F.curDD.toggle", "F.curDD.wCls", "F.d.comment", "F.d.email", "F.d.factoryName", "F.d.final", "F.d.height", "F.d.infoDate", "F.d.isAdmin", "F.d.length", "F.d.login", "F.d.name", "F.d.p1", "F.d.p2", "F.d.sourceText", "F.d.sourceUrl", "F.d.text", "F.d.visible", "F.del", "F.delText", "F.dirtyCls", "F.dirtyText", "F.e.email", "F.e.height", "F.e.infoDate", "F.e.kind", "F.e.length", "F.e.login", "F.e.name", "F.e.p1", "F.e.p2", "F.e.sourceUrl", "F.editCls", "F.editing", "F.em.email", "F.em.height", "F.em.infoDate", "F.em.kind", "F.em.length", "F.em.login", "F.em.name", "F.em.p1", "F.em.p2", "F.em.sourceUrl", "F.errorText", "F.fmt.a", "F.fmt.b", "F.fmt.h", "F.fmt.i", "F.fmt.q", "F.fmt.ul", "F.hasErrors", "F.hasNotes", "F.hasReplace", "F.hasSimilar", "F.hasSource", "F.hasSub", "F.hasView", "F.heading", "F.inv.email", "F.inv.height", "F.inv.infoDate", "F.inv.length", "F.inv.login", "F.inv.name", "F.inv.p1", "F.inv.p2", "F.inv.sourceUrl", "F.isAuthor", "F.isKind", "F.isMe", "F.isNew", "F.kindDD.disabled", "F.kindDD.exp", "F.kindDD.inv", "F.kindDD.label", "F.kindDD.none", "F.kindDD.open", "F.kindDD.q", "F.kindDD.searchable", "F.kindDD.setQ", "F.kindDD.toggle", "F.kindDD.wCls", "F.linkedCount", "F.linkedTitle", "F.moreLinked", "F.nameLabel", "F.noLinked", "F.noNotes", "F.noPhotos", "F.noTags", "F.noVariants", "F.noteCount", "F.openNotes", "F.origDD.disabled", "F.origDD.exp", "F.origDD.inv", "F.origDD.label", "F.origDD.none", "F.origDD.open", "F.origDD.q", "F.origDD.searchable", "F.origDD.setQ", "F.origDD.toggle", "F.origDD.wCls", "F.passHint", "F.passTitle", "F.prevCls", "F.prevDate", "F.prevTitle", "F.preview", "F.q.add", "F.q.cancel", "F.q.err", "F.q.hasErr", "F.q.label", "F.q.name", "F.q.on", "F.q.setName", "F.quickAuthor", "F.quickKind", "F.quickTag", "F.replaceFile", "F.save", "F.saveText", "F.set.adminBox", "F.set.comment", "F.set.email", "F.set.factoryName", "F.set.finalBox", "F.set.height", "F.set.infoDate", "F.set.length", "F.set.login", "F.set.name", "F.set.p1", "F.set.p2", "F.set.sourceText", "F.set.sourceUrl", "F.set.text", "F.set.visibleBox", "F.showLinked", "F.showNotes", "F.similar", "F.sourceLabel", "F.sub", "F.svc.created", "F.svc.createdBy", "F.svc.modified", "F.svc.modifiedBy", "F.t.links", "F.t.main", "F.t.notes", "F.t.photos", "F.t.svc", "F.tagDD.disabled", "F.tagDD.exp", "F.tagDD.inv", "F.tagDD.label", "F.tagDD.none", "F.tagDD.open", "F.tagDD.q", "F.tagDD.searchable", "F.tagDD.setQ", "F.tagDD.toggle", "F.tagDD.wCls", "F.toEdit", "F.toPrev", "F.uploadLeft", "F.uploading", "F.urlOk", "F.variantCount", "F.view", "F.viewHref", "F.visHint", "L.add", "L.addText", "L.cols.exp", "L.cols.open", "L.cols.toggle", "L.cols.wCls", "L.count", "L.export", "L.exportHint", "L.filtered", "L.first", "L.grid", "L.has", "L.hasAdd", "L.hasCols", "L.isGrid", "L.isTable", "L.last", "L.next", "L.noMatch", "L.noNext", "L.noPrev", "L.none", "L.noneText", "L.noneTitle", "L.perDD.disabled", "L.perDD.exp", "L.perDD.inv", "L.perDD.label", "L.perDD.none", "L.perDD.open", "L.perDD.q", "L.perDD.searchable", "L.perDD.setQ", "L.perDD.toggle", "L.perDD.wCls", "L.prev", "L.q", "L.range", "L.reset", "L.searchHint", "L.setQ", "L.title", "M.busy", "M.cancel", "M.curDD.disabled", "M.curDD.exp", "M.curDD.inv", "M.curDD.label", "M.curDD.none", "M.curDD.open", "M.curDD.q", "M.curDD.searchable", "M.curDD.setQ", "M.curDD.toggle", "M.curDD.wCls", "M.d.comment1", "M.d.comment2", "M.d.comment3", "M.d.enable", "M.d.isMain", "M.d.pictureCompressed", "M.d.price", "M.dup", "M.err", "M.figDD.disabled", "M.figDD.exp", "M.figDD.inv", "M.figDD.label", "M.figDD.none", "M.figDD.open", "M.figDD.q", "M.figDD.searchable", "M.figDD.setQ", "M.figDD.toggle", "M.figDD.wCls", "M.fileLabel", "M.hasDup", "M.hasErr", "M.hasImg", "M.hasSvc", "M.inv.price", "M.isBind", "M.isNote", "M.isPhoto", "M.open", "M.pickFile", "M.save", "M.saveText", "M.set.comment1", "M.set.comment2", "M.set.comment3", "M.set.enableBox", "M.set.mainBox", "M.set.price", "M.svc.created", "M.svc.createdBy", "M.svc.modified", "M.svc.modifiedBy", "M.tagDD.disabled", "M.tagDD.exp", "M.tagDD.inv", "M.tagDD.label", "M.tagDD.none", "M.tagDD.open", "M.tagDD.q", "M.tagDD.searchable", "M.tagDD.setQ", "M.tagDD.toggle", "M.tagDD.wCls", "M.tagLabel", "M.title", "M.userDD.disabled", "M.userDD.exp", "M.userDD.inv", "M.userDD.label", "M.userDD.none", "M.userDD.open", "M.userDD.q", "M.userDD.searchable", "M.userDD.setQ", "M.userDD.toggle", "M.userDD.wCls", "V.caption", "V.close", "V.open", "V.src", "confirm.alt", "confirm.altText", "confirm.hasAlt", "confirm.hasLinked", "confirm.hasRepl", "confirm.hasYes", "confirm.linkedCount", "confirm.more", "confirm.moreText", "confirm.no", "confirm.noText", "confirm.open", "confirm.replDD.disabled", "confirm.replDD.exp", "confirm.replDD.inv", "confirm.replDD.label", "confirm.replDD.none", "confirm.replDD.open", "confirm.replDD.q", "confirm.replDD.searchable", "confirm.replDD.setQ", "confirm.replDD.toggle", "confirm.replDD.wCls", "confirm.replLabel", "confirm.text", "confirm.title", "confirm.yes", "confirm.yesCls", "confirm.yesDisabled", "confirm.yesText", "dash.addFigure", "dash.hello", "dash.noRecent", "dash.sync", "ddClose", "ddOpen", "denied", "deniedText", "false", "goHome", "loadError", "loadErrorText", "loading", "logout", "me.avatar", "me.email", "me.exp", "me.hasAvatar", "me.name", "me.noAvatar", "me.open", "me.toggle", "previewNote", "ready", "s.dash", "s.dict", "s.figure", "s.info", "s.list", "s.user", "saving", "toast.cls", "toast.on", "toast.text", "true"];
+    function put(path, val) { var ks = path.split('.'), o = v; for (var i = 0; i < ks.length - 1; i++) { if (o[ks[i]] == null) o[ks[i]] = {}; else if (typeof o[ks[i]] !== 'object') return; o = o[ks[i]]; } var k = ks[ks.length - 1]; if (o[k] === undefined) o[k] = val; }
+    L.forEach(function (x) { put(x, []); }); H.forEach(function (x) { put(x, ''); });
+    return v;
+  }
+}
+</script>
+</body>
+</html>

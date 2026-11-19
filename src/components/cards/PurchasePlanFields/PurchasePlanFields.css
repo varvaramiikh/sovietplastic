@@ -1,0 +1,83 @@
+.sp-plan {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+}
+article:hover .sp-plan,
+.sp-plan:hover,
+.sp-plan:focus-within {
+  opacity: 1;
+}
+.sp-plan-f {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  cursor: text;
+}
+.sp-plan-price {
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px !important;
+}
+.sp-plan-price .sp-plan-in {
+  width: 110px;
+  flex: none;
+}
+.sp-plan-l {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4e6488;
+}
+.sp-plan-in {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.sp-plan-in i {
+  font-style: normal;
+  font-size: 15px;
+  color: #4e6488;
+}
+.sp-plan input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #252932;
+  font-family: inherit;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.sp-plan input::placeholder {
+  color: #a9b4c2;
+}
+.sp-plan input:hover {
+  border-bottom-color: #c9d1db;
+}
+.sp-plan input:focus {
+  outline: none;
+  border-bottom-color: #1b2a41;
+}
+.sp-plan-price input {
+  text-align: right;
+}

@@ -1,0 +1,60 @@
+/* Стили страницы из <helmet> файла original-export/project/Figurine.dc.html (без изменений, кроме путей к картинкам).
+   Подключаются только пока страница открыта — как в Claude Design, где у каждой страницы свой документ. */
+
+body{margin:0;background:#FFFFFF}
+a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+a svg{transition:transform .2s ease}a:hover>svg{transform:translateX(3px)}
+.sp-thumb img{transition:transform .3s ease}.sp-thumb:hover img{transform:scale(1.08)}
+@keyframes sp-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){main section+section,article{animation:sp-rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}
+.sp-navlink{position:relative}.sp-navlink::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;opacity:0}.sp-navlink:hover::after{opacity:1}header .sp-navlink::after{background:#1B2A41}
+.sp-footbtn:hover{background:rgba(169,185,210,.16)!important}
+button{transition:transform .15s ease,color .2s ease,background-color .2s ease,border-color .2s ease}button:active:not([aria-label="Закрыть окно"]){transform:scale(.96)}
+article figure img{transition:transform .5s ease}article:hover figure img{transform:scale(1.04)}
+button[style*="background: #1B2A41"]:hover,a[style*="background: #1B2A41"]:hover{background:#2C3F5E!important;border-color:#2C3F5E!important}
+button[style*="border: 1px solid"][style*="background: transparent"]:hover,button[style*="border: 1px solid"][style*="background: #FFFFFF"]:hover{background:#F8FAFD!important}
+.sp-arrow:hover{background:rgba(27,42,65,.08)!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a{color:#252932;text-decoration:none}a:hover{color:#3E5A88}
+@keyframes sp-pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sp-tag{display:inline-flex;align-items:center;height:30px;padding:0 11px;border-radius:6px;font-size:13px;line-height:1;white-space:nowrap;text-decoration:none;box-sizing:border-box}
+.sp-tag{background:#FFFFFF;color:#1B2A41;border:1px solid #C9D1DB}
+.sp-tag:hover{border-color:#1B2A41;color:#1B2A41}
+nav[aria-label="Навигационная цепочка"]{text-transform:uppercase;letter-spacing:.14em;font-size:12px!important;font-weight:500}
+html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+.sp-tagc{display:inline-flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#1B2A41;text-decoration:none;line-height:1}
+.sp-tagc:hover{color:#3E5A88}
+.sp-tagc i{width:7px;height:7px;border-radius:50%;background:#A9B9D2;flex:none}
+.sp-chip{display:inline-flex;align-items:center;height:36px;padding:0 14px;border:1px solid #C9D1DB;border-radius:6px;background:#FFFFFF;color:#252932;font-family:inherit;font-size:14px;line-height:1;white-space:nowrap;text-decoration:none;box-sizing:border-box;transition:border-color .2s ease,color .2s ease}
+.sp-chip:hover{border-color:#1B2A41;color:#1B2A41}
+.sp-arrow{width:48px;height:48px;border:0;border-radius:6px;background:#1B2A41;color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-arrow:hover{background:#2C3F5E}
+.sp-thumb{width:84px;height:84px;padding:0;border:1px solid transparent;border-radius:6px;background:#DBE2EA;cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sp-thumb-on{border-color:#1B2A41;box-shadow:inset 0 0 0 1px #1B2A41}
+.sp-gal{display:flex;gap:16px;align-items:flex-start}
+.sp-thumbs-wrap{order:-1;flex:none}
+.sp-thumbs{display:flex;flex-direction:column;gap:10px;max-height:640px;overflow-y:auto;scrollbar-width:none}
+.sp-thumbs::-webkit-scrollbar{display:none}
+.sp-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:64px;align-items:start}
+.sp-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:64px}
+.sp-more{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 28px}
+.sp-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;row-gap:22px}
+.sp-col{margin:0;display:flex;flex-direction:column;gap:22px}
+.sp-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:baseline;font-size:18px;line-height:27px}
+.sp-row dt{display:flex;align-items:baseline;gap:10px;color:#4E6488}
+.sp-row dt i{flex:1;min-width:24px;border-bottom:1px solid #C9D1DB;transform:translateY(-6px)}
+.sp-row dd{margin:0;color:#252932}
+.sp-iconbtn{width:40px;height:40px;flex:none;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sp-wide{margin-top:48px;width:100%;height:64px;border:1px solid #1B2A41;border-radius:6px;background:transparent;color:#1B2A41;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px}
+.sp-wide:hover,.sp-iconbtn:hover{background:#FFFFFF}
+@media (max-width:900px){
+.sp-specs{grid-template-columns:minmax(0,1fr)}
+.sp-wrap{padding-left:20px !important;padding-right:20px !important}
+.sp-top,.sp-two{grid-template-columns:minmax(0,1fr);gap:32px}
+.sp-gal{flex-direction:column;align-items:stretch}
+.sp-gal>div:first-child{height:440px!important}
+.sp-thumbs-wrap{order:1}
+.sp-thumbs{flex-direction:row;flex-wrap:wrap;max-height:none}
+.sp-more{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+}
+

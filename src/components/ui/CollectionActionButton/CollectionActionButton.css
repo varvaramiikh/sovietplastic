@@ -1,0 +1,47 @@
+.sp-act {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.sp-act svg {
+  transition: transform 0.2s ease;
+}
+.sp-act:hover svg {
+  transform: scale(1.1);
+}
+.sp-act:active svg {
+  transform: scale(0.9);
+}
+.sp-act::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #1b2a41;
+  color: #ffffff;
+  font-family: 'Onest', system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+.sp-act:hover::after,
+.sp-act:focus-visible::after {
+  opacity: 1;
+  transform: none;
+}
