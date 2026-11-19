@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { publicUrl } from '../../runtime/urls';
 import { DCLogic } from '../../runtime/DCLogic';
 import { authRequest, cacheUser } from '../../features/auth/auth';
 
@@ -15,7 +16,7 @@ export default class LoginLogic extends DCLogic {
       const data = await authRequest(reg ? 'register' : st.mode, { email: st.email, password: st.pass, login: st.login, name: st.name, code: st.code });
       if(forgot) this.setState({ mode: 'reset', message: data.message });
       else if(reset) this.setState({ mode: 'login', pass: '', pass2: '', code: '', message: data.message });
-      else { cacheUser(data.user); window.location.assign('/account'); }
+      else { cacheUser(data.user); window.location.assign(publicUrl('/account')); }
     } catch(error) { this.setState({ error: error.message }); }
     finally { this.setState({ busy: false }); }
   };

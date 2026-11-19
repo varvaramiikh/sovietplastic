@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../ui/Image/Image.tsx';
 import Link from '../ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/SiteFooter.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
 import { Fragment } from 'react';
@@ -39,7 +40,7 @@ function View({ $v }: { $v: any }) {
             }}
           >
             {' '}
-            <img src="/images/logo-white.svg" alt="" style={{ height: '44px', width: 'auto' }} />{' '}
+            <Image src="/images/logo-white.svg" alt="" style={{ height: '44px', width: 'auto' }} />{' '}
             <span style={{ fontSize: '22px', fontWeight: '500', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
               {'Советский '}
               <span style={{ color: '#A9B9D2' }}>пластик</span>

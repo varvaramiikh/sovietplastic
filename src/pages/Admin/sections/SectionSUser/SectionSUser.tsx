@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import Checkbox from '../../../../components/ui/Checkbox/Checkbox.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
 import Link from '../../../../components/ui/Link/Link.tsx';
@@ -166,7 +167,7 @@ export default function SectionSUser({ $v }: SectionSUserProps) {
                           >
                             {o?.hasImg ? (
                               <>
-                                <img src={o?.img} alt="" className="a-dd-img" />
+                                <Image src={o?.img} alt="" className="a-dd-img" />
                               </>
                             ) : null}
                             <span>{o?.l}</span>

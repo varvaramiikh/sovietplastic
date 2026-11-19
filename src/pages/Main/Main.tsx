@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Button from '../../components/ui/Button/Button.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
 import PurchasePlanModal from '../../components/modals/PurchasePlanModal/PurchasePlanModal.tsx';
@@ -45,7 +46,7 @@ function View({ $v }: { $v: any }) {
                         <Fragment key={$index}>
                           <div className="k-slide" aria-hidden={n?.hidden}>
                             <div className="k-slide-bg" aria-hidden="true">
-                              <img src={n?.img} alt="" />
+                              <Image src={n?.img} alt="" />
                             </div>
                             <div className="k-slide-text">
                               <p
@@ -130,7 +131,7 @@ function View({ $v }: { $v: any }) {
             ) : null}{' '}
             <div className="k-hero">
               <div aria-hidden="true" className="k-hero-art">
-                <img
+                <Image
                   src="/images/logo-accent.svg"
                   alt=""
                   style={{ height: '92%', width: 'auto', marginBottom: '2%' }}
@@ -297,7 +298,7 @@ function View({ $v }: { $v: any }) {
                 }}
               >
                 {' '}
-                <img
+                <Image
                   src="/images/placeholder-ballerina.svg"
                   alt=""
                   style={{
@@ -368,7 +369,7 @@ function View({ $v }: { $v: any }) {
                         )}
                       >
                         {' '}
-                        <img
+                        <Image
                           src={p?.img}
                           alt=""
                           style={__css(`height: ${__s(p?.h)}; width: auto; margin-bottom: ${__s(p?.mb)}`)}

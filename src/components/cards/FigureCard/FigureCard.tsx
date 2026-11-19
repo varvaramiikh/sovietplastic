@@ -1,3 +1,4 @@
+import Image from '../../ui/Image/Image.tsx';
 import LikeButton from '../../ui/LikeButton/LikeButton.tsx';
 import CheckButton from '../../ui/CheckButton/CheckButton.tsx';
 import Link from '../../ui/Link/Link.tsx';
@@ -14,7 +15,7 @@ export default function FigureCard({ item, href = '/figurine' }: FigureCardProps
       <div className="figure-card__media">
         <Link href={href} onClick={item.go} aria-label={item.title} className="figure-card__image-link">
           <figure className="figure-card__figure">
-            <img src={item.img} alt="" style={getCardImageStyle(item.scale)} />
+            <Image src={item.img} alt="" style={getCardImageStyle(item.scale)} />
           </figure>
         </Link>
         {item.planOn && <PurchasePlanFields item={item} />}

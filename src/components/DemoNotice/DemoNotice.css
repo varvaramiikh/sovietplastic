@@ -1,0 +1,22 @@
+.demo-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 20px;
+  background: #eef2f8;
+  color: #1b2a41;
+  font:
+    13px/1.5 system-ui,
+    sans-serif;
+}
+.demo-notice__button {
+  border: 1px solid #a9b9d2;
+  border-radius: 6px;
+  background: white;
+  color: #1b2a41;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer;
+}

@@ -1,4 +1,6 @@
+import { publicUrl, isStaticDemo } from '../../runtime/urls';
 export async function authRequest(action: string, body?: Record<string, unknown>) {
+  if (isStaticDemo) throw new Error('Это демонстрационный макет. Вход, регистрация и отправка писем доступны в полной версии сайта.');
   let response: Response;
   try { response = await fetch('/api/auth/' + action, { method: body ? 'POST' : 'GET', credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); }
   catch { throw new Error('Сервер недоступен. Запустите npm.cmd run server.'); }
@@ -15,7 +17,7 @@ export function cacheUser(user: Record<string, unknown>) {
   localStorage.setItem('sp-auth', '1'); localStorage.removeItem('sp-admin');
 }
 export async function signOut() {
-  await authRequest('logout', {});
+  if (!isStaticDemo) await authRequest('logout', {});
   localStorage.removeItem('sp-auth'); localStorage.removeItem('sp-admin');
-  window.location.assign('/login');
+  window.location.assign(publicUrl('/login')!);
 }

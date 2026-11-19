@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import Checkbox from '../../../../components/ui/Checkbox/Checkbox.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
 import Button from '../../../../components/ui/Button/Button.tsx';
@@ -96,7 +97,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                         >
                           {o?.hasImg ? (
                             <>
-                              <img src={o?.img} alt="" className="a-dd-img" />
+                              <Image src={o?.img} alt="" className="a-dd-img" />
                             </>
                           ) : null}
                           <span>{o?.l}</span>
@@ -240,7 +241,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                           <div className="a-thumb">
                             {c?.hasSrc ? (
                               <>
-                                <img src={c?.src} alt="" />
+                                <Image src={c?.src} alt="" />
                               </>
                             ) : null}
                             {c?.noSrc ? (
@@ -330,7 +331,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                                         >
                                           {o?.hasImg ? (
                                             <>
-                                              <img src={o?.img} alt="" className="a-dd-img" />
+                                              <Image src={o?.img} alt="" className="a-dd-img" />
                                             </>
                                           ) : null}
                                           <span>{o?.l}</span>
@@ -367,7 +368,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                 <div className={`a-ph ${__s(p?.mainCls)}`}>
                   {' '}
                   <Button type="button" className="a-ph-img" onClick={p?.viewer} aria-label="Просмотр фото">
-                    <img src={p?.src} alt="" />
+                    <Image src={p?.src} alt="" />
                     {p?.isMain ? (
                       <>
                         <span className="a-ph-tag">Главное</span>
@@ -436,7 +437,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                                   >
                                     {o?.hasImg ? (
                                       <>
-                                        <img src={o?.img} alt="" className="a-dd-img" />
+                                        <Image src={o?.img} alt="" className="a-dd-img" />
                                       </>
                                     ) : null}
                                     <span>{o?.l}</span>
@@ -553,7 +554,7 @@ export default function SectionSList({ $v }: SectionSListProps) {
                           >
                             {o?.hasImg ? (
                               <>
-                                <img src={o?.img} alt="" className="a-dd-img" />
+                                <Image src={o?.img} alt="" className="a-dd-img" />
                               </>
                             ) : null}
                             <span>{o?.l}</span>

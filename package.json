@@ -16,7 +16,9 @@
     "compare": "node scripts/compare_with_original.mjs",
     "server": "node --env-file=wserver/.env wserver/server.mjs",
     "test:auth": "node --test wserver/auth.test.mjs",
-    "test:components": "node scripts/check-components.mjs"
+    "test:components": "node scripts/check-components.mjs",
+    "build:pages": "tsc -b && vite build --mode pages && node scripts/pages-routes.mjs",
+    "test:pages": "node scripts/check-pages.mjs"
   },
   "dependencies": {
     "@fontsource/onest": "^5.3.1",

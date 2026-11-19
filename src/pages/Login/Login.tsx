@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import TextInput from '../../components/ui/TextInput/TextInput.tsx';
 import Button from '../../components/ui/Button/Button.tsx';
 /* Сгенерировано из original-export/project/Login.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
@@ -215,7 +216,7 @@ function View({ $v }: { $v: any }) {
                 }}
               >
                 {' '}
-                <img src="/images/logo-accent.svg" alt="" style={{ height: '88%', width: 'auto' }} />{' '}
+                <Image src="/images/logo-accent.svg" alt="" style={{ height: '88%', width: 'auto' }} />{' '}
               </div>
             </div>
           </section>

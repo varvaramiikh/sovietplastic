@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import TextArea from '../../../../components/ui/TextArea/TextArea.tsx';
 import Checkbox from '../../../../components/ui/Checkbox/Checkbox.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
@@ -172,7 +173,7 @@ export default function SectionSDict({ $v }: SectionSDictProps) {
                     <Fragment key={$index}>
                       <div className="a-tr" style={{ gridTemplateColumns: '56px minmax(0,1fr)' }}>
                         <div className="a-thumb">
-                          <img src={v?.src} alt="" />
+                          <Image src={v?.src} alt="" />
                         </div>
                         <Button type="button" className="a-tbtn" onClick={v?.go}>
                           {v?.l}

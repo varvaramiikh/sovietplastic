@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Button from '../../components/ui/Button/Button.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/Admin.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
@@ -101,7 +102,7 @@ function View({ $v }: { $v: any }) {
           <header className="a-topbar">
             {' '}
             <Button type="button" className="a-brand" onClick={$v?.goHome} title="Обзор админ-панели">
-              <img src="/images/logo-white.svg" alt="" style={{ height: '30px', width: 'auto' }} />
+              <Image src="/images/logo-white.svg" alt="" style={{ height: '30px', width: 'auto' }} />
               <span>
                 КарболитЪ
                 <small>Админ-панель</small>
@@ -119,7 +120,7 @@ function View({ $v }: { $v: any }) {
               >
                 {$v?.me?.hasAvatar ? (
                   <>
-                    <img src={$v?.me?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image src={$v?.me?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </>
                 ) : null}
                 {$v?.me?.noAvatar ? (

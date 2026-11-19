@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import TextArea from '../../../../components/ui/TextArea/TextArea.tsx';
 import Checkbox from '../../../../components/ui/Checkbox/Checkbox.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
@@ -169,7 +170,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                                 >
                                   {o?.hasImg ? (
                                     <>
-                                      <img src={o?.img} alt="" className="a-dd-img" />
+                                      <Image src={o?.img} alt="" className="a-dd-img" />
                                     </>
                                   ) : null}
                                   <span>{o?.l}</span>
@@ -246,7 +247,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                                 >
                                   {o?.hasImg ? (
                                     <>
-                                      <img src={o?.img} alt="" className="a-dd-img" />
+                                      <Image src={o?.img} alt="" className="a-dd-img" />
                                     </>
                                   ) : null}
                                   <span>{o?.l}</span>
@@ -419,7 +420,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>
@@ -515,7 +516,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                   <div className={`a-ph ${__s(p?.mainCls)}`}>
                     {' '}
                     <Button type="button" className="a-ph-img" onClick={p?.viewer} aria-label="Просмотр фото">
-                      <img src={p?.thumb} alt="" />
+                      <Image src={p?.thumb} alt="" />
                       {p?.isMain ? (
                         <>
                           <span className="a-ph-tag">Главное</span>
@@ -586,7 +587,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                                     >
                                       {o?.hasImg ? (
                                         <>
-                                          <img src={o?.img} alt="" className="a-dd-img" />
+                                          <Image src={o?.img} alt="" className="a-dd-img" />
                                         </>
                                       ) : null}
                                       <span>{o?.l}</span>
@@ -716,7 +717,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                             >
                               {o?.hasImg ? (
                                 <>
-                                  <img src={o?.img} alt="" className="a-dd-img" />
+                                  <Image src={o?.img} alt="" className="a-dd-img" />
                                 </>
                               ) : null}
                               <span>{o?.l}</span>
@@ -755,7 +756,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                     <Fragment key={$index}>
                       <div className="a-tr" style={{ gridTemplateColumns: '56px minmax(0,1fr)' }}>
                         <div className="a-thumb">
-                          <img src={v?.src} alt="" />
+                          <Image src={v?.src} alt="" />
                         </div>
                         <Button type="button" className="a-tbtn" onClick={v?.go}>
                           {v?.l}
@@ -838,7 +839,7 @@ export default function SectionSFigure({ $v }: SectionSFigureProps) {
                                   >
                                     {o?.hasImg ? (
                                       <>
-                                        <img src={o?.img} alt="" className="a-dd-img" />
+                                        <Image src={o?.img} alt="" className="a-dd-img" />
                                       </>
                                     ) : null}
                                     <span>{o?.l}</span>

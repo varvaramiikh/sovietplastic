@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import TextArea from '../../../../components/ui/TextArea/TextArea.tsx';
 import Checkbox from '../../../../components/ui/Checkbox/Checkbox.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
@@ -78,7 +79,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>
@@ -141,7 +142,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>
@@ -257,7 +258,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                                 >
                                   {o?.hasImg ? (
                                     <>
-                                      <img src={o?.img} alt="" className="a-dd-img" />
+                                      <Image src={o?.img} alt="" className="a-dd-img" />
                                     </>
                                   ) : null}
                                   <span>{o?.l}</span>
@@ -286,7 +287,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                   {$v?.M?.hasImg ? (
                     <>
                       <div className="a-ph-img" style={{ maxWidth: '260px', borderRadius: '8px' }}>
-                        <img src={$v?.M?.d?.pictureCompressed} alt="Предпросмотр" />
+                        <Image src={$v?.M?.d?.pictureCompressed} alt="Предпросмотр" />
                       </div>
                     </>
                   ) : null}{' '}
@@ -353,7 +354,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>
@@ -432,7 +433,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>
@@ -505,7 +506,7 @@ export default function SectionMOpen({ $v }: SectionMOpenProps) {
                               >
                                 {o?.hasImg ? (
                                   <>
-                                    <img src={o?.img} alt="" className="a-dd-img" />
+                                    <Image src={o?.img} alt="" className="a-dd-img" />
                                   </>
                                 ) : null}
                                 <span>{o?.l}</span>

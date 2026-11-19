@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import Button from '../../../../components/ui/Button/Button.tsx';
 /* Сгенерировано из original-export/project/Admin.dc.html (блок <sc-if value="{{ V.open }}">) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
 import { Fragment } from 'react';
@@ -18,7 +19,7 @@ export default function SectionVOpen({ $v }: SectionVOpenProps) {
           aria-label="Просмотр фото"
           style={{ maxWidth: '900px', textAlign: 'center' }}
         >
-          <img
+          <Image
             src={$v?.V?.src}
             alt=""
             style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: '6px', background: '#DBE2EA' }}

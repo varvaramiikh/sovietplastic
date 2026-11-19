@@ -43,7 +43,7 @@ assert.ok(modal.includes('role="dialog"')); assert.ok(modal.includes('aria-label
 console.log('OK: action callbacks, pressed states, card composition, plan fields, modal and native button behavior.');
 `;
 try {
- const result = await build({ stdin: { contents: source, resolveDir: process.cwd(), loader: 'js' }, bundle: true, jsx: 'automatic', resolveExtensions: ['.ts', '.tsx', '.js', '.jsx', '.json'], platform: 'node', format: 'esm', packages: 'external', loader: { '.css': 'empty' }, write: false });
+ const result = await build({ stdin: { contents: source, resolveDir: process.cwd(), loader: 'js' }, define: { 'import.meta.env': JSON.stringify({ BASE_URL: '/', VITE_STATIC_DEMO: 'false' }) }, bundle: true, jsx: 'automatic', resolveExtensions: ['.ts', '.tsx', '.js', '.jsx', '.json'], platform: 'node', format: 'esm', packages: 'external', loader: { '.css': 'empty' }, write: false });
  writeFileSync(outfile, result.outputFiles[0].contents);
  await import(outfile.href);
  for(const group of ['ui','cards','modals']) for(const name of readdirSync(new URL('../src/components/' + group + '/', import.meta.url))) {

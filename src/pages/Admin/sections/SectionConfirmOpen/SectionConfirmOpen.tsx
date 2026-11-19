@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../../../components/ui/Image/Image.tsx';
 import TextInput from '../../../../components/ui/TextInput/TextInput.tsx';
 import Button from '../../../../components/ui/Button/Button.tsx';
 /* Сгенерировано из original-export/project/Admin.dc.html (блок <sc-if value="{{ confirm.open }}">) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
@@ -82,7 +83,7 @@ export default function SectionConfirmOpen({ $v }: SectionConfirmOpenProps) {
                                   >
                                     {o?.hasImg ? (
                                       <>
-                                        <img src={o?.img} alt="" className="a-dd-img" />
+                                        <Image src={o?.img} alt="" className="a-dd-img" />
                                       </>
                                     ) : null}
                                     <span>{o?.l}</span>

@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/Materials.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
 import { Fragment } from 'react';
@@ -71,7 +72,7 @@ function View({ $v }: { $v: any }) {
                       )}
                     >
                       {' '}
-                      <img
+                      <Image
                         src={m?.img}
                         alt=""
                         style={__css(`height: ${__s(m?.h)}; width: auto; margin-bottom: ${__s(m?.mb)}`)}

@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Button from '../../components/ui/Button/Button.tsx';
 import CheckButton from '../../components/ui/CheckButton/CheckButton.tsx';
 import LikeButton from '../../components/ui/LikeButton/LikeButton.tsx';
@@ -61,7 +62,7 @@ function View({ $v }: { $v: any }) {
                   }}
                 >
                   {' '}
-                  <img
+                  <Image
                     src={$v?.item?.img}
                     alt={$v?.viewAlt}
                     style={__css(`height: ${__s($v?.view?.h)}; width: auto; margin-top: ${__s($v?.view?.mt)}`)}
@@ -158,7 +159,7 @@ function View({ $v }: { $v: any }) {
                           aria-label={v?.label}
                           onClick={v?.pick}
                         >
-                          <img
+                          <Image
                             src={v?.img}
                             alt=""
                             style={__css(`height: ${__s(v?.h)}; width: auto; margin-top: ${__s(v?.mt)}`)}

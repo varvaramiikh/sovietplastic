@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import TextInput from '../../components/ui/TextInput/TextInput.tsx';
 import Button from '../../components/ui/Button/Button.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
@@ -96,7 +97,7 @@ function View({ $v }: { $v: any }) {
                       {' '}
                       {$v?.hasAvatar ? (
                         <>
-                          <img src={$v?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          <Image src={$v?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </>
                       ) : null}{' '}
                       {$v?.noAvatar ? (
@@ -329,7 +330,7 @@ function View({ $v }: { $v: any }) {
                   {' '}
                   {$v?.dHasAvatar ? (
                     <>
-                      <img
+                      <Image
                         src={$v?.dAvatar}
                         alt="Аватар"
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}

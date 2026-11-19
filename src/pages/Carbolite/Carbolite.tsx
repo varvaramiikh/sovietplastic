@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/Carbolite.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
 import { Fragment } from 'react';
@@ -74,10 +75,10 @@ function View({ $v }: { $v: any }) {
               }}
             >
               {' '}
-              <img src="/images/placeholder-skater.svg" alt="" style={{ height: '250px', width: 'auto' }} />{' '}
-              <img src="/images/placeholder-ballerina.svg" alt="" style={{ height: '380px', width: 'auto' }} />{' '}
-              <img src="/images/placeholder-boxer.svg" alt="" style={{ height: '300px', width: 'auto' }} />{' '}
-              <img src="/images/placeholder-skater.svg" alt="" style={{ height: '220px', width: 'auto' }} />{' '}
+              <Image src="/images/placeholder-skater.svg" alt="" style={{ height: '250px', width: 'auto' }} />{' '}
+              <Image src="/images/placeholder-ballerina.svg" alt="" style={{ height: '380px', width: 'auto' }} />{' '}
+              <Image src="/images/placeholder-boxer.svg" alt="" style={{ height: '300px', width: 'auto' }} />{' '}
+              <Image src="/images/placeholder-skater.svg" alt="" style={{ height: '220px', width: 'auto' }} />{' '}
             </figure>
           </section>
           <div aria-hidden="true" style={{ margin: '88px 48px 0', height: '1px', background: '#DCE2EA' }}></div>
@@ -125,7 +126,7 @@ function View({ $v }: { $v: any }) {
                 }}
               >
                 {' '}
-                <img
+                <Image
                   src="/images/placeholder-ballerina.svg"
                   alt="Деталь поверхности материала"
                   style={{
@@ -154,7 +155,7 @@ function View({ $v }: { $v: any }) {
                 }}
               >
                 {' '}
-                <img
+                <Image
                   src="/images/placeholder-boxer.svg"
                   alt="Основание статуэтки со следами производства"
                   style={{ height: '190%', width: 'auto', marginBottom: '-10px' }}
@@ -237,7 +238,7 @@ function View({ $v }: { $v: any }) {
                     overflow: 'hidden',
                   }}
                 >
-                  <img
+                  <Image
                     src="/images/placeholder-skater.svg"
                     alt="Клеймо на основании"
                     style={{ height: '210%', width: 'auto', marginBottom: '-20px' }}
@@ -270,8 +271,8 @@ function View({ $v }: { $v: any }) {
                     overflow: 'hidden',
                   }}
                 >
-                  <img src="/images/placeholder-ballerina.svg" alt="" style={{ height: '74%', width: 'auto' }} />
-                  <img
+                  <Image src="/images/placeholder-ballerina.svg" alt="" style={{ height: '74%', width: 'auto' }} />
+                  <Image
                     src="/images/placeholder-ballerina.svg"
                     alt=""
                     style={{ height: '74%', width: 'auto', opacity: '0.7' }}

@@ -213,3 +213,26 @@ src/components/
 оформление секций и индивидуальные варианты элементов.
 
 Проверка композиции компонентов и структуры папок: `npm.cmd run test:components`.
+
+## Публикация макета на GitHub Pages
+
+В репозитории `varvaramiikh/sovietplastic` выберите Settings → Pages → Source → GitHub Actions.
+Файл `.github/workflows/deploy.yml` собирает макет после каждого push в `main`.
+Адрес: https://varvaramiikh.github.io/sovietplastic/
+
+```powershell
+git add .
+git commit -m "Configure GitHub Pages prototype"
+git push origin main
+```
+
+Дождитесь зелёного статуса Publish clickable prototype на вкладке Actions.
+Никакие шаблоны Jekyll или Static HTML в настройках Pages выбирать не нужно.
+
+Отдельная сборка: `npm.cmd run build:pages`. Настройки без секретов находятся
+в `.env.pages`. В этом режиме сервер авторизации не вызывается. Демо-кабинет
+доступен по кнопке в полосе над страницей; данные сохраняются в браузере посетителя.
+Вход, регистрация и письма требуют полноценного сервера и в макете не имитируются.
+Папки `dist/catalog`, `dist/account` и остальные создаются автоматически, чтобы
+прямые ссылки и обновление страниц работали на статическом хостинге.
+Обычная команда `npm.cmd run dev` сохраняет работу с локальным сервером авторизации.

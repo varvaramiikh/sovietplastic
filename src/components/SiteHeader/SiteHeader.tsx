@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../ui/Image/Image.tsx';
 import Button from '../ui/Button/Button.tsx';
 import Link from '../ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/SiteHeader.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
@@ -45,7 +46,7 @@ function View({ $v }: { $v: any }) {
             }}
           >
             {' '}
-            <img src="/images/logo-accent.svg" alt="" style={{ height: '38px', width: 'auto' }} />{' '}
+            <Image src="/images/logo-accent.svg" alt="" style={{ height: '38px', width: 'auto' }} />{' '}
             <span>Советский пластик</span>{' '}
           </Link>{' '}
           <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
@@ -144,7 +145,7 @@ function View({ $v }: { $v: any }) {
                     {' '}
                     {$v?.hasAvatar ? (
                       <>
-                        <img src={$v?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <Image src={$v?.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </>
                     ) : null}{' '}
                     {$v?.noAvatar ? (

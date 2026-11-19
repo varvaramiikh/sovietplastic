@@ -1,4 +1,5 @@
 // @ts-nocheck
+import Image from '../../components/ui/Image/Image.tsx';
 import Link from '../../components/ui/Link/Link.tsx';
 /* Сгенерировано из original-export/project/Article.dc.html (разметка внутри <x-dc>) инструментом scripts/convert-dc.mjs. Дальше это обычный исходный код. */
 import { Fragment } from 'react';
@@ -76,9 +77,9 @@ function View({ $v }: { $v: any }) {
                 }}
               >
                 {' '}
-                <img src="/images/placeholder-skater.svg" alt="" style={{ height: '300px', width: 'auto' }} />{' '}
-                <img src="/images/placeholder-ballerina.svg" alt="" style={{ height: '440px', width: 'auto' }} />{' '}
-                <img src="/images/placeholder-boxer.svg" alt="" style={{ height: '260px', width: 'auto' }} />{' '}
+                <Image src="/images/placeholder-skater.svg" alt="" style={{ height: '300px', width: 'auto' }} />{' '}
+                <Image src="/images/placeholder-ballerina.svg" alt="" style={{ height: '440px', width: 'auto' }} />{' '}
+                <Image src="/images/placeholder-boxer.svg" alt="" style={{ height: '260px', width: 'auto' }} />{' '}
               </div>
               <figcaption style={{ marginTop: '14px', fontSize: '14px', color: '#4E6488' }}>
                 Подпись к обложке, источник изображения
@@ -114,7 +115,7 @@ function View({ $v }: { $v: any }) {
                 </p>
                 <figure style={{ margin: '40px 0' }}>
                   <div style={{ height: '440px', background: '#C9D5E5', position: 'relative', overflow: 'hidden' }}>
-                    <img
+                    <Image
                       src="/images/placeholder-ballerina.svg"
                       alt=""
                       style={{
@@ -197,7 +198,7 @@ function View({ $v }: { $v: any }) {
                   overflow: 'hidden',
                 }}
               >
-                <img
+                <Image
                   src="/images/placeholder-boxer.svg"
                   alt=""
                   style={{ height: '190%', width: 'auto', marginTop: '70%' }}
@@ -232,7 +233,7 @@ function View({ $v }: { $v: any }) {
                         justifyContent: 'center',
                       }}
                     >
-                      <img src="/images/placeholder-skater.svg" alt="" style={{ height: '80%', width: 'auto' }} />
+                      <Image src="/images/placeholder-skater.svg" alt="" style={{ height: '80%', width: 'auto' }} />
                     </div>
                     <figcaption style={{ marginTop: '12px', fontSize: '15px' }}>
                       Предмет или ракурс 1
@@ -251,7 +252,7 @@ function View({ $v }: { $v: any }) {
                         justifyContent: 'center',
                       }}
                     >
-                      <img src="/images/placeholder-ballerina.svg" alt="" style={{ height: '70%', width: 'auto' }} />
+                      <Image src="/images/placeholder-ballerina.svg" alt="" style={{ height: '70%', width: 'auto' }} />
                     </div>
                     <figcaption style={{ marginTop: '12px', fontSize: '15px' }}>
                       Предмет или ракурс 2
